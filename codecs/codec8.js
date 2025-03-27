@@ -2,7 +2,7 @@
 
 const binutils = require('binutils64');
 const Codec = require('./codec');
-const basicProtocolIoElements = require('../iot-data-standards/teltonika/basic-protocol-io-elements.json');
+const basicProtocolIoElements = require('../iot-data-standards/teltonika/basic-protocol.json');
 
 /**
  * Codec 8 decoding
