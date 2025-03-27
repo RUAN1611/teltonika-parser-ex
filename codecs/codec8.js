@@ -203,6 +203,13 @@ class Codec8 extends Codec {
     if (!element || !element.convert) {
       return value;
     }
+    
+    // Check if the conversion method exists before calling it
+    if (typeof this[element.convert] !== 'function') {
+      console.warn(`Conversion function ${element.convert} not found for property ID ${property_id}`);
+      return value;
+    }
+    
     return this[element.convert](value);
   }
 
