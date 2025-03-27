@@ -1,0 +1,3048 @@
+{
+    "deviceType": "string",
+    "deviceId": "string",
+    "timestamp": "string",
+    "data": {
+      "gps": {
+        "latitude": "number",
+        "longitude": "number",
+        "altitude": "number",
+        "angle": "number",
+        "satellites": "number",
+        "speed": "number"
+      },
+      "priority": "number",
+      "eventId": "number",
+      "ioelements": [
+        {
+          "id": 1,
+          "label": "digital_01"
+        },
+        {
+          "id": 2,
+          "label": "digital_02"
+        },
+        {
+          "id": 3,
+          "label": "digital_03"
+        },
+        {
+          "id": 4,
+          "label": "pulse_din1"
+        },
+        {
+          "id": 5,
+          "label": "pulse_din2"
+        },
+        {
+          "id": 6,
+          "convert": "AnalogTelemetryProcessor",
+          "label": "analog_02"
+        },
+        {
+          "id": 7,
+          "label": "buffer_records"
+        },
+        {
+          "id": 8,
+          "convert": "IButton",
+          "label": "authorized_ibutton"
+        },
+        {
+          "id": 9,
+          "convert": "AnalogTelemetryProcessor",
+          "label": "analog_01"
+        },
+        {
+          "id": 10,
+          "label": "sd_card"
+        },
+        {
+          "id": 11,
+          "convert": "ToStr",
+          "label": "iccid_01"
+        },
+        {
+          "id": 12,
+          "convert": "UnsignedThousandth",
+          "label": "fuel_counter"
+        },
+        {
+          "id": 13,
+          "convert": "UnsignedHundredth",
+          "label": "fuel_rate"
+        },
+        {
+          "id": 14,
+          "convert": "ToStr",
+          "label": "iccid_02"
+        },
+        {
+          "id": 15,
+          "convert": "UnsignedHundredth",
+          "label": "eco_score"
+        },
+        {
+          "id": 16,
+          "convert": "UnsignedThousandth",
+          "label": "odometer"
+        },
+        {
+          "id": 17,
+          "convert": "SignedThousandth",
+          "label": "x"
+        },
+        {
+          "id": 18,
+          "convert": "SignedThousandth",
+          "label": "y"
+        },
+        {
+          "id": 19,
+          "convert": "SignedThousandth",
+          "label": "z"
+        },
+        {
+          "id": 20,
+          "label": "battery_ble_02"
+        },
+        {
+          "id": 21,
+          "label": "gsm_signal"
+        },
+        {
+          "id": 22,
+          "label": "battery_ble_03"
+        },
+        {
+          "id": 23,
+          "label": "battery_ble_04"
+        },
+        {
+          "id": 24,
+          "label": "gps_speed"
+        },
+        {
+          "id": 25,
+          "convert": "SignedHundredth",
+          "label": "temp_ble_01"
+        },
+        {
+          "id": 26,
+          "convert": "SignedHundredth",
+          "label": "temp_ble_02"
+        },
+        {
+          "id": 27,
+          "convert": "SignedHundredth",
+          "label": "temp_ble_03"
+        },
+        {
+          "id": 28,
+          "convert": "SignedHundredth",
+          "label": "temp_ble_04"
+        },
+        {
+          "id": 29,
+          "label": "battery_ble_01"
+        },
+        {
+          "id": 30,
+          "label": "dtc_number"
+        },
+        {
+          "id": 31,
+          "label": "can_eng_load"
+        },
+        {
+          "id": 32,
+          "convert": "SignedValue",
+          "label": "can_coolant_temp"
+        },
+        {
+          "id": 33,
+          "convert": "SignedValue",
+          "label": "can_fuel_trim_1"
+        },
+        {
+          "id": 34,
+          "label": "can_fuel_pressure"
+        },
+        {
+          "id": 35,
+          "label": "can_manifold_pressure"
+        },
+        {
+          "id": 36,
+          "label": "can_rpm"
+        },
+        {
+          "id": 37,
+          "label": "can_speed"
+        },
+        {
+          "id": 38,
+          "convert": "SignedValue",
+          "label": "can_timing_advance"
+        },
+        {
+          "id": 39,
+          "convert": "SignedValue",
+          "label": "can_intake_temp"
+        },
+        {
+          "id": 40,
+          "convert": "UnsignedHundredth",
+          "label": "can_air_flow"
+        },
+        {
+          "id": 41,
+          "label": "can_accel_perc"
+        },
+        {
+          "id": 42,
+          "label": "can_engine_runtime"
+        },
+        {
+          "id": 43,
+          "label": "mil_distance"
+        },
+        {
+          "id": 44,
+          "convert": "UnsignedTenth",
+          "label": "can_fuel_rail_pressure_rel"
+        },
+        {
+          "id": 45,
+          "convert": "UnsignedTen",
+          "label": "can_fuel_rail_pressure_direct"
+        },
+        {
+          "id": 46,
+          "label": "can_egr_commanded"
+        },
+        {
+          "id": 47,
+          "convert": "SignedValue",
+          "label": "can_egr_error"
+        },
+        {
+          "id": 48,
+          "label": "can_fuel_perc"
+        },
+        {
+          "id": 49,
+          "label": "can_clear_code_dist"
+        },
+        {
+          "id": 50,
+          "label": "can_barometric_pressure"
+        },
+        {
+          "id": 51,
+          "convert": "UnsignedThousandth",
+          "label": "can_ctrl_mod_voltage"
+        },
+        {
+          "id": 52,
+          "label": "can_abs_load"
+        },
+        {
+          "id": 53,
+          "convert": "SignedValue",
+          "label": "can_air_temp"
+        },
+        {
+          "id": 54,
+          "label": "can_mil_time"
+        },
+        {
+          "id": 55,
+          "label": "can_trouble_clear_time"
+        },
+        {
+          "id": 56,
+          "convert": "UnsignedTenth",
+          "label": "can_abs_fuel_rate"
+        },
+        {
+          "id": 57,
+          "label": "can_hybrid_battery_perc"
+        },
+        {
+          "id": 58,
+          "label": "can_oil_temp"
+        },
+        {
+          "id": 59,
+          "convert": "SignedHundredth",
+          "label": "can_fuel_inj_timing"
+        },
+        {
+          "id": 60,
+          "convert": "UnsignedHundredth",
+          "label": "can_fuel_rate"
+        },
+        {
+          "id": 61,
+          "label": "geofence_zone_06"
+        },
+        {
+          "id": 62,
+          "label": "geofence_zone_07"
+        },
+        {
+          "id": 63,
+          "label": "geofence_zone_08"
+        },
+        {
+          "id": 64,
+          "label": "geofence_zone_09"
+        },
+        {
+          "id": 65,
+          "label": "geofence_zone_10"
+        },
+        {
+          "id": 66,
+          "convert": "UnsignedThousandth",
+          "label": "power_voltage"
+        },
+        {
+          "id": 67,
+          "convert": "UnsignedThousandth",
+          "label": "battery_voltage"
+        },
+        {
+          "id": 68,
+          "convert": "UnsignedThousandth",
+          "label": "battery_current"
+        },
+        {
+          "id": 69,
+          "label": "gnss_status"
+        },
+        {
+          "id": 70,
+          "label": "geofence_zone_11"
+        },
+        {
+          "id": 71,
+          "convert": "LeToHex",
+          "label": "temp_04_id"
+        },
+        {
+          "id": 72,
+          "convert": "SignedTenth",
+          "label": "temp_01"
+        },
+        {
+          "id": 73,
+          "convert": "SignedTenth",
+          "label": "temp_02"
+        },
+        {
+          "id": 74,
+          "convert": "SignedTenth",
+          "label": "temp_03"
+        },
+        {
+          "id": 75,
+          "convert": "SignedTenth",
+          "label": "temp_04"
+        },
+        {
+          "id": 76,
+          "convert": "LeToHex",
+          "label": "temp_01_id"
+        },
+        {
+          "id": 77,
+          "convert": "LeToHex",
+          "label": "temp_02_id"
+        },
+        {
+          "id": 78,
+          "convert": "IButton",
+          "label": "driver_id"
+        },
+        {
+          "id": 79,
+          "convert": "LeToHex",
+          "label": "temp_03_id"
+        },
+        {
+          "id": 80,
+          "label": "data_mode"
+        },
+        {
+          "id": 81,
+          "label": "vehicle_speed"
+        },
+        {
+          "id": 82,
+          "label": "accelerator_pedal_position"
+        },
+        {
+          "id": 83,
+          "convert": "UnsignedTenth",
+          "label": "fuel_consumed"
+        },
+        {
+          "id": 84,
+          "convert": "UnsignedTenth",
+          "label": "fuel_level"
+        },
+        {
+          "id": 85,
+          "label": "engine_rpm"
+        },
+        {
+          "id": 86,
+          "convert": "UnsignedTenth",
+          "label": "humidity_ble_01"
+        },
+        {
+          "id": 87,
+          "convert": "UnsignedThousandth",
+          "label": "total_mileage"
+        },
+        {
+          "id": 88,
+          "label": "geofence_zone_12"
+        },
+        {
+          "id": 89,
+          "label": "fuel_level_perc"
+        },
+        {
+          "id": 90,
+          "label": "door_status"
+        },
+        {
+          "id": 91,
+          "label": "geofence_zone_13"
+        },
+        {
+          "id": 92,
+          "label": "geofence_zone_14"
+        },
+        {
+          "id": 93,
+          "label": "geofence_zone_15"
+        },
+        {
+          "id": 94,
+          "label": "geofence_zone_16"
+        },
+        {
+          "id": 95,
+          "label": "geofence_zone_17"
+        },
+        {
+          "id": 96,
+          "label": "geofence_zone_18"
+        },
+        {
+          "id": 97,
+          "label": "geofence_zone_19"
+        },
+        {
+          "id": 98,
+          "label": "geofence_zone_20"
+        },
+        {
+          "id": 99,
+          "label": "geofence_zone_21"
+        },
+        {
+          "id": 100,
+          "label": "program_number"
+        },
+        {
+          "id": 101,
+          "label": "module_id_8b"
+        },
+        {
+          "id": 102,
+          "label": "engine_worktime"
+        },
+        {
+          "id": 103,
+          "label": "engine_worktime_counted"
+        },
+        {
+          "id": 104,
+          "convert": "UnsignedTenth",
+          "label": "humidity_ble_02"
+        },
+        {
+          "id": 105,
+          "convert": "UnsignedThousandth",
+          "label": "total_mileage_counted"
+        },
+        {
+          "id": 106,
+          "convert": "UnsignedTenth",
+          "label": "humidity_ble_03"
+        },
+        {
+          "id": 107,
+          "convert": "UnsignedTenth",
+          "label": "fuel_consumed_counted"
+        },
+        {
+          "id": 108,
+          "convert": "UnsignedTenth",
+          "label": "humidity_ble_04"
+        },
+        {
+          "id": 110,
+          "convert": "UnsignedTenth",
+          "label": "fuel_rate_per_litre"
+        },
+        {
+          "id": 111,
+          "label": "adblue_perc"
+        },
+        {
+          "id": 112,
+          "convert": "UnsignedTenth",
+          "label": "adblue_level"
+        },
+        {
+          "id": 113,
+          "label": "battery_perc"
+        },
+        {
+          "id": 114,
+          "label": "engine_load"
+        },
+        {
+          "id": 115,
+          "convert": "SignedTenth",
+          "label": "engine_temp"
+        },
+        {
+          "id": 116,
+          "label": "charger_connected"
+        },
+        {
+          "id": 118,
+          "label": "axle_1_load"
+        },
+        {
+          "id": 119,
+          "label": "axle_2_load"
+        },
+        {
+          "id": 120,
+          "label": "axle_3_load"
+        },
+        {
+          "id": 121,
+          "label": "axle_4_load"
+        },
+        {
+          "id": 122,
+          "label": "axle_5_load"
+        },
+        {
+          "id": 123,
+          "convert": "LeToHex",
+          "label": "control_state_flags"
+        },
+        {
+          "id": 124,
+          "label": "agricultural_machinery_flags"
+        },
+        {
+          "id": 125,
+          "label": "harvesting_time"
+        },
+        {
+          "id": 126,
+          "label": "area_of_harvest"
+        },
+        {
+          "id": 127,
+          "convert": "UnsignedValue",
+          "label": "mowing_efficiency"
+        },
+        {
+          "id": 128,
+          "label": "grain_mow_volume"
+        },
+        {
+          "id": 129,
+          "label": "grain_moisture"
+        },
+        {
+          "id": 130,
+          "label": "harvesting_drum_rpm"
+        },
+        {
+          "id": 131,
+          "label": "gap_under_harvesting_drum"
+        },
+        {
+          "id": 132,
+          "convert": "LeToHex",
+          "label": "security_state_flags"
+        },
+        {
+          "id": 133,
+          "convert": "UnsignedThousandth",
+          "label": "tacho_total_distance"
+        },
+        {
+          "id": 134,
+          "convert": "UnsignedThousandth",
+          "label": "trip_distance"
+        },
+        {
+          "id": 135,
+          "label": "tacho_vehicle_speed"
+        },
+        {
+          "id": 136,
+          "label": "tacho_driver_card_presence"
+        },
+        {
+          "id": 137,
+          "label": "driver_1_states"
+        },
+        {
+          "id": 138,
+          "label": "driver_2_states"
+        },
+        {
+          "id": 139,
+          "label": "driver_1_driving_time"
+        },
+        {
+          "id": 140,
+          "label": "driver_2_driving_time"
+        },
+        {
+          "id": 141,
+          "label": "driver_1_break_time"
+        },
+        {
+          "id": 142,
+          "label": "driver_2_break_time"
+        },
+        {
+          "id": 143,
+          "label": "driver_1_activity_duration"
+        },
+        {
+          "id": 144,
+          "label": "driver_2_activity_duration"
+        },
+        {
+          "id": 145,
+          "label": "driver_1_driving_time_total"
+        },
+        {
+          "id": 146,
+          "label": "driver_2_driving_time_total"
+        },
+        {
+          "id": 147,
+          "label": "driver_1_id_high"
+        },
+        {
+          "id": 148,
+          "label": "driver_1_id_low"
+        },
+        {
+          "id": 149,
+          "label": "driver_2_id_high"
+        },
+        {
+          "id": 150,
+          "label": "driver_2_id_low"
+        },
+        {
+          "id": 151,
+          "convert": "SignedTenth",
+          "label": "battery_temp"
+        },
+        {
+          "id": 152,
+          "label": "battery_level"
+        },
+        {
+          "id": 153,
+          "label": "geofence_zone_22"
+        },
+        {
+          "id": 154,
+          "label": "geofence_zone_23"
+        },
+        {
+          "id": 155,
+          "label": "geofence_zone_01"
+        },
+        {
+          "id": 156,
+          "label": "geofence_zone_02"
+        },
+        {
+          "id": 157,
+          "label": "geofence_zone_03"
+        },
+        {
+          "id": 158,
+          "label": "geofence_zone_04"
+        },
+        {
+          "id": 159,
+          "label": "geofence_zone_05"
+        },
+        {
+          "id": 160,
+          "label": "dtc_faults_count"
+        },
+        {
+          "id": 161,
+          "label": "slope_of_arm"
+        },
+        {
+          "id": 162,
+          "label": "rotation_of_arm"
+        },
+        {
+          "id": 163,
+          "label": "eject_of_arm"
+        },
+        {
+          "id": 164,
+          "label": "horizontal_distance_arm"
+        },
+        {
+          "id": 165,
+          "label": "height_arm_above_ground"
+        },
+        {
+          "id": 166,
+          "label": "drill_rpm"
+        },
+        {
+          "id": 167,
+          "label": "spread_salt"
+        },
+        {
+          "id": 168,
+          "label": "can_battery_voltage"
+        },
+        {
+          "id": 169,
+          "label": "spread_fine_grained_salt"
+        },
+        {
+          "id": 170,
+          "label": "coarse_grained_salt"
+        },
+        {
+          "id": 171,
+          "label": "spread_dimix"
+        },
+        {
+          "id": 172,
+          "label": "spread_coarse_grained_calcium"
+        },
+        {
+          "id": 173,
+          "label": "spread_calcium_chloride"
+        },
+        {
+          "id": 174,
+          "label": "spread_sodium_chloride"
+        },
+        {
+          "id": 175,
+          "label": "auto_geofence"
+        },
+        {
+          "id": 176,
+          "label": "spread_magnesium_chloride"
+        },
+        {
+          "id": 177,
+          "label": "amount_of_spread_gravel"
+        },
+        {
+          "id": 178,
+          "label": "amount_of_spread_sand"
+        },
+        {
+          "id": 179,
+          "label": "output_01"
+        },
+        {
+          "id": 180,
+          "label": "output_02"
+        },
+        {
+          "id": 181,
+          "convert": "UnsignedTenth",
+          "label": "pdop"
+        },
+        {
+          "id": 182,
+          "convert": "UnsignedTenth",
+          "label": "hdop"
+        },
+        {
+          "id": 183,
+          "label": "width_pouring_left"
+        },
+        {
+          "id": 184,
+          "label": "width_pouring_right"
+        },
+        {
+          "id": 185,
+          "label": "salt_spreader_working_hours"
+        },
+        {
+          "id": 186,
+          "label": "distance_during_salting"
+        },
+        {
+          "id": 187,
+          "label": "load_weight"
+        },
+        {
+          "id": 188,
+          "label": "retarder_load"
+        },
+        {
+          "id": 189,
+          "label": "cruise_time"
+        },
+        {
+          "id": 190,
+          "label": "geofence_zone_24"
+        },
+        {
+          "id": 191,
+          "label": "geofence_zone_25"
+        },
+        {
+          "id": 192,
+          "label": "geofence_zone_26"
+        },
+        {
+          "id": 193,
+          "label": "geofence_zone_27"
+        },
+        {
+          "id": 194,
+          "label": "geofence_zone_28"
+        },
+        {
+          "id": 195,
+          "label": "geofence_zone_29"
+        },
+        {
+          "id": 196,
+          "label": "geofence_zone_30"
+        },
+        {
+          "id": 197,
+          "label": "geofence_zone_31"
+        },
+        {
+          "id": 198,
+          "label": "geofence_zone_32"
+        },
+        {
+          "id": 199,
+          "convert": "UnsignedThousandth",
+          "label": "odo_diff"
+        },
+        {
+          "id": 200,
+          "label": "sleep"
+        },
+        {
+          "id": 201,
+          "convert": "SignedValue",
+          "label": "fuel_level_01"
+        },
+        {
+          "id": 202,
+          "convert": "SignedValue",
+          "label": "fuel_temp_01"
+        },
+        {
+          "id": 203,
+          "convert": "SignedValue",
+          "label": "fuel_level_02"
+        },
+        {
+          "id": 204,
+          "convert": "SignedValue",
+          "label": "fuel_temp_02"
+        },
+        {
+          "id": 205,
+          "label": "gsm_cell"
+        },
+        {
+          "id": 206,
+          "label": "gsm_lac"
+        },
+        {
+          "id": 207,
+          "label": "rfid_id"
+        },
+        {
+          "id": 208,
+          "label": "geofence_zone_33"
+        },
+        {
+          "id": 209,
+          "label": "geofence_zone_34"
+        },
+        {
+          "id": 210,
+          "label": "fuel_level_03"
+        },
+        {
+          "id": 211,
+          "convert": "SignedValue",
+          "label": "fuel_temp_03"
+        },
+        {
+          "id": 212,
+          "convert": "SignedValue",
+          "label": "fuel_level_04"
+        },
+        {
+          "id": 213,
+          "convert": "SignedValue",
+          "label": "fuel_temp_04"
+        },
+        {
+          "id": 214,
+          "convert": "SignedValue",
+          "label": "fuel_level_05"
+        },
+        {
+          "id": 215,
+          "convert": "SignedValue",
+          "label": "fuel_temp_05"
+        },
+        {
+          "id": 216,
+          "label": "geofence_zone_35"
+        },
+        {
+          "id": 217,
+          "label": "geofence_zone_36"
+        },
+        {
+          "id": 218,
+          "label": "geofence_zone_37"
+        },
+        {
+          "id": 219,
+          "label": "geofence_zone_38"
+        },
+        {
+          "id": 220,
+          "label": "geofence_zone_39"
+        },
+        {
+          "id": 221,
+          "label": "geofence_zone_40"
+        },
+        {
+          "id": 222,
+          "label": "geofence_zone_41"
+        },
+        {
+          "id": 223,
+          "label": "geofence_zone_42"
+        },
+        {
+          "id": 224,
+          "label": "geofence_zone_43"
+        },
+        {
+          "id": 225,
+          "label": "geofence_zone_44"
+        },
+        {
+          "id": 226,
+          "label": "geofence_zone_45"
+        },
+        {
+          "id": 227,
+          "label": "geofence_zone_46"
+        },
+        {
+          "id": 228,
+          "label": "geofence_zone_47"
+        },
+        {
+          "id": 229,
+          "label": "geofence_zone_48"
+        },
+        {
+          "id": 230,
+          "label": "geofence_zone_49"
+        },
+        {
+          "id": 231,
+          "label": "geofence_zone_50"
+        },
+        {
+          "id": 232,
+          "label": "cng_status"
+        },
+        {
+          "id": 233,
+          "label": "cng_used"
+        },
+        {
+          "id": 234,
+          "label": "cng_level"
+        },
+        {
+          "id": 235,
+          "label": "engine_oil_level"
+        },
+        {
+          "id": 236,
+          "label": "alarm"
+        },
+        {
+          "id": 237,
+          "label": "network_type"
+        },
+        {
+          "id": 238,
+          "label": "mac"
+        },
+        {
+          "id": 239,
+          "label": "ignition"
+        },
+        {
+          "id": 240,
+          "label": "moving"
+        },
+        {
+          "id": 241,
+          "label": "gsm_code"
+        },
+        {
+          "id": 242,
+          "label": "mandown"
+        },
+        {
+          "id": 243,
+          "label": "eco_duration"
+        },
+        {
+          "id": 244,
+          "label": "din2ain2"
+        },
+        {
+          "id": 246,
+          "label": "tow"
+        },
+        {
+          "id": 247,
+          "label": "crash"
+        },
+        {
+          "id": 248,
+          "label": "immobilizer"
+        },
+        {
+          "id": 249,
+          "label": "gsm_jammed"
+        },
+        {
+          "id": 250,
+          "label": "trip"
+        },
+        {
+          "id": 251,
+          "label": "idling"
+        },
+        {
+          "id": 252,
+          "label": "unplug"
+        },
+        {
+          "id": 253,
+          "label": "eco_type"
+        },
+        {
+          "id": 254,
+          "convert": "UnsignedHundredth",
+          "label": "eco_value"
+        },
+        {
+          "id": 255,
+          "label": "over_speeding"
+        },
+        {
+          "id": 256,
+          "convert": "ToStrAscii",
+          "label": "vin"
+        },
+        {
+          "id": 257,
+          "label": "crash_trace"
+        },
+        {
+          "id": 258,
+          "label": "eco_maximum"
+        },
+        {
+          "id": 259,
+          "label": "eco_average"
+        },
+        {
+          "id": 260,
+          "label": "eco_duration"
+        },
+        {
+          "id": 262,
+          "label": "digital_04"
+        },
+        {
+          "id": 263,
+          "label": "ble_status"
+        },
+        {
+          "id": 264,
+          "label": "barcode_id"
+        },
+        {
+          "id": 269,
+          "convert": "SignedValue",
+          "label": "escort_lls_temp_01"
+        },
+        {
+          "id": 270,
+          "label": "ble_fuel_level_01"
+        },
+        {
+          "id": 271,
+          "convert": "UnsignedHundredth",
+          "label": "escort_lls_battery_voltage_01"
+        },
+        {
+          "id": 272,
+          "convert": "SignedValue",
+          "label": "escort_lls_temp_02"
+        },
+        {
+          "id": 273,
+          "label": "ble_fuel_level_02"
+        },
+        {
+          "id": 274,
+          "convert": "UnsignedHundredth",
+          "label": "escort_lls_battery_voltage_02"
+        },
+        {
+          "id": 275,
+          "convert": "SignedValue",
+          "label": "escort_lls_temp_03"
+        },
+        {
+          "id": 276,
+          "label": "ble_fuel_level_03"
+        },
+        {
+          "id": 277,
+          "convert": "UnsignedHundredth",
+          "label": "escort_lls_battery_voltage_03"
+        },
+        {
+          "id": 278,
+          "convert": "SignedValue",
+          "label": "escort_lls_temp_04"
+        },
+        {
+          "id": 279,
+          "label": "ble_fuel_level_04"
+        },
+        {
+          "id": 280,
+          "convert": "UnsignedHundredth",
+          "label": "escort_lls_battery_voltage_04"
+        },
+        {
+          "id": 281,
+          "convert": "ToStrAsciiStripUnicode",
+          "label": "can_fault_codes"
+        },
+        {
+          "id": 282,
+          "label": "dtc"
+        },
+        {
+          "id": 283,
+          "label": "driving"
+        },
+        {
+          "id": 284,
+          "label": "driving_records"
+        },
+        {
+          "id": 285,
+          "label": "blood_alc"
+        },
+        {
+          "id": 286,
+          "label": "gsm_signal_rx_0"
+        },
+        {
+          "id": 287,
+          "label": "gsm_cell_lac_1"
+        },
+        {
+          "id": 288,
+          "label": "gsm_cell_id_1"
+        },
+        {
+          "id": 289,
+          "label": "gsm_signal_rx_1"
+        },
+        {
+          "id": 290,
+          "label": "gsm_cell_lac_2"
+        },
+        {
+          "id": 291,
+          "label": "gsm_cell_id_2"
+        },
+        {
+          "id": 292,
+          "label": "gsm_signal_rx_2"
+        },
+        {
+          "id": 293,
+          "label": "gsm_cell_lac_3"
+        },
+        {
+          "id": 294,
+          "label": "gsm_cell_id_3"
+        },
+        {
+          "id": 295,
+          "label": "gsm_signal_rx_3"
+        },
+        {
+          "id": 296,
+          "label": "gsm_cell_lac_4"
+        },
+        {
+          "id": 297,
+          "label": "gsm_cell_id_4"
+        },
+        {
+          "id": 298,
+          "label": "gsm_signal_rx_4"
+        },
+        {
+          "id": 303,
+          "label": "instant_movement"
+        },
+        {
+          "id": 304,
+          "convert": "UnsignedThousandth",
+          "label": "range_battery"
+        },
+        {
+          "id": 305,
+          "label": "range_on_additional_fuel"
+        },
+        {
+          "id": 306,
+          "label": "ble_fuel_frequency_01"
+        },
+        {
+          "id": 307,
+          "label": "ble_fuel_frequency_02"
+        },
+        {
+          "id": 308,
+          "label": "ble_fuel_frequency_03"
+        },
+        {
+          "id": 309,
+          "label": "ble_fuel_frequency_04"
+        },
+        {
+          "id": 310,
+          "label": "movement_event"
+        },
+        {
+          "id": 317,
+          "label": "crash_event_counter"
+        },
+        {
+          "id": 325,
+          "convert": "ToStrAscii",
+          "label": "vin"
+        },
+        {
+          "id": 327,
+          "convert": "SignedTenth",
+          "label": "ul202-02_sensor_fuel_level"
+        },
+        {
+          "id": 329,
+          "label": "ain_speed"
+        },
+        {
+          "id": 330,
+          "label": "trip_trace_event"
+        },
+        {
+          "id": 331,
+          "label": "ble_1_custom_01"
+        },
+        {
+          "id": 332,
+          "label": "ble_2_custom_01"
+        },
+        {
+          "id": 333,
+          "label": "ble_3_custom_01"
+        },
+        {
+          "id": 334,
+          "label": "ble_4_custom_01"
+        },
+        {
+          "id": 335,
+          "label": "ble_luminosity_01"
+        },
+        {
+          "id": 336,
+          "label": "ble_luminosity_02"
+        },
+        {
+          "id": 337,
+          "label": "ble_luminosity_03"
+        },
+        {
+          "id": 338,
+          "label": "ble_luminosity_04"
+        },
+        {
+          "id": 380,
+          "label": "output_03"
+        },
+        {
+          "id": 381,
+          "label": "ground_sense"
+        },
+        {
+          "id": 383,
+          "label": "axl_status"
+        },
+        {
+          "id": 385,
+          "label": "beacon"
+        },
+        {
+          "id": 386,
+          "label": "last_known_position"
+        },
+        {
+          "id": 387,
+          "label": "iso6709_coordinates"
+        },
+        {
+          "id": 388,
+          "label": "module_id_17b"
+        },
+        {
+          "id": 389,
+          "convert": "UnsignedThousandth",
+          "label": "obd_oem_total_mileage"
+        },
+        {
+          "id": 390,
+          "convert": "UnsignedTenth",
+          "label": "obd_oem_fuel_level"
+        },
+        {
+          "id": 391,
+          "label": "private_mode"
+        },
+        {
+          "id": 399,
+          "label": "time_to_first_fix"
+        },
+        {
+          "id": 400,
+          "label": "distance_to_next_service"
+        },
+        {
+          "id": 402,
+          "label": "oem_distance_until_service"
+        },
+        {
+          "id": 403,
+          "label": "driver_name"
+        },
+        {
+          "id": 404,
+          "label": "driver_card_license_type"
+        },
+        {
+          "id": 405,
+          "label": "driver_gender"
+        },
+        {
+          "id": 406,
+          "label": "driver_card_id"
+        },
+        {
+          "id": 407,
+          "label": "driver_card_expiration_date"
+        },
+        {
+          "id": 408,
+          "label": "driver_card_place_of_issue"
+        },
+        {
+          "id": 409,
+          "label": "driver_status_event"
+        },
+        {
+          "id": 410,
+          "label": "oem_battery_charge"
+        },
+        {
+          "id": 411,
+          "label": "oem_battery_perc"
+        },
+        {
+          "id": 412,
+          "label": "oem_battery_power_consumption"
+        },
+        {
+          "id": 449,
+          "label": "ignition_on_counter"
+        },
+        {
+          "id": 450,
+          "label": "cng_level_kg"
+        },
+        {
+          "id": 451,
+          "label": "ble_rfid_01"
+        },
+        {
+          "id": 452,
+          "label": "ble_rfid_02"
+        },
+        {
+          "id": 453,
+          "label": "ble_rfid_03"
+        },
+        {
+          "id": 454,
+          "label": "ble_rfid_04"
+        },
+        {
+          "id": 455,
+          "label": "ble_button_01_state_01"
+        },
+        {
+          "id": 456,
+          "label": "ble_button_01_state_02"
+        },
+        {
+          "id": 457,
+          "label": "ble_button_01_state_03"
+        },
+        {
+          "id": 458,
+          "label": "ble_button_01_state_04"
+        },
+        {
+          "id": 459,
+          "label": "ble_button_02_state_01"
+        },
+        {
+          "id": 460,
+          "label": "ble_button_02_state_02"
+        },
+        {
+          "id": 461,
+          "label": "ble_button_02_state_03"
+        },
+        {
+          "id": 462,
+          "label": "ble_button_02_state_04"
+        },
+        {
+          "id": 463,
+          "label": "ble_1_custom_02"
+        },
+        {
+          "id": 464,
+          "label": "ble_1_custom_03"
+        },
+        {
+          "id": 465,
+          "label": "ble_1_custom_04"
+        },
+        {
+          "id": 466,
+          "label": "ble_1_custom_05"
+        },
+        {
+          "id": 467,
+          "label": "ble_2_custom_02"
+        },
+        {
+          "id": 468,
+          "label": "ble_2_custom_03"
+        },
+        {
+          "id": 469,
+          "label": "ble_2_custom_04"
+        },
+        {
+          "id": 470,
+          "label": "ble_2_custom_05"
+        },
+        {
+          "id": 471,
+          "label": "ble_3_custom_02"
+        },
+        {
+          "id": 472,
+          "label": "ble_3_custom_03"
+        },
+        {
+          "id": 473,
+          "label": "ble_3_custom_04"
+        },
+        {
+          "id": 474,
+          "label": "ble_3_custom_05"
+        },
+        {
+          "id": 475,
+          "label": "ble_4_custom_02"
+        },
+        {
+          "id": 476,
+          "label": "ble_4_custom_03"
+        },
+        {
+          "id": 477,
+          "label": "ble_4_custom_04"
+        },
+        {
+          "id": 478,
+          "label": "ble_4_custom_05"
+        },
+        {
+          "id": 483,
+          "label": "ul202-02_sensor_status"
+        },
+        {
+          "id": 497,
+          "label": "rear_camera"
+        },
+        {
+          "id": 498,
+          "label": "front_camera"
+        },
+        {
+          "id": 499,
+          "label": "sos"
+        },
+        {
+          "id": 500,
+          "label": "msp500_vendor_name"
+        },
+        {
+          "id": 501,
+          "label": "msp500_vin"
+        },
+        {
+          "id": 502,
+          "label": "msp500_speed"
+        },
+        {
+          "id": 517,
+          "convert": "LeToHex",
+          "label": "securitystateflags_p4"
+        },
+        {
+          "id": 518,
+          "convert": "LeToHex",
+          "label": "controlstateflags_p4"
+        },
+        {
+          "id": 519,
+          "convert": "LeToHex",
+          "label": "indicatorstateflags_p4"
+        },
+        {
+          "id": 520,
+          "convert": "LeToHex",
+          "label": "agriculturalstateflags_p4"
+        },
+        {
+          "id": 521,
+          "convert": "LeToHex",
+          "label": "utilitystateflags_p4"
+        },
+        {
+          "id": 522,
+          "convert": "LeToHex",
+          "label": "cisternstateflags_p4"
+        },
+        {
+          "id": 540,
+          "label": "throttle_position_group"
+        },
+        {
+          "id": 541,
+          "convert": "UnsignedHundredth",
+          "label": "commanded_equivalence_r"
+        },
+        {
+          "id": 542,
+          "label": "can_manifold_pressure_2B"
+        },
+        {
+          "id": 543,
+          "label": "hybrid_system_voltage"
+        },
+        {
+          "id": 544,
+          "convert": "SignedValue",
+          "label": "hybrid_system_current"
+        },
+        {
+          "id": 548,
+          "label": "ble_advertisement_data_advanced"
+        },
+        {
+          "id": 585,
+          "label": "ble_devices"
+        },
+        {
+          "id": 622,
+          "convert": "UnsignedTenth",
+          "label": "digital_01_freq"
+        },
+        {
+          "id": 623,
+          "convert": "UnsignedTenth",
+          "label": "digital_02_freq"
+        },
+        {
+          "id": 636,
+          "label": "umts_lte_cell_id"
+        },
+        {
+          "id": 637,
+          "label": "wake_reason"
+        },
+        {
+          "id": 639,
+          "label": "sleep_mode"
+        },
+        {
+          "id": 641,
+          "convert": "ToStr",
+          "label": "iccid_01"
+        },
+        {
+          "id": 652,
+          "label": "ssf_keyinignitionlock"
+        },
+        {
+          "id": 653,
+          "label": "ssf_handbrake_is_active"
+        },
+        {
+          "id": 654,
+          "label": "ssf_front_left_door_open"
+        },
+        {
+          "id": 655,
+          "label": "ssf_front_right_door_open"
+        },
+        {
+          "id": 656,
+          "label": "ssf_rear_left_door_open"
+        },
+        {
+          "id": 657,
+          "label": "ssf_rear_right_door_open"
+        },
+        {
+          "id": 658,
+          "label": "ssf_trunk_door_open"
+        },
+        {
+          "id": 659,
+          "label": "ssf_neutral_gear_active"
+        },
+        {
+          "id": 660,
+          "label": "ssf_parking_gear_active"
+        },
+        {
+          "id": 661,
+          "label": "ssf_reverse_gear_active"
+        },
+        {
+          "id": 662,
+          "label": "ssf_car_is_closed"
+        },
+        {
+          "id": 755,
+          "label": "oem_remaining_distance"
+        },
+        {
+          "id": 759,
+          "label": "fuel_type"
+        },
+        {
+          "id": 800,
+          "convert": "UnsignedThousandth",
+          "label": "extended_external_voltage"
+        },
+        {
+          "id": 839,
+          "convert": "UnsignedThousandth",
+          "label": "extended_analog_input_1"
+        },
+        {
+          "id": 840,
+          "convert": "UnsignedThousandth",
+          "label": "extended_analog_input_2"
+        },
+        {
+          "id": 841,
+          "convert": "UnsignedThousandth",
+          "label": "dout_1_overcurrent"
+        },
+        {
+          "id": 842,
+          "convert": "UnsignedThousandth",
+          "label": "dout2_overcurrent"
+        },
+        {
+          "id": 849,
+          "convert": "UnsignedThousandth",
+          "label": "extended_analog_input_2"
+        },
+        {
+          "id": 854,
+          "label": "user_id"
+        },
+        {
+          "id": 855,
+          "label": "total_lng_used"
+        },
+        {
+          "id": 856,
+          "label": "total_lng_used_counted"
+        },
+        {
+          "id": 857,
+          "label": "lng_level_proc"
+        },
+        {
+          "id": 858,
+          "label": "lng_level_kg"
+        },
+        {
+          "id": 859,
+          "label": "distance_from_need_of_service"
+        },
+        {
+          "id": 860,
+          "label": "distance_from_last_service"
+        },
+        {
+          "id": 861,
+          "label": "time_to_next_service"
+        },
+        {
+          "id": 862,
+          "label": "time_from_need_of_service"
+        },
+        {
+          "id": 863,
+          "label": "time_from_last_service"
+        },
+        {
+          "id": 864,
+          "label": "distance_to_next_oil_service"
+        },
+        {
+          "id": 865,
+          "label": "time_to_next_oil_service"
+        },
+        {
+          "id": 866,
+          "label": "lvcan_vehicle_range"
+        },
+        {
+          "id": 867,
+          "label": "lvcan_total_cng_counted"
+        },
+        {
+          "id": 871,
+          "label": "ble_lock"
+        },
+        {
+          "id": 872,
+          "label": "ble_lock_battery"
+        },
+        {
+          "id": 873,
+          "label": "ble_lock_discovered"
+        },
+        {
+          "id": 874,
+          "label": "bluetooth_home_zone_violation"
+        },
+        {
+          "id": 875,
+          "convert": "ToStrAsciiStripUnicode",
+          "label": "proximity_violation_teltonika"
+        },
+        {
+          "id": 876,
+          "convert": "ToStrAsciiStripUnicode",
+          "label": "proximity_violation_ibeacons"
+        },
+        {
+          "id": 889,
+          "label": "proximity_violation"
+        },
+        {
+          "id": 890,
+          "label": "proximity_duration"
+        },
+        {
+          "id": 891,
+          "convert": "ToStrAsciiStripUnicode",
+          "label": "ble_mac_address"
+        },
+        {
+          "id": 898,
+          "label": "ssf_ignition"
+        },
+        {
+          "id": 899,
+          "label": "ssf_webasto"
+        },
+        {
+          "id": 900,
+          "label": "ssf_engine_working"
+        },
+        {
+          "id": 901,
+          "label": "ssf_standalone_engine"
+        },
+        {
+          "id": 902,
+          "label": "ssf_ready_to_drive"
+        },
+        {
+          "id": 903,
+          "label": "ssf_engine_working_on_cng"
+        },
+        {
+          "id": 904,
+          "label": "ssf_work_mode"
+        },
+        {
+          "id": 905,
+          "label": "ssf_operator"
+        },
+        {
+          "id": 906,
+          "label": "ssf_interlock"
+        },
+        {
+          "id": 907,
+          "label": "ssf_engine_lock_active"
+        },
+        {
+          "id": 908,
+          "label": "ssf_request_to_lock_engine"
+        },
+        {
+          "id": 909,
+          "label": "ssf_roof_open"
+        },
+        {
+          "id": 910,
+          "label": "ssf_footbrake_is_active"
+        },
+        {
+          "id": 911,
+          "label": "ssf_clutch_pushed"
+        },
+        {
+          "id": 912,
+          "label": "ssf_hazard_warning_lights"
+        },
+        {
+          "id": 913,
+          "label": "ssf_engine_cover_open"
+        },
+        {
+          "id": 914,
+          "label": "ssf_charging_wire_plugged"
+        },
+        {
+          "id": 915,
+          "label": "ssf_batttery_charging"
+        },
+        {
+          "id": 916,
+          "label": "ssf_electric_engine_state"
+        },
+        {
+          "id": 917,
+          "label": "ssf_car_closed_factory_remote"
+        },
+        {
+          "id": 918,
+          "label": "ssf_factory_alarm_actuated"
+        },
+        {
+          "id": 919,
+          "label": "ssf_factory_alarm_emulated"
+        },
+        {
+          "id": 920,
+          "label": "ssf_signal_close_factory_remote"
+        },
+        {
+          "id": 921,
+          "label": "ssf_signal_open_factory_remote"
+        },
+        {
+          "id": 922,
+          "label": "ssf_rearming_signal"
+        },
+        {
+          "id": 923,
+          "label": "ssf_trunk_door_opened_factory_remote"
+        },
+        {
+          "id": 924,
+          "label": "ssf_can_module_in_sleep"
+        },
+        {
+          "id": 925,
+          "label": "ssf_factory_remote_3x"
+        },
+        {
+          "id": 926,
+          "label": "ssf_factory_armed"
+        },
+        {
+          "id": 927,
+          "label": "ssf_drive_is_active"
+        },
+        {
+          "id": 928,
+          "label": "csf_parking_lights"
+        },
+        {
+          "id": 929,
+          "label": "csf_dipped_head_lights"
+        },
+        {
+          "id": 930,
+          "label": "csf_full_beam_headlights"
+        },
+        {
+          "id": 931,
+          "label": "csf_rear_fog_lights"
+        },
+        {
+          "id": 932,
+          "label": "csf_front_fog_lights"
+        },
+        {
+          "id": 933,
+          "label": "csf_additional_front_lights"
+        },
+        {
+          "id": 934,
+          "label": "csf_additional_rear_lights"
+        },
+        {
+          "id": 935,
+          "label": "csf_light_signal"
+        },
+        {
+          "id": 936,
+          "label": "csf_air_conditioning"
+        },
+        {
+          "id": 937,
+          "label": "csf_cruise_control"
+        },
+        {
+          "id": 938,
+          "label": "csf_automatic_retarder"
+        },
+        {
+          "id": 939,
+          "label": "csf_manual_retarder"
+        },
+        {
+          "id": 940,
+          "label": "csf_driver_seatbelt_fastened"
+        },
+        {
+          "id": 941,
+          "label": "csf_front_driver_seatbelt_fastened"
+        },
+        {
+          "id": 942,
+          "label": "csf_left_driver_seatbelt_fastened"
+        },
+        {
+          "id": 943,
+          "label": "csf_right_driver_seatbelt_fastened"
+        },
+        {
+          "id": 944,
+          "label": "csf_centre_driver_seatbelt_fastened"
+        },
+        {
+          "id": 945,
+          "label": "csf_front_passenger_present"
+        },
+        {
+          "id": 946,
+          "label": "csf_pto"
+        },
+        {
+          "id": 947,
+          "label": "csf_front_differential_locked"
+        },
+        {
+          "id": 948,
+          "label": "csf_rear_differential_locked"
+        },
+        {
+          "id": 949,
+          "label": "csf_central_differential_4hi_locked"
+        },
+        {
+          "id": 950,
+          "label": "csf_rear_differential_4lo_locked"
+        },
+        {
+          "id": 951,
+          "label": "csf_trailer_axle_1_lift_active"
+        },
+        {
+          "id": 952,
+          "label": "csf_trailer_axle_2_lift_active"
+        },
+        {
+          "id": 953,
+          "label": "isf_check_engine"
+        },
+        {
+          "id": 954,
+          "label": "isf_abs"
+        },
+        {
+          "id": 955,
+          "label": "isf_esp"
+        },
+        {
+          "id": 956,
+          "label": "isf_esp_turned_off"
+        },
+        {
+          "id": 957,
+          "label": "isf_stop"
+        },
+        {
+          "id": 958,
+          "label": "isf_oil_level"
+        },
+        {
+          "id": 959,
+          "label": "isf_coolant_liquid_level"
+        },
+        {
+          "id": 960,
+          "label": "isf_battery_not_charging"
+        },
+        {
+          "id": 961,
+          "label": "isf_handbrake_system"
+        },
+        {
+          "id": 962,
+          "label": "isf_airbag"
+        },
+        {
+          "id": 963,
+          "label": "isf_eps"
+        },
+        {
+          "id": 964,
+          "label": "isf_warning"
+        },
+        {
+          "id": 965,
+          "label": "isf_lights_failure"
+        },
+        {
+          "id": 966,
+          "label": "isf_low_tire_pressure"
+        },
+        {
+          "id": 967,
+          "label": "isf_wear_of_brake_pads"
+        },
+        {
+          "id": 968,
+          "label": "isf_low_fuel_level"
+        },
+        {
+          "id": 969,
+          "label": "isf_maintenance_required"
+        },
+        {
+          "id": 970,
+          "label": "isf_glow_plug"
+        },
+        {
+          "id": 971,
+          "label": "isf_fap"
+        },
+        {
+          "id": 972,
+          "label": "isf_epc_electronic_power_control"
+        },
+        {
+          "id": 973,
+          "label": "isf_clogged_engine_oil_filter"
+        },
+        {
+          "id": 974,
+          "label": "isf_low_engine_oil_pressure"
+        },
+        {
+          "id": 975,
+          "label": "isf_too_high_engine_oil_temp"
+        },
+        {
+          "id": 976,
+          "label": "isf_low_coolant_level"
+        },
+        {
+          "id": 977,
+          "label": "isf_clogged_hydraulic_system_oil_filter"
+        },
+        {
+          "id": 978,
+          "label": "isf_hydraulic_system_low_pressure"
+        },
+        {
+          "id": 979,
+          "label": "isf_hydraulic_oil_low_level"
+        },
+        {
+          "id": 980,
+          "label": "isf_hydraulic_system_high_temp"
+        },
+        {
+          "id": 981,
+          "label": "isf_oil_overflow_in_hydraulic_chamber"
+        },
+        {
+          "id": 982,
+          "label": "isf_clogged_air_filter"
+        },
+        {
+          "id": 983,
+          "label": "isf_clogged_fuel_filter"
+        },
+        {
+          "id": 984,
+          "label": "isf_water_in_fuel"
+        },
+        {
+          "id": 985,
+          "label": "isf_clogged_brake_system_filter"
+        },
+        {
+          "id": 986,
+          "label": "isf_low_washer_fluid_level"
+        },
+        {
+          "id": 987,
+          "label": "isf_low_adblue_level"
+        },
+        {
+          "id": 988,
+          "label": "isf_low_trailer_tyre_pressure"
+        },
+        {
+          "id": 989,
+          "label": "isf_wear_of_trailer_brake_lining"
+        },
+        {
+          "id": 990,
+          "label": "isf_high_trailer_brake_temp"
+        },
+        {
+          "id": 991,
+          "label": "isf_incorrect_trailer_pneumatic_supply"
+        },
+        {
+          "id": 992,
+          "label": "isf_low_cng_level"
+        },
+        {
+          "id": 993,
+          "label": "asf_right_joystick_moved_right_active"
+        },
+        {
+          "id": 994,
+          "label": "asf_right_joystick_moved_left_active"
+        },
+        {
+          "id": 995,
+          "label": "asf_right_joystick_moved_forward_active"
+        },
+        {
+          "id": 996,
+          "label": "asf_right_joystick_moved_back_active"
+        },
+        {
+          "id": 997,
+          "label": "asf_left_joystick_moved_right_active"
+        },
+        {
+          "id": 998,
+          "label": "asf_left_joystick_moved_left_active"
+        },
+        {
+          "id": 999,
+          "label": "asf_left_joystick_moved_forward_active"
+        },
+        {
+          "id": 1000,
+          "label": "asf_left_joystick_moved_back_active"
+        },
+        {
+          "id": 1001,
+          "label": "asf_first_rear_hydraulic"
+        },
+        {
+          "id": 1002,
+          "label": "asf_second_rear_hydraulic"
+        },
+        {
+          "id": 1003,
+          "label": "asf_third_rear_hydraulic"
+        },
+        {
+          "id": 1004,
+          "label": "asf_fourth_rear_hydraulic"
+        },
+        {
+          "id": 1005,
+          "label": "asf_first_front_hydraulic"
+        },
+        {
+          "id": 1006,
+          "label": "asf_second_front_hydraulic"
+        },
+        {
+          "id": 1007,
+          "label": "asf_third_front_hydraulic"
+        },
+        {
+          "id": 1008,
+          "label": "asf_fourth_front_hydraulic"
+        },
+        {
+          "id": 1009,
+          "label": "asf_front_three-point_hitch"
+        },
+        {
+          "id": 1010,
+          "label": "asf_rear_three-point_hitch"
+        },
+        {
+          "id": 1011,
+          "label": "asf_front_power_take-off"
+        },
+        {
+          "id": 1012,
+          "label": "asf_rear_power_take-off"
+        },
+        {
+          "id": 1013,
+          "label": "asf_mowing_active"
+        },
+        {
+          "id": 1014,
+          "label": "asf_threshing_active"
+        },
+        {
+          "id": 1015,
+          "label": "asf_grain_release_from_hopper"
+        },
+        {
+          "id": 1016,
+          "label": "asf_grain_tank_is_100_full"
+        },
+        {
+          "id": 1017,
+          "label": "asf_grain_tank_is_70_full"
+        },
+        {
+          "id": 1018,
+          "label": "asf_grain_tank_is_opened"
+        },
+        {
+          "id": 1019,
+          "label": "asf_unloader_drive"
+        },
+        {
+          "id": 1020,
+          "label": "asf_cleaning_fan_control_turned_off"
+        },
+        {
+          "id": 1021,
+          "label": "asf_threshing_drum_control_turned_off"
+        },
+        {
+          "id": 1022,
+          "label": "asf_straw_walker_is_clogged"
+        },
+        {
+          "id": 1023,
+          "label": "asf_excessive_clearance"
+        },
+        {
+          "id": 1024,
+          "label": "asf_low_temp_of_drive_system"
+        },
+        {
+          "id": 1025,
+          "label": "asf_high_temp_of_drive_system"
+        },
+        {
+          "id": 1026,
+          "label": "asf_ear_auger_speed_below_the_norm"
+        },
+        {
+          "id": 1027,
+          "label": "asf_grain_auger_speed_below_the_norm"
+        },
+        {
+          "id": 1028,
+          "label": "asf_straw_chooper_speed_below_the_norm"
+        },
+        {
+          "id": 1029,
+          "label": "asf_straw_shaker_speed_below_the_norm"
+        },
+        {
+          "id": 1030,
+          "label": "asf_feeder_speed_below_the_norm"
+        },
+        {
+          "id": 1031,
+          "label": "asf_straw_chopper_switched_on"
+        },
+        {
+          "id": 1032,
+          "label": "asf_corn_header_connected"
+        },
+        {
+          "id": 1033,
+          "label": "asf_grain_header_connected"
+        },
+        {
+          "id": 1034,
+          "label": "asf_feeder_reverse_switched_on"
+        },
+        {
+          "id": 1035,
+          "label": "asf_pressure_filter_clogged"
+        },
+        {
+          "id": 1036,
+          "label": "usf_spreading"
+        },
+        {
+          "id": 1037,
+          "label": "usf_pouring_chemicals"
+        },
+        {
+          "id": 1038,
+          "label": "usf_conveyor_belt"
+        },
+        {
+          "id": 1039,
+          "label": "usf_salt_spreaders_drive_wheel"
+        },
+        {
+          "id": 1040,
+          "label": "usf_brushes"
+        },
+        {
+          "id": 1041,
+          "label": "usf_vacuum_cleaner"
+        },
+        {
+          "id": 1042,
+          "label": "usf_water_supply"
+        },
+        {
+          "id": 1043,
+          "label": "usf_spreading"
+        },
+        {
+          "id": 1044,
+          "label": "usf_liquid_pump"
+        },
+        {
+          "id": 1045,
+          "label": "usf_unloading_from_the_hopper"
+        },
+        {
+          "id": 1046,
+          "label": "usf_low_salt"
+        },
+        {
+          "id": 1047,
+          "label": "usf_low_water"
+        },
+        {
+          "id": 1048,
+          "label": "usf_chemicals"
+        },
+        {
+          "id": 1049,
+          "label": "usf_compressor"
+        },
+        {
+          "id": 1050,
+          "label": "usf_water_valve_is_opened"
+        },
+        {
+          "id": 1051,
+          "label": "usf_cabin_moved_up_status_active"
+        },
+        {
+          "id": 1052,
+          "label": "usf_cabin_moved_down_status_active"
+        },
+        {
+          "id": 1053,
+          "label": "cisf_section_1_fluid"
+        },
+        {
+          "id": 1054,
+          "label": "cisf_section_1_filled"
+        },
+        {
+          "id": 1055,
+          "label": "cisf_section_1_overfilled"
+        },
+        {
+          "id": 1056,
+          "label": "cisf_section_2_fluid"
+        },
+        {
+          "id": 1057,
+          "label": "cisf_section_2_filled"
+        },
+        {
+          "id": 1058,
+          "label": "cisf_section_2_overfilled"
+        },
+        {
+          "id": 1059,
+          "label": "cisf_section_3_fluid"
+        },
+        {
+          "id": 1060,
+          "label": "cisf_section_3_filled"
+        },
+        {
+          "id": 1061,
+          "label": "cisf_section_3_overfilled"
+        },
+        {
+          "id": 1062,
+          "label": "cisf_section_4_fluid"
+        },
+        {
+          "id": 1063,
+          "label": "cisf_section_4_filled"
+        },
+        {
+          "id": 1064,
+          "label": "cisf_section_4_overfilled"
+        },
+        {
+          "id": 1065,
+          "label": "cisf_section_5_fluid"
+        },
+        {
+          "id": 1066,
+          "label": "cisf_section_5_filled"
+        },
+        {
+          "id": 1067,
+          "label": "cisf_section_5_overfilled"
+        },
+        {
+          "id": 1068,
+          "label": "cisf_section_6_fluid"
+        },
+        {
+          "id": 1069,
+          "label": "cisf_section_6_filled"
+        },
+        {
+          "id": 1070,
+          "label": "cisf_section_6_overfilled"
+        },
+        {
+          "id": 1071,
+          "label": "cisf_section_7_fluid"
+        },
+        {
+          "id": 1072,
+          "label": "cisf_section_7_filled"
+        },
+        {
+          "id": 1073,
+          "label": "cisf_section_7_overfilled"
+        },
+        {
+          "id": 1074,
+          "label": "cisf_section_8_fluid"
+        },
+        {
+          "id": 1075,
+          "label": "cisf_section_8_filled"
+        },
+        {
+          "id": 1076,
+          "label": "cisf_section_8_overfilled"
+        },
+        {
+          "id": 1079,
+          "label": "total_bale_count"
+        },
+        {
+          "id": 1080,
+          "label": "bale_count"
+        },
+        {
+          "id": 1081,
+          "label": "cut_bale_count"
+        },
+        {
+          "id": 1082,
+          "label": "bale_slices"
+        },
+        {
+          "id": 1083,
+          "label": "ssf_engine_working_on_dual_fuel"
+        },
+        {
+          "id": 1084,
+          "label": "ssf_engine_working_on_lpg"
+        },
+        {
+          "id": 1085,
+          "label": "csf_trailer_connected"
+        },
+        {
+          "id": 1086,
+          "label": "csf_start_stop_system_inactive"
+        },
+        {
+          "id": 1087,
+          "label": "asf_adapter_pressure_filter_sensor"
+        },
+        {
+          "id": 1088,
+          "label": "asf_service_2_required"
+        },
+        {
+          "id": 1089,
+          "label": "asf_drain_filter_clogged"
+        },
+        {
+          "id": 1090,
+          "label": "asf_section_1_spraying"
+        },
+        {
+          "id": 1091,
+          "label": "asf_section_2_spraying"
+        },
+        {
+          "id": 1092,
+          "label": "asf_section_3_spraying"
+        },
+        {
+          "id": 1093,
+          "label": "asf_section_4_spraying"
+        },
+        {
+          "id": 1094,
+          "label": "asf_section_5_spraying"
+        },
+        {
+          "id": 1095,
+          "label": "asf_section_6_spraying"
+        },
+        {
+          "id": 1096,
+          "label": "asf_section_7_spraying"
+        },
+        {
+          "id": 1097,
+          "label": "asf_section_8_spraying"
+        },
+        {
+          "id": 1098,
+          "label": "asf_section_9_spraying"
+        },
+        {
+          "id": 1099,
+          "label": "usf_hydraulics_work_not_permitted"
+        },
+        {
+          "id": 1100,
+          "label": "total_lpg_used"
+        },
+        {
+          "id": 1101,
+          "label": "total_lpg_used_counted"
+        },
+        {
+          "id": 1102,
+          "label": "lpg_level_proc"
+        },
+        {
+          "id": 1103,
+          "label": "lpg_level_liters"
+        },
+        {
+          "id": 1112,
+          "label": "lvcan_hvbatterypackvoltage"
+        },
+        {
+          "id": 1113,
+          "label": "lvcan_hvbatterypackcurrent"
+        },
+        {
+          "id": 1116,
+          "label": "lvcan_maxroadspeed"
+        },
+        {
+          "id": 1117,
+          "label": "lvcan_exceededroadspeed"
+        },
+        {
+          "id": 1136,
+          "label": "fmcan_control_state_flags"
+        },
+        {
+          "id": 1137,
+          "convert": "SignedValue",
+          "label": "fmcan_steering_wheel_angle"
+        },
+        {
+          "id": 1151,
+          "label": "oem_battery_health"
+        },
+        {
+          "id": 1152,
+          "label": "oem_battery_temp"
+        },
+        {
+          "id": 1155,
+          "label": "lvcan_hv_batt_consumed_energy"
+        },
+        {
+          "id": 1156,
+          "label": "lvcan_hv_batt_recup_energy"
+        },
+        {
+          "id": 1157,
+          "label": "lvcan_hv_batt_power"
+        },
+        {
+          "id": 1158,
+          "label": "lvcan_engine_oil_pressure"
+        },
+        {
+          "id": 1159,
+          "label": "lvcan_engine_oil_level"
+        },
+        {
+          "id": 1200,
+          "label": "gsm_cell_mnc_1"
+        },
+        {
+          "id": 1201,
+          "label": "gsm_cell_mnc_2"
+        },
+        {
+          "id": 1202,
+          "label": "gsm_cell_mnc_3"
+        },
+        {
+          "id": 1203,
+          "label": "gsm_cell_mnc_4"
+        },
+        {
+          "id": 1205,
+          "label": "lvcan_rsf_speedlimitsign"
+        },
+        {
+          "id": 1206,
+          "label": "lvcan_rsf_endofspeedlimitsign"
+        },
+        {
+          "id": 1207,
+          "label": "lvcan_rsf_speedexceeded"
+        },
+        {
+          "id": 1208,
+          "label": "lvcan_rsf_timespeedlimitsign"
+        },
+        {
+          "id": 1209,
+          "label": "lvcan_rsf_wthrspeedlimitsign"
+        },
+        {
+          "id": 10800,
+          "convert": "SignedHundredth",
+          "label": "eye_temp_01"
+        },
+        {
+          "id": 10801,
+          "convert": "SignedHundredth",
+          "label": "eye_temp_02"
+        },
+        {
+          "id": 10802,
+          "convert": "SignedHundredth",
+          "label": "eye_temp_03"
+        },
+        {
+          "id": 10803,
+          "convert": "SignedHundredth",
+          "label": "eye_temp_04"
+        },
+        {
+          "id": 10804,
+          "label": "eye_humidity_01"
+        },
+        {
+          "id": 10805,
+          "label": "eye_humidity_02"
+        },
+        {
+          "id": 10806,
+          "label": "eye_humidity_03"
+        },
+        {
+          "id": 10807,
+          "label": "eye_humidity_04"
+        },
+        {
+          "id": 10808,
+          "label": "eye_magnet_01"
+        },
+        {
+          "id": 10809,
+          "label": "eye_magnet_02"
+        },
+        {
+          "id": 10810,
+          "label": "eye_magnet_03"
+        },
+        {
+          "id": 10811,
+          "label": "eye_magnet_04"
+        },
+        {
+          "id": 10812,
+          "label": "eye_movement_01"
+        },
+        {
+          "id": 10813,
+          "label": "eye_movement_02"
+        },
+        {
+          "id": 10814,
+          "label": "eye_movement_03"
+        },
+        {
+          "id": 10815,
+          "label": "eye_movement_04"
+        },
+        {
+          "id": 10816,
+          "convert": "SignedValue",
+          "label": "eye_pitch_01"
+        },
+        {
+          "id": 10817,
+          "convert": "SignedValue",
+          "label": "eye_pitch_02"
+        },
+        {
+          "id": 10818,
+          "convert": "SignedValue",
+          "label": "eye_pitch_03"
+        },
+        {
+          "id": 10819,
+          "convert": "SignedValue",
+          "label": "eye_pitch_04"
+        },
+        {
+          "id": 10820,
+          "label": "eye_low_battery_01"
+        },
+        {
+          "id": 10821,
+          "label": "eye_low_battery_02"
+        },
+        {
+          "id": 10822,
+          "label": "eye_low_battery_03"
+        },
+        {
+          "id": 10823,
+          "label": "eye_low_battery_04"
+        },
+        {
+          "id": 10824,
+          "convert": "UnsignedThousandth",
+          "label": "eye_battery_voltage_01"
+        },
+        {
+          "id": 10825,
+          "convert": "UnsignedThousandth",
+          "label": "eye_battery_voltage_02"
+        },
+        {
+          "id": 10826,
+          "convert": "UnsignedThousandth",
+          "label": "eye_battery_voltage_03"
+        },
+        {
+          "id": 10827,
+          "convert": "UnsignedThousandth",
+          "label": "eye_battery_voltage_04"
+        },
+        {
+          "id": 10828,
+          "label": "eye_proximity_near"
+        },
+        {
+          "id": 10829,
+          "label": "eye_proximity_away"
+        },
+        {
+          "id": 10830,
+          "label": "eye_proximity_far_away"
+        },
+        {
+          "id": 10831,
+          "label": "eye_proximity_lost"
+        },
+        {
+          "id": 10832,
+          "convert": "SignedValue",
+          "label": "eye_roll_01"
+        },
+        {
+          "id": 10833,
+          "convert": "SignedValue",
+          "label": "eye_roll_02"
+        },
+        {
+          "id": 10834,
+          "convert": "SignedValue",
+          "label": "eye_roll_03"
+        },
+        {
+          "id": 10835,
+          "convert": "SignedValue",
+          "label": "eye_roll_04"
+        },
+        {
+          "id": 10836,
+          "label": "eye_movement_01_counter"
+        },
+        {
+          "id": 10837,
+          "label": "eye_movement_02_counter"
+        },
+        {
+          "id": 10838,
+          "label": "eye_movement_03_counter"
+        },
+        {
+          "id": 10839,
+          "label": "eye_movement_04_counter"
+        },
+        {
+          "id": 10840,
+          "label": "eye_magnet_01_counter"
+        },
+        {
+          "id": 10841,
+          "label": "eye_magnet_02_counter"
+        },
+        {
+          "id": 10842,
+          "label": "eye_magnet_03_counter"
+        },
+        {
+          "id": 10843,
+          "label": "eye_magnet_04_counter"
+        },
+        {
+          "id": 11317,
+          "label": "eye_sensor_list"
+        },
+        {
+          "id": 20015,
+          "label": "modem_uptime"
+        },
+        {
+          "id": 20016,
+          "convert": "SignedValue",
+          "label": "rsrp"
+        },
+        {
+          "id": 20017,
+          "convert": "SignedValue",
+          "label": "rsrq"
+        },
+        {
+          "id": 25016,
+          "convert": "SignedValue",
+          "label": "rsrp"
+        },
+        {
+          "id": 25017,
+          "convert": "SignedValue",
+          "label": "rsrq"
+        },
+        {
+          "id": 25019,
+          "label": "lte_signal_rx_0"
+        },
+        {
+          "id": 25020,
+          "label": "lte_cell_lac_1"
+        },
+        {
+          "id": 25021,
+          "label": "lte_cell_id_1"
+        },
+        {
+          "id": 25022,
+          "label": "lte_signal_rx_1"
+        },
+        {
+          "id": 25023,
+          "label": "lte_cell_lac_2"
+        },
+        {
+          "id": 25024,
+          "label": "lte_cell_id_2"
+        },
+        {
+          "id": 25025,
+          "label": "lte_signal_rx_2"
+        },
+        {
+          "id": 25026,
+          "label": "lte_cell_lac_3"
+        },
+        {
+          "id": 25027,
+          "label": "lte_cell_id_3"
+        },
+        {
+          "id": 25028,
+          "label": "lte_signal_rx_3"
+        },
+        {
+          "id": 25029,
+          "label": "lte_cell_lac_4"
+        },
+        {
+          "id": 25030,
+          "label": "lte_cell_id_4"
+        },
+        {
+          "id": 25031,
+          "label": "lte_signal_rx_4"
+        },
+        {
+          "id": 25032,
+          "label": "lte_cell_mnc_1"
+        },
+        {
+          "id": 25033,
+          "label": "lte_cell_mnc_2"
+        },
+        {
+          "id": 25034,
+          "label": "lte_cell_mnc_3"
+        },
+        {
+          "id": 25035,
+          "label": "lte_cell_mnc_4"
+        }
+      ]
+    }
+  }
+  
