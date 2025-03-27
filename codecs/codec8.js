@@ -245,7 +245,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  signedThousandth(value) {
+  SignedThousandth(value) {
     return Number(value) * 0.001;
   }
 
@@ -254,7 +254,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  signedHundredth(value) {
+  SignedHundredth(value) {
     return Number(value) * 0.01;
   }
 
@@ -263,7 +263,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  signedTenth(value) {
+  SignedTenth(value) {
     return Number(value) * 0.1;
   }
 
@@ -272,7 +272,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  signedValue(value) {
+  SignedValue(value) {
     return Number(value);
   }
 
@@ -281,7 +281,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedValue(value) {
+  UnsignedValue(value) {
     return Math.abs(Number(value));
   }
 
@@ -290,7 +290,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedThousandth(value) {
+  UnsignedThousandth(value) {
     return Math.abs(Number(value)) * 0.001;
   }
 
@@ -299,7 +299,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedHundredth(value) {
+  UnsignedHundredth(value) {
     return Math.abs(Number(value)) * 0.01;
   }
 
@@ -308,7 +308,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedTenth(value) {
+  UnsignedTenth(value) {
     return Math.abs(Number(value)) * 0.1;
   }
 
@@ -317,7 +317,7 @@ class Codec8 extends Codec {
    * @param {any} value 
    * @returns {string}
    */
-  toStr(value) {
+  ToStr(value) {
     return String(value);
   }
 
@@ -326,7 +326,7 @@ class Codec8 extends Codec {
    * @param {any} value 
    * @returns {string}
    */
-  toStrAscii(value) {
+  ToStrAscii(value) {
     return String(value).replace(/[^\x00-\x7F]/g, "");
   }
 
@@ -335,7 +335,7 @@ class Codec8 extends Codec {
    * @param {any} value 
    * @returns {string}
    */
-  toStrAsciiStripUnicode(value) {
+  ToStrAsciiStripUnicode(value) {
     return String(value)
       .replace(/[^\x00-\x7F]/g, "")
       .normalize('NFKD')
@@ -347,7 +347,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedTen(value) {
+  UnsignedTen(value) {
     return Math.abs(Number(value)) * 10;
   }
 
@@ -356,7 +356,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  iButton(value) {
+  IButton(value) {
     return Math.abs(Number(value));
   }
 
@@ -365,7 +365,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {string}
    */
-  leToHex(value) {
+  LeToHex(value) {
     return Math.abs(Number(value)).toString(16);
   }
 
@@ -374,7 +374,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedThousandthFifty(value) {
+  UnsignedThousandthFifty(value) {
     return Math.abs(Number(value)) * 50;
   }
 
@@ -384,7 +384,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  cellTemperature(value) {
+  CellTemperature(value) {
     return Number(value) * 0.03125 ;
   }
 
@@ -393,7 +393,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedTwo(value) {
+  UnsignedTwo(value) {
     return Math.abs(Number(value)) * 2;
   }
 
@@ -402,7 +402,7 @@ class Codec8 extends Codec {
    * @param {number} value 
    * @returns {number}
    */
-  unsignedFourTenth(value) {
+  UnsignedFourTenth(value) {
     return Math.abs(Number(value)) * 0.4;
   }
 
@@ -411,7 +411,7 @@ class Codec8 extends Codec {
    * @param {any} value 
    * @returns {string}
    */
-  leToStrAscii(value) {
+  LeToStrAscii(value) {
     return String(value).replace(/[^\x00-\x7F]/g, "");
   }
 }
