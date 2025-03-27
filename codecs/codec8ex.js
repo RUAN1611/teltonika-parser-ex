@@ -48,13 +48,14 @@ class Codec8e extends Codec {
   }
 
   /**
-   * Codec 8 construct
+   * Codec 8e construct
    *
    * @param reader
    * @param number_of_records
+   * @param imei - Device IMEI number
    */
-  constructor(reader, number_of_records) {
-    super(reader, number_of_records);
+  constructor(reader, number_of_records, imei) {
+    super(reader, number_of_records, imei);
     this._gpsPrecision = 10000000;
   }
 

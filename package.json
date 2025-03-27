@@ -27,7 +27,8 @@
   },
   "name": "teltonika-parser-ex",
   "scripts": {
-    "test": "mocha test/test.js"
+    "test": "mocha test/test.js",
+    "install-protocol": "npm install -s git+https://x-token-auth:${BITBUCKET_TOKEN}@bitbucket.org/matogen/iot-data-standards.git"
   },
   "version": "0.0.16",
   "keywords": [

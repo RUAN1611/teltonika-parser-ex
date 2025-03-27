@@ -44,25 +44,29 @@ class TeltonikaParser {
       case 7:
         this._codec = new codec7(
           this._codecReader,
-          this._avlObj.number_of_data
+          this._avlObj.number_of_data,
+          this.imei
         );
         break;
       case 8:
         this._codec = new codec8(
           this._codecReader,
-          this._avlObj.number_of_data
+          this._avlObj.number_of_data,
+          this.imei
         );
         break;
       case 16:
         this._codec = new codec16(
           this._codecReader,
-          this._avlObj.number_of_data
+          this._avlObj.number_of_data,
+          this.imei
         );
         break;
       case 142:
         this._codec = new codec8ex(
           this._codecReader,
-          this._avlObj.number_of_data
+          this._avlObj.number_of_data,
+          this.imei
         );
         break;
     }
@@ -82,13 +86,7 @@ class TeltonikaParser {
   }
 
   parseFooter() {
-    this._avlObj.number_of_data2 = this._toInt(this._reader.ReadBytes(1));
-    this._avlObj.CRC = {
-      0: this._toInt(this._reader.ReadBytes(1)),
-      1: this._toInt(this._reader.ReadBytes(1)),
-      2: this._toInt(this._reader.ReadBytes(1)),
-      3: this._toInt(this._reader.ReadBytes(1)),
-    };
+    this._avlObj.crc = this._reader.ReadInt32();
   }
 
   /**
@@ -102,6 +100,11 @@ class TeltonikaParser {
     return parseInt(bytes.toString('hex'), 16);
   }
 
+  /**
+   * Get AVL object
+   *
+   * @returns {{}}
+   */
   getAvl() {
     return this._avlObj;
   }
