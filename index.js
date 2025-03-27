@@ -3,13 +3,14 @@
 const binutils = require('binutils64');
 const codec7 = require('./codecs/codec7');
 const codec8 = require('./codecs/codec8');
-const codec16 = require('./codecs/codec8');
+const codec16 = require('./codecs/codec16');
 const codec8ex = require('./codecs/codec8ex');
 
 class TeltonikaParser {
-  constructor(buffer) {
+  constructor(buffer, imei = null) {
     this._reader = new binutils.BinaryReader(buffer);
     this._avlObj = {};
+    this.imei = imei;
     this.checkIsImei();
     if (!this.isImei) {
       this.parseHeader();
@@ -32,6 +33,10 @@ class TeltonikaParser {
    * Parsing AVL record header
    */
   parseHeader() {
+    if (!this.imei) {
+      throw new Error('IMEI is required for data parsing. Make sure to provide IMEI when creating the parser.');
+    }
+
     this._avlObj = {
       data_length: this._reader.ReadInt32(),
       codec_id: this._toInt(this._reader.ReadBytes(1)),
