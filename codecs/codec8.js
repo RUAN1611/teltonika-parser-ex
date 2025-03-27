@@ -215,7 +215,22 @@ class Codec8 extends Codec {
     if (this.getProtocol() !== 'basic-protocol') {
       throw new Error(`Protocol ${this.getProtocol()} not supported yet`);
     }
-    return basicProtocolIoElements;
+    
+    // Convert the array to an object with id as key for faster lookups
+    const elementsById = {};
+    if (basicProtocolIoElements && basicProtocolIoElements.data && 
+        Array.isArray(basicProtocolIoElements.data.ioelements)) {
+      basicProtocolIoElements.data.ioelements.forEach(element => {
+        elementsById[element.id] = element;
+      });
+    } else if (Array.isArray(basicProtocolIoElements)) {
+      // Handle case where the import might be just the array
+      basicProtocolIoElements.forEach(element => {
+        elementsById[element.id] = element;
+      });
+    }
+    
+    return elementsById;
   }
 
   /**
