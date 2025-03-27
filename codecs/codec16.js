@@ -37,14 +37,13 @@ class Codec16 {
   }
 
   /**
-   * Codec16 constructor
-   * @param reader
-   * @param number_of_records
-   * @param imei - Device IMEI number
+   * Codec8 constructor
+   * @param buffer
    */
-  constructor(reader, number_of_records, imei) {
-    super(reader, number_of_records, imei);
-    this._gpsPrecision = 10000000;
+  constructor(buffer) {
+    this._reader = new binutils.BinaryReader(buffer);
+    this._avlObj = {};
+    this.parseHeader();
   }
 
   /**
