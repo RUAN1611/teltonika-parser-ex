@@ -78,6 +78,7 @@ class Codec8e extends Codec {
   parseAvlRecords() {
     let avlRecord = {
       timestamp: new Date(this.toInt(this.reader.ReadBytes(8))),
+      protocol: `teltonika/${this.getProtocol()}`,
       priority: this.toInt(this.reader.ReadBytes(1)),
       gps: {
         longitude: this.reader.ReadInt32(),
