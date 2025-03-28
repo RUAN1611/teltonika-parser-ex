@@ -1,0 +1,37 @@
+image: atlassian/default-image:3
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Validate Protocol Mappings
+          script:
+            - bash ./validate-protocols.sh
+          after-script:
+            - echo "Protocol validation completed"
+
+  branches:
+    develop:
+      - step:
+          name: Validate Protocol Mappings
+          script:
+            - bash ./validate-protocols.sh
+          after-script:
+            - echo "Protocol validation completed"
+    main:
+      - step:
+          name: Validate Protocol Mappings
+          script:
+            - bash ./validate-protocols.sh
+          after-script:
+            - echo "Protocol validation completed"
+
+  # Custom trigger - can be manually run from Bitbucket UI
+  custom:
+    validation:
+      - step:
+          name: Manual Protocol Validation
+          script:
+            - bash ./validate-protocols.sh
+          after-script:
+            - echo "Manual protocol validation completed"
