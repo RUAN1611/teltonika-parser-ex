@@ -3,6 +3,7 @@
 const binutils = require('binutils64');
 const Codec = require('./codec');
 const basicProtocolIoElements = require('../iot-data-standards/teltonika/basic-protocol.json');
+const advancedProtocolIoElements = require('../iot-data-standards/teltonika/advanced-protocol.json');
 
 /**
  * Codec 8 decoding
@@ -249,7 +250,7 @@ class Codec8e extends Codec {
   ioElements() {
     // For now, we only support basic protocol
     if (this.getProtocol() !== 'basic-protocol' && this.getProtocol() !== 'advanced-protocol') {
-      throw new Error(`Protocol ${this.getProtocol()} not supported yet`);
+      this.setProtocol('basic-protocol');
     }
     
     // Convert the array to an object with id as key for faster lookups

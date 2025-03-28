@@ -58,6 +58,10 @@ class Codec {
     return this.protocol;
   }
 
+  setProtocol(protocol) {
+    this.protocol = protocol;
+  }
+
   /**
    * Run parse process
    */
