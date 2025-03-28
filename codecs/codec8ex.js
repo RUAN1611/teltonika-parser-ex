@@ -248,24 +248,40 @@ class Codec8e extends Codec {
    */
   ioElements() {
     // For now, we only support basic protocol
-    if (this.getProtocol() !== 'basic-protocol') {
+    if (this.getProtocol() !== 'basic-protocol' && this.getProtocol() !== 'advanced-protocol') {
       throw new Error(`Protocol ${this.getProtocol()} not supported yet`);
     }
     
     // Convert the array to an object with id as key for faster lookups
     const elementsById = {};
-    if (basicProtocolIoElements && basicProtocolIoElements.data && 
-        Array.isArray(basicProtocolIoElements.data.ioelements)) {
-      basicProtocolIoElements.data.ioelements.forEach(element => {
-        elementsById[element.id] = element;
-      });
-    } else if (Array.isArray(basicProtocolIoElements)) {
-      // Handle case where the import might be just the array
-      basicProtocolIoElements.forEach(element => {
-        elementsById[element.id] = element;
-      });
+    if(this.getProtocol() === 'basic-protocol') {
+        if (basicProtocolIoElements && basicProtocolIoElements.data && 
+          Array.isArray(basicProtocolIoElements.data.ioelements)) {
+        basicProtocolIoElements.data.ioelements.forEach(element => {
+          elementsById[element.id] = element;
+        });
+      } else if (Array.isArray(basicProtocolIoElements)) {
+        // Handle case where the import might be just the array
+        basicProtocolIoElements.forEach(element => {
+          elementsById[element.id] = element;
+        });
+      }
     }
-    
+
+    if(this.getProtocol() === 'advanced-protocol') {
+      if (advancedProtocolIoElements && advancedProtocolIoElements.data && 
+          Array.isArray(advancedProtocolIoElements.data.ioelements)) {
+        advancedProtocolIoElements.data.ioelements.forEach(element => {
+          elementsById[element.id] = element;
+        });
+        } else if (Array.isArray(advancedProtocolIoElements)) {
+          // Handle case where the import might be just the array
+          advancedProtocolIoElements.forEach(element => {
+            elementsById[element.id] = element;
+          });
+        }
+    }
+
     return elementsById;
   }
 
