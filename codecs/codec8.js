@@ -259,6 +259,15 @@ class Codec8 extends Codec {
   }
 
   /**
+   * Converts unsigned value with 0.001 multiplier
+   * @param {number} value 
+   * @returns {number}
+   */
+  AnalogTelemetryProcessor(value) {
+    return Math.abs(Number(value)) * 0.001;
+  }
+
+  /**
    * Convert signed value with 0.001 multiplier
    * @param {number} value 
    * @returns {number}
