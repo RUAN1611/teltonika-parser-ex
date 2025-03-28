@@ -4,6 +4,7 @@ const binutils = require('binutils64');
 const Codec = require('./codec');
 const basicProtocolIoElements = require('../iot-data-standards/teltonika/basic-protocol.json');
 const advancedProtocolIoElements = require('../iot-data-standards/teltonika/advanced-protocol.json');
+const professionalProtocolIoElements = require('../iot-data-standards/teltonika/professional-protocol.json');
 
 /**
  * Codec 8 decoding
@@ -221,7 +222,7 @@ class Codec8 extends Codec {
    */
   ioElements() {
     // For now, we only support basic protocol
-    if (this.getProtocol() !== 'basic-protocol' && this.getProtocol() !== 'advanced-protocol') {
+    if (this.getProtocol() !== 'basic-protocol' && this.getProtocol() !== 'advanced-protocol' && this.getProtocol() !== 'professional-protocol') {
       this.setProtocol('basic-protocol');
     }
     
@@ -250,6 +251,20 @@ class Codec8 extends Codec {
         } else if (Array.isArray(advancedProtocolIoElements)) {
           // Handle case where the import might be just the array
           advancedProtocolIoElements.forEach(element => {
+            elementsById[element.id] = element;
+          });
+        }
+    }
+
+    if(this.getProtocol() === 'professional-protocol') {
+      if (professionalProtocolIoElements && professionalProtocolIoElements.data && 
+          Array.isArray(professionalProtocolIoElements.data.ioelements)) {
+        professionalProtocolIoElements.data.ioelements.forEach(element => {
+          elementsById[element.id] = element;
+        });
+        } else if (Array.isArray(professionalProtocolIoElements)) {
+          // Handle case where the import might be just the array
+          professionalProtocolIoElements.forEach(element => {
             elementsById[element.id] = element;
           });
         }
