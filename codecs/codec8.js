@@ -5,6 +5,10 @@ const Codec = require('./codec');
 const basicProtocolIoElements = require('../iot-data-standards/teltonika/basic-protocol.json');
 const advancedProtocolIoElements = require('../iot-data-standards/teltonika/advanced-protocol.json');
 const professionalProtocolIoElements = require('../iot-data-standards/teltonika/professional-protocol.json');
+const canTrackersAndAdaptersProtocolIoElements = require('../iot-data-standards/teltonika/can-trackers-and-adapters-protocol.json');
+const autonomousProtocolIoElements = require('../iot-data-standards/teltonika/autonomous-protocol.json');
+const eMobilityProtocolIoElements = require('../iot-data-standards/teltonika/e-mobility-protocol.json');
+const fastAndEasyProtocolIoElements = require('../iot-data-standards/teltonika/fast-and-easy-protocol.json');
 
 /**
  * Codec 8 decoding
@@ -222,52 +226,125 @@ class Codec8 extends Codec {
    */
   ioElements() {
     // For now, we only support basic protocol
-    if (this.getProtocol() !== 'basic-protocol' && this.getProtocol() !== 'advanced-protocol' && this.getProtocol() !== 'professional-protocol') {
+    if (this.getProtocol() !== 'basic-protocol' && 
+    this.getProtocol() !== 'advanced-protocol' && 
+    this.getProtocol() !== 'professional-protocol' && 
+    this.getProtocol() !== 'can-trackers-and-adapters-protocol' && 
+    this.getProtocol() !== 'autonomous-protocol' && 
+    this.getProtocol() !== 'e-mobility-protocol' && 
+    this.getProtocol() !== 'fast-and-easy-protocol') {
       this.setProtocol('basic-protocol');
     }
     
     // Convert the array to an object with id as key for faster lookups
     const elementsById = {};
     if(this.getProtocol() === 'basic-protocol') {
-        if (basicProtocolIoElements && basicProtocolIoElements.data && 
-          Array.isArray(basicProtocolIoElements.data.ioelements)) {
-        basicProtocolIoElements.data.ioelements.forEach(element => {
-          elementsById[element.id] = element;
-        });
-      } else if (Array.isArray(basicProtocolIoElements)) {
-        // Handle case where the import might be just the array
-        basicProtocolIoElements.forEach(element => {
-          elementsById[element.id] = element;
-        });
-      }
+      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      Object.entries(basicProtocolIoElements).forEach(([key, element]) => {
+        if (key.startsWith('data::io::')) {
+          const id = parseInt(key.split('::')[2], 10);
+          if (!isNaN(id)) {
+            elementsById[id] = {
+              id: id,
+              label: element.label,
+              ...(element.convert && { convert: element.convert })
+            };
+          }
+        }
+      });
     }
 
     if(this.getProtocol() === 'advanced-protocol') {
-      if (advancedProtocolIoElements && advancedProtocolIoElements.data && 
-          Array.isArray(advancedProtocolIoElements.data.ioelements)) {
-        advancedProtocolIoElements.data.ioelements.forEach(element => {
-          elementsById[element.id] = element;
-        });
-        } else if (Array.isArray(advancedProtocolIoElements)) {
-          // Handle case where the import might be just the array
-          advancedProtocolIoElements.forEach(element => {
-            elementsById[element.id] = element;
-          });
+      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      Object.entries(advancedProtocolIoElements).forEach(([key, element]) => {
+        if (key.startsWith('data::io::')) {
+          const id = parseInt(key.split('::')[2], 10);
+          if (!isNaN(id)) {
+            elementsById[id] = {
+              id: id,
+              label: element.label,
+              ...(element.convert && { convert: element.convert })
+            };
+          }
         }
+      });
     }
 
     if(this.getProtocol() === 'professional-protocol') {
-      if (professionalProtocolIoElements && professionalProtocolIoElements.data && 
-          Array.isArray(professionalProtocolIoElements.data.ioelements)) {
-        professionalProtocolIoElements.data.ioelements.forEach(element => {
-          elementsById[element.id] = element;
-        });
-        } else if (Array.isArray(professionalProtocolIoElements)) {
-          // Handle case where the import might be just the array
-          professionalProtocolIoElements.forEach(element => {
-            elementsById[element.id] = element;
-          });
+      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      Object.entries(professionalProtocolIoElements).forEach(([key, element]) => {
+        if (key.startsWith('data::io::')) {
+          const id = parseInt(key.split('::')[2], 10);
+          if (!isNaN(id)) {
+            elementsById[id] = {
+              id: id,
+              label: element.label,
+              ...(element.convert && { convert: element.convert })
+            };
+          }
         }
+      });
+    }
+
+    if(this.getProtocol() === 'can-trackers-and-adapters-protocol') {
+      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      Object.entries(canTrackersAndAdaptersProtocolIoElements).forEach(([key, element]) => {
+        if (key.startsWith('data::io::')) {
+          const id = parseInt(key.split('::')[2], 10);
+          if (!isNaN(id)) {
+            elementsById[id] = {
+              id: id,
+              label: element.label,
+              ...(element.convert && { convert: element.convert })
+            };
+          }
+        }
+      });
+    }
+
+    if(this.getProtocol() === 'autonomous-protocol') {
+      Object.entries(autonomousProtocolIoElements).forEach(([key, element]) => {
+        if (key.startsWith('data::io::')) {
+          const id = parseInt(key.split('::')[2], 10);
+          if (!isNaN(id)) {
+            elementsById[id] = {
+              id: id,
+              label: element.label,
+              ...(element.convert && { convert: element.convert })
+            };
+          }
+        }
+      });
+    }
+
+    if(this.getProtocol() === 'e-mobility-protocol') {
+      Object.entries(eMobilityProtocolIoElements).forEach(([key, element]) => {
+        if (key.startsWith('data::io::')) {
+          const id = parseInt(key.split('::')[2], 10);
+          if (!isNaN(id)) {
+            elementsById[id] = {
+              id: id,
+              label: element.label,
+              ...(element.convert && { convert: element.convert })
+            };
+          }
+        }
+      });
+    }
+
+    if(this.getProtocol() === 'fast-and-easy-protocol') {
+      Object.entries(fastAndEasyProtocolIoElements).forEach(([key, element]) => {
+        if (key.startsWith('data::io::')) {
+          const id = parseInt(key.split('::')[2], 10);
+          if (!isNaN(id)) {
+            elementsById[id] = {
+              id: id,
+              label: element.label,
+              ...(element.convert && { convert: element.convert })
+            };
+          }
+        }
+      });
     }
 
     return elementsById;
