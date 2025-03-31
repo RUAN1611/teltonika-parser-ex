@@ -32,8 +32,12 @@ class Codec {
       throw new Error('IMEI is required to determine protocol');
     }
     
-    // Extract first 8 digits of IMEI (TAC code)
-    const tacCode = this.imei.substring(0, 8);
+    // Extract first 8 digits of IMEI (TAC code) using regex
+    const tacCodeMatch = this.imei.match(/^(\d{8})/);
+    if (!tacCodeMatch) {
+      throw new Error('Invalid IMEI format: cannot extract TAC code');
+    }
+    const tacCode = tacCodeMatch[1];
     
     // Get the raw JSON content to find first occurrence
     const rawMapping = require('fs').readFileSync(require.resolve('../iot-data-standards/teltonika/protocol-mapping.json'), 'utf8');

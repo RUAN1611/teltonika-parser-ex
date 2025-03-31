@@ -225,7 +225,6 @@ class Codec8 extends Codec {
    * @returns {Object}
    */
   ioElements() {
-    // For now, we only support basic protocol
     if (this.getProtocol() !== 'basic-protocol' && 
     this.getProtocol() !== 'advanced-protocol' && 
     this.getProtocol() !== 'professional-protocol' && 

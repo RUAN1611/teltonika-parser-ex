@@ -1,6 +1,6 @@
 {
   "deviceId": {
-    "label": "deviceId",
+    "label": "device_id",
     "convert": "ToStr"
   },
   "timestamp": {
@@ -31,7 +31,7 @@
     "label": "priority"
   },
   "data::eventId": {
-    "label": "eventId"
+    "label": "event_id"
   },
   "data::io::1": { "label": "digital_01" },
   "data::io::2": { "label": "digital_02" },
