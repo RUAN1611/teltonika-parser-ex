@@ -76,7 +76,7 @@ class Codec16 {
    */
   parseAvlRecords() {
     let avlRecord = {};
-    avlRecord.timestamp = this._reader.ReadDouble();
+    avlRecord.created_on = this._reader.ReadDouble();
     avlRecord.priority = this._toInt(this._reader.ReadBytes(1));
     avlRecord.longtitude = this._reader.ReadInt32();
     avlRecord.latitude = this._reader.ReadInt32();

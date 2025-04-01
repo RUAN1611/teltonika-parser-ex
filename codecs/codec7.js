@@ -72,7 +72,7 @@ class Codec7 extends Codec {
     let timestamp = priorityAndTimestamp & 0x3fffffff;
 
     let avlRecord = {
-      timestamp: new Date(timestamp),
+      created_on: new Date(timestamp),
       priority: priority,
       gps: {
         longitude: this.reader.ReadInt32(),
