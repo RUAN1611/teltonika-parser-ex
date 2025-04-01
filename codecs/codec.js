@@ -43,9 +43,9 @@ class Codec {
     const rawMapping = require('fs').readFileSync(require.resolve('../iot-data-standards/teltonika/protocol-mapping.json'), 'utf8');
     const jsonContent = JSON.parse(rawMapping);
     
-    // Find the first occurrence of the TAC code in the file
+    // Find the first occurrence where the TAC code matches the pattern (excluding the asterisk)
     const entries = Object.entries(jsonContent);
-    const firstEntry = entries.find(([key]) => key === tacCode);
+    const firstEntry = entries.find(([key]) => key.replace('*', '') === tacCode);
     
     if (!firstEntry) {
       throw new Error(`No protocol mapping found for TAC code: ${tacCode}`);
