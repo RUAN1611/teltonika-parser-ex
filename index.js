@@ -90,6 +90,13 @@ class TeltonikaParser {
           this.imei
         );
         break;
+      case 255:
+        this._codec = new codec8(
+          this._codecReader,
+          this._avlObject.number_of_data,
+          this.imei
+        );
+        break;
     }
   }
 
