@@ -9,6 +9,7 @@ const canTrackersAndAdaptersProtocolIoElements = require('../iot-data-standards/
 const autonomousProtocolIoElements = require('../iot-data-standards/teltonika/autonomous-protocol.json');
 const eMobilityProtocolIoElements = require('../iot-data-standards/teltonika/e-mobility-protocol.json');
 const fastAndEasyProtocolIoElements = require('../iot-data-standards/teltonika/fast-and-easy-protocol.json');
+const ValidationEngine = require('../event-processor-engine/ValidationEngine');
 
 /**
  * Codec 8 decoding
@@ -64,6 +65,7 @@ class Codec8 extends Codec {
   constructor(reader, number_of_records, imei) {
     super(reader, number_of_records, imei);
     this._gpsPrecision = 10000000;
+    this.validationEngine = new ValidationEngine();
   }
 
   /**
@@ -74,6 +76,42 @@ class Codec8 extends Codec {
 
     for (var i = 0; i < this.number_of_records; i++) {
       this.parseAvlRecords();
+    }
+
+    // Process events after all records are parsed
+    this.processEvents();
+  }
+
+  /**
+   * Process events using the validation engine
+   */
+  processEvents() {
+    const protocolElements = this.getProtocolElements();
+    this.avlObj = this.validationEngine.processEvents(this.avlObj, protocolElements);
+  }
+
+  /**
+   * Get protocol elements for the current protocol
+   * @returns {Object} - Protocol elements object
+   */
+  getProtocolElements() {
+    switch(this.getProtocol()) {
+      case 'basic-protocol':
+        return basicProtocolIoElements;
+      case 'advanced-protocol':
+        return advancedProtocolIoElements;
+      case 'professional-protocol':
+        return professionalProtocolIoElements;
+      case 'can-trackers-and-adapters-protocol':
+        return canTrackersAndAdaptersProtocolIoElements;
+      case 'autonomous-protocol':
+        return autonomousProtocolIoElements;
+      case 'e-mobility-protocol':
+        return eMobilityProtocolIoElements;
+      case 'fast-and-easy-protocol':
+        return fastAndEasyProtocolIoElements;
+      default:
+        return basicProtocolIoElements;
     }
   }
 
