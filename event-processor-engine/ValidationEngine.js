@@ -3,6 +3,7 @@
 const SignalLowEvent = require('./validators/SignalLowEvent');
 const HandleBleTemp = require('./validators/HandleBleTemp');
 const HandleAlarm = require('./validators/HandleAlarm');
+const HandleBitFlagSplit = require('./validators/HandleBitFlagSplit');
 
 /**
  * Simple validation engine that processes telemetry data and adds events
@@ -13,7 +14,8 @@ class ValidationEngine {
         this.validators = {
             'SignalLowEvent': new SignalLowEvent(),
             'HandleBleTemp': new HandleBleTemp(),
-            'HandleAlarm': new HandleAlarm()
+            'HandleAlarm': new HandleAlarm(),
+            'HandleBitFlagSplit': new HandleBitFlagSplit()
         };
     }
 
@@ -51,25 +53,57 @@ class ValidationEngine {
 
                     if (validator) {
                         try {
-                            // Run validation
-                            const validationResult = validator.validate(ioElement.value, {});
+                            let validationResult;
+                            
+                            // Special handling for HandleBitFlagSplit
+                            if (eventType === 'HandleBitFlagSplit') {
+                                // Determine flag type from the IO element label
+                                const flagType = this.determineFlagType(ioElement.label);
+                                validationResult = validator.validate(ioElement.value, flagType);
+                                
+                                // Handle multiple flag events
+                                if (validationResult.shouldTriggerEvent && validationResult.activeFlags) {
+                                    validationResult.activeFlags.forEach(flag => {
+                                        const event = {
+                                            event_type: `${eventType}_${flag.label.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}`,
+                                            avl_id: ioElement.id,
+                                            trigger_value: ioElement.value,
+                                            label: ioElement.label,
+                                            reason: `Flag active: ${flag.label}`,
+                                            timestamp: record.created_on,
+                                            flag_type: validationResult.flagType,
+                                            bit_position: flag.bit,
+                                            byte_position: flag.byte,
+                                            bit_mask: flag.hexMask,
+                                            flag_label: flag.label,
+                                            raw_value: validationResult.rawValue,
+                                            hex_value: validationResult.hexValue
+                                        };
 
-                            // If validation passes, add event to record
-                            if (validationResult.shouldTriggerEvent) {
-                                const event = {
-                                    event_type: eventType,
-                                    avl_id: ioElement.id,
-                                    trigger_value: ioElement.value,
-                                    label: ioElement.label,
-                                    reason: validationResult.reason,
-                                    timestamp: record.created_on,
-                                    ...validationResult // Include any additional validation data
-                                };
+                                        record.events.push(event);
+                                    });
+                                }
+                            } else {
+                                // Standard validation for other event types
+                                validationResult = validator.validate(ioElement.value);
 
-                                // Remove shouldTriggerEvent from the event object
-                                delete event.shouldTriggerEvent;
+                                // If validation passes, add event to record
+                                if (validationResult.shouldTriggerEvent) {
+                                    const event = {
+                                        event_type: eventType,
+                                        avl_id: ioElement.id,
+                                        trigger_value: ioElement.value,
+                                        label: ioElement.label,
+                                        reason: validationResult.reason,
+                                        timestamp: record.created_on,
+                                        ...validationResult // Include any additional validation data
+                                    };
 
-                                record.events.push(event);
+                                    // Remove shouldTriggerEvent from the event object
+                                    delete event.shouldTriggerEvent;
+
+                                    record.events.push(event);
+                                }
                             }
                         } catch (error) {
                             console.warn(`Validation error for ${eventType} on AVL ID ${ioElement.id}:`, error.message);
@@ -99,6 +133,30 @@ class ValidationEngine {
      */
     getAvailableValidators() {
         return Object.keys(this.validators);
+    }
+
+    /**
+     * Determine flag type based on the IO element label
+     * @param {string} label - The IO element label
+     * @returns {string} - The determined flag type
+     */
+    determineFlagType(label) {
+        // Map IO element labels to flag types based on protocol definitions
+        const labelToFlagType = {
+            'controlstateflags_p4': 'controlstateflags_p4',
+            'control_state_flags': 'controlstateflags_p2',
+            'indicatorstateflags_p4': 'indicatorstateflags_p4',
+            'securitystateflags_p4': 'securitystateflags_p4',
+            'security_state_flags': 'securitystateflags_p2',
+            'agriculturalstateflags_p4': 'agriculturalstateflags_p4',
+            'agricultural_machinery_flags': 'agriculturalstateflags_p2',
+            'utilitystateflags_p4': 'utilitystateflags_p4',
+            'cisternstateflags_p4': 'cisternstateflags_p4',
+            'fmcan_control_state_flags': 'controlstateflags_p4'
+        };
+
+        // Return the mapped flag type or default to controlstateflags_p4
+        return labelToFlagType[label] || 'controlstateflags_p4';
     }
 }
 
