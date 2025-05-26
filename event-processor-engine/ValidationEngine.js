@@ -4,6 +4,12 @@ const SignalLowEvent = require('./validators/SignalLowEvent');
 const HandleBleTemp = require('./validators/HandleBleTemp');
 const HandleAlarm = require('./validators/HandleAlarm');
 const HandleBitFlagSplit = require('./validators/HandleBitFlagSplit');
+const HandleBleHumidity = require('./validators/HandleBleHumidity');
+const HandleCanFaultCodes = require('./validators/HandleCanFaultCodes');
+const HandleDallasTemperature4B = require('./validators/HandleDallasTemperature4B');
+const HandleDoorStatus = require('./validators/HandleDoorStatus');
+const HandleDrivingState = require('./validators/HandleDrivingState');
+const HandleGreenDrivingType = require('./validators/HandleGreenDrivingType');
 
 /**
  * Simple validation engine that processes telemetry data and adds events
@@ -15,7 +21,13 @@ class ValidationEngine {
             'SignalLowEvent': new SignalLowEvent(),
             'HandleBleTemp': new HandleBleTemp(),
             'HandleAlarm': new HandleAlarm(),
-            'HandleBitFlagSplit': new HandleBitFlagSplit()
+            'HandleBitFlagSplit': new HandleBitFlagSplit(),
+            'HandleBleHumidity': new HandleBleHumidity(),
+            'HandleCanFaultCodes': new HandleCanFaultCodes(),
+            'HandleDallasTemperature4B': new HandleDallasTemperature4B(),
+            'HandleDoorStatus': new HandleDoorStatus(),
+            'HandleDrivingState': new HandleDrivingState(),
+            'HandleGreenDrivingType': new HandleGreenDrivingType()
         };
     }
 
@@ -78,6 +90,34 @@ class ValidationEngine {
                                             flag_label: flag.label,
                                             raw_value: validationResult.rawValue,
                                             hex_value: validationResult.hexValue
+                                        };
+
+                                        record.events.push(event);
+                                    });
+                                }
+                            } else if (eventType === 'HandleCanFaultCodes') {
+                                // Special handling for CAN fault codes
+                                validationResult = validator.validate(ioElement.value);
+                                
+                                // Handle multiple fault code events
+                                if (validationResult.shouldTriggerEvent && validationResult.faultCodes) {
+                                    validationResult.faultCodes.forEach(fault => {
+                                        const event = {
+                                            event_type: `${eventType}_${fault.code}`,
+                                            avl_id: ioElement.id,
+                                            trigger_value: ioElement.value,
+                                            label: ioElement.label,
+                                            reason: `Fault code active: ${fault.code} - ${fault.description}`,
+                                            timestamp: record.created_on,
+                                            fault_code: fault.code,
+                                            fault_description: fault.description,
+                                            fault_severity: fault.severity,
+                                            fault_category: fault.category,
+                                            total_codes: validationResult.totalCodes,
+                                            known_codes: validationResult.knownCodes,
+                                            unknown_codes: validationResult.unknownCodes,
+                                            highest_severity: validationResult.highestSeverity,
+                                            raw_value: validationResult.rawValue
                                         };
 
                                         record.events.push(event);
