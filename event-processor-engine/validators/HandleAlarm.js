@@ -1,5 +1,5 @@
 class HandleAlarm {
-    validate(telemetryValue, config = {}) {
+    validate(telemetryValue) {
         // AVL ID 236: Alarm indication (triggered by button press)
         // 0 = Reserved/No alarm
         // 1 = Alarm event occurred
