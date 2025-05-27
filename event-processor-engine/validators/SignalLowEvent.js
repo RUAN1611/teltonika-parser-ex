@@ -1,8 +1,8 @@
 class SignalLowEvent {
     validate(telemetryValue) {
-        const threshold = 20;
+        const threshold = 1;
         return {
-            shouldTriggerEvent: telemetryValue < threshold,
+            shouldTriggerEvent: telemetryValue <= threshold,
             reason: `Signal strength ${telemetryValue} is below threshold ${threshold}`,
         };
     }

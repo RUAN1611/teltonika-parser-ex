@@ -10,7 +10,14 @@ const HandleDallasTemperature4B = require('./validators/HandleDallasTemperature4
 const HandleDoorStatus = require('./validators/HandleDoorStatus');
 const HandleDrivingState = require('./validators/HandleDrivingState');
 const HandleGreenDrivingType = require('./validators/HandleGreenDrivingType');
-
+const HandleIgnition = require('./validators/HandleIgnition');
+const HandleMovement = require('./validators/HandleMovement');
+const HandleTripStatus = require('./validators/HandleTripStatus');
+const HandleUnplugStatus = require('./validators/HandleUnplugStatus');
+const HandleManDown = require('./validators/HandleManDown');
+const HandleTowDigital = require('./validators/HandleTowDigital');
+const HandleGsmJammingEvent = require('./validators/HandleGsmJammingEvent');
+const HandleCrashData = require('./validators/HandleCrashData');
 /**
  * Simple validation engine that processes telemetry data and adds events
  */
@@ -27,7 +34,15 @@ class ValidationEngine {
             'HandleDallasTemperature4B': new HandleDallasTemperature4B(),
             'HandleDoorStatus': new HandleDoorStatus(),
             'HandleDrivingState': new HandleDrivingState(),
-            'HandleGreenDrivingType': new HandleGreenDrivingType()
+            'HandleGreenDrivingType': new HandleGreenDrivingType(),
+            'HandleIgnition': new HandleIgnition(),
+            'HandleMovement': new HandleMovement(),
+            'HandleTripStatus': new HandleTripStatus(),
+            'HandleUnplugStatus': new HandleUnplugStatus(),
+            'HandleManDown': new HandleManDown(),
+            'HandleTowDigital': new HandleTowDigital(),
+            'HandleGsmJammingEvent': new HandleGsmJammingEvent(),
+            'HandleCrashData': new HandleCrashData()
         };
     }
 
@@ -111,12 +126,9 @@ class ValidationEngine {
                                             timestamp: record.created_on,
                                             fault_code: fault.code,
                                             fault_description: fault.description,
-                                            fault_severity: fault.severity,
-                                            fault_category: fault.category,
                                             total_codes: validationResult.totalCodes,
                                             known_codes: validationResult.knownCodes,
                                             unknown_codes: validationResult.unknownCodes,
-                                            highest_severity: validationResult.highestSeverity,
                                             raw_value: validationResult.rawValue
                                         };
 
