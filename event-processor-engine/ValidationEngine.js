@@ -18,6 +18,8 @@ const HandleManDown = require('./validators/HandleManDown');
 const HandleTowDigital = require('./validators/HandleTowDigital');
 const HandleGsmJammingEvent = require('./validators/HandleGsmJammingEvent');
 const HandleCrashData = require('./validators/HandleCrashData');
+const HandleMilTime = require('./validators/HandleMilTime');
+const HandleEco = require('./validators/HandleEco');
 /**
  * Simple validation engine that processes telemetry data and adds events
  */
@@ -42,7 +44,9 @@ class ValidationEngine {
             'HandleManDown': new HandleManDown(),
             'HandleTowDigital': new HandleTowDigital(),
             'HandleGsmJammingEvent': new HandleGsmJammingEvent(),
-            'HandleCrashData': new HandleCrashData()
+            'HandleCrashData': new HandleCrashData(),
+            'HandleMilTime': new HandleMilTime(),
+            'HandleEco': new HandleEco()
         };
     }
 
