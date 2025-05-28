@@ -57,15 +57,26 @@ class ValidationEngine {
      * @returns {Object} - AVL data with events added
      */
     processEvents(avlData, protocolElements) {
+        console.log('ValidationEngine.processEvents called');
+        console.log('Protocol elements available:', Object.keys(protocolElements).length);
+        
         if (!avlData.records || !Array.isArray(avlData.records)) {
+            console.log('No records found in AVL data');
             return avlData;
         }
 
+        console.log('Processing', avlData.records.length, 'records');
+
         // Process each record
-        avlData.records.forEach(record => {
+        avlData.records.forEach((record, recordIndex) => {
+            console.log(`Processing record ${recordIndex}`);
+            
             if (!record.ioElements || !Array.isArray(record.ioElements)) {
+                console.log(`Record ${recordIndex} has no ioElements`);
                 return;
             }
+
+            console.log(`Record ${recordIndex} has ${record.ioElements.length} IO elements`);
 
             // Initialize events array if not exists
             if (!record.events) {
@@ -73,14 +84,24 @@ class ValidationEngine {
             }
 
             // Check each IO element for event validation
-            record.ioElements.forEach(ioElement => {
+            record.ioElements.forEach((ioElement, ioIndex) => {
                 const protocolKey = `data::io::${ioElement.id}`;
                 const protocolElement = protocolElements[protocolKey];
+
+                console.log(`IO ${ioIndex}: ID=${ioElement.id}, Label=${ioElement.label}, Value=${ioElement.value}`);
+                console.log(`Protocol key: ${protocolKey}`);
+                console.log(`Protocol element found:`, !!protocolElement);
+                
+                if (protocolElement) {
+                    console.log(`Protocol element:`, protocolElement);
+                }
 
                 // Check if this IO element has an event processor defined
                 if (protocolElement && protocolElement.event) {
                     const eventType = protocolElement.event;
                     const validator = this.validators[eventType];
+
+                    console.log(`Event type: ${eventType}, Validator found: ${!!validator}`);
 
                     if (validator) {
                         try {
@@ -141,7 +162,9 @@ class ValidationEngine {
                                 }
                             } else {
                                 // Standard validation for other event types
+                                console.log(`Validating ${eventType} with value: ${ioElement.value}`);
                                 validationResult = validator.validate(ioElement.value);
+                                console.log(`Validation result:`, validationResult);
 
                                 // If validation passes, add event to record
                                 if (validationResult.shouldTriggerEvent) {
@@ -158,6 +181,7 @@ class ValidationEngine {
                                     // Remove shouldTriggerEvent from the event object
                                     delete event.shouldTriggerEvent;
 
+                                    console.log(`Adding event:`, event);
                                     record.events.push(event);
                                 }
                             }
@@ -167,10 +191,13 @@ class ValidationEngine {
                     } else {
                         console.warn(`Validator not found for event type: ${eventType}`);
                     }
+                } else {
+                    console.log(`No event defined for IO element ${ioElement.id}`);
                 }
             });
         });
 
+        console.log('Event processing completed');
         return avlData;
     }
 
