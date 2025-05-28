@@ -9,6 +9,7 @@ const canTrackersAndAdaptersProtocolIoElements = require('../iot-data-standards/
 const autonomousProtocolIoElements = require('../iot-data-standards/teltonika/autonomous-protocol.json');
 const eMobilityProtocolIoElements = require('../iot-data-standards/teltonika/e-mobility-protocol.json');
 const fastAndEasyProtocolIoElements = require('../iot-data-standards/teltonika/fast-and-easy-protocol.json');
+const ValidationEngine = require('../event-processor-engine/ValidationEngine');
 /**
  * Codec 8 decoding
  */
@@ -63,6 +64,7 @@ class Codec8e extends Codec {
   constructor(reader, number_of_records, imei) {
     super(reader, number_of_records, imei);
     this._gpsPrecision = 10000000;
+    this.validationEngine = new ValidationEngine();
   }
 
   /**
@@ -74,6 +76,9 @@ class Codec8e extends Codec {
     for (var i = 0; i < this.number_of_records; i++) {
       this.parseAvlRecords();
     }
+
+    // Process events after all records are parsed
+    this.processEvents();
   }
 
   /**
@@ -560,6 +565,54 @@ class Codec8e extends Codec {
    */
   LeToStrAscii(value) {
     return String(value).replace(/[^\x00-\x7F]/g, "");
+  }
+
+  /**
+   * Process events using the validation engine
+   */
+  processEvents() {
+    const protocolElements = this.getProtocolElements();
+    console.log('Processing events with protocol:', this.getProtocol());
+    console.log('Protocol elements keys:', Object.keys(protocolElements).filter(k => k.startsWith('data::io::')).slice(0, 10));
+    console.log('AVL records count:', this.avlObj.records?.length);
+    
+    if (this.avlObj.records && this.avlObj.records.length > 0) {
+      console.log('First record IO elements:', this.avlObj.records[0].ioElements?.map(io => ({ id: io.id, label: io.label, value: io.value })));
+    }
+    
+    this.avlObj = this.validationEngine.processEvents(this.avlObj, protocolElements);
+    
+    if (this.avlObj.records && this.avlObj.records.length > 0) {
+      console.log('Events generated:', this.avlObj.records[0].events?.length || 0);
+      if (this.avlObj.records[0].events?.length > 0) {
+        console.log('Generated events:', this.avlObj.records[0].events);
+      }
+    }
+  }
+
+  /**
+   * Get protocol elements for the current protocol
+   * @returns {Object} - Protocol elements object
+   */
+  getProtocolElements() {
+    switch(this.getProtocol()) {
+      case 'basic-protocol':
+        return basicProtocolIoElements;
+      case 'advanced-protocol':
+        return advancedProtocolIoElements;
+      case 'professional-protocol':
+        return professionalProtocolIoElements;
+      case 'can-trackers-and-adapters-protocol':
+        return canTrackersAndAdaptersProtocolIoElements;
+      case 'autonomous-protocol':
+        return autonomousProtocolIoElements;
+      case 'e-mobility-protocol':
+        return eMobilityProtocolIoElements;
+      case 'fast-and-easy-protocol':
+        return fastAndEasyProtocolIoElements;
+      default:
+        return basicProtocolIoElements;
+    }
   }
 }
 
