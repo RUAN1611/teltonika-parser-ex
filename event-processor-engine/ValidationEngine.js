@@ -56,7 +56,7 @@ class ValidationEngine {
      * @param {Object} protocolElements - Protocol elements with event definitions
      * @returns {Object} - AVL data with events added
      */
-    processEvents(avlData, protocolElements) {
+    processEvents(avlData, protocolElements, previousValues = {}) {
         console.log('ValidationEngine.processEvents called');
         console.log('Protocol elements available:', Object.keys(protocolElements).length);
         
@@ -105,85 +105,27 @@ class ValidationEngine {
 
                     if (validator) {
                         try {
-                            let validationResult;
-                            
-                            // Special handling for HandleBitFlagSplit
-                            if (eventType === 'HandleBitFlagSplit') {
-                                // Determine flag type from the IO element label
-                                const flagType = this.determineFlagType(ioElement.label);
-                                validationResult = validator.validate(ioElement.value, flagType);
-                                
-                                // Handle multiple flag events
-                                if (validationResult.shouldTriggerEvent && validationResult.activeFlags) {
-                                    validationResult.activeFlags.forEach(flag => {
-                                        const event = {
-                                            event_type: `${eventType}_${flag.label.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}`,
-                                            avl_id: ioElement.id,
-                                            trigger_value: ioElement.value,
-                                            label: ioElement.label,
-                                            reason: `Flag active: ${flag.label}`,
-                                            timestamp: record.created_on,
-                                            flag_type: validationResult.flagType,
-                                            bit_position: flag.bit,
-                                            byte_position: flag.byte,
-                                            bit_mask: flag.hexMask,
-                                            flag_label: flag.label,
-                                            raw_value: validationResult.rawValue,
-                                            hex_value: validationResult.hexValue
-                                        };
+                            // Standard validation for all event types
+                            console.log(`Validating ${eventType} with value: ${ioElement.value}`);
+                            const validationResult = validator.validate(ioElement.value);
+                            console.log(`Validation result:`, validationResult);
 
-                                        record.events.push(event);
-                                    });
-                                }
-                            } else if (eventType === 'HandleCanFaultCodes') {
-                                // Special handling for CAN fault codes
-                                validationResult = validator.validate(ioElement.value);
-                                
-                                // Handle multiple fault code events
-                                if (validationResult.shouldTriggerEvent && validationResult.faultCodes) {
-                                    validationResult.faultCodes.forEach(fault => {
-                                        const event = {
-                                            event_type: `${eventType}_${fault.code}`,
-                                            avl_id: ioElement.id,
-                                            trigger_value: ioElement.value,
-                                            label: ioElement.label,
-                                            reason: `Fault code active: ${fault.code} - ${fault.description}`,
-                                            timestamp: record.created_on,
-                                            fault_code: fault.code,
-                                            fault_description: fault.description,
-                                            total_codes: validationResult.totalCodes,
-                                            known_codes: validationResult.knownCodes,
-                                            unknown_codes: validationResult.unknownCodes,
-                                            raw_value: validationResult.rawValue
-                                        };
+                            // If validation passes, add event to record
+                            if (validationResult.shouldTriggerEvent) {
+                                const event = {
+                                    event_type: eventType,
+                                    avl_id: ioElement.id,
+                                    trigger_value: ioElement.value,
+                                    label: ioElement.label,
+                                    timestamp: record.created_on,
+                                    ...validationResult // Include any additional validation data
+                                };
 
-                                        record.events.push(event);
-                                    });
-                                }
-                            } else {
-                                // Standard validation for other event types
-                                console.log(`Validating ${eventType} with value: ${ioElement.value}`);
-                                validationResult = validator.validate(ioElement.value);
-                                console.log(`Validation result:`, validationResult);
+                                // Remove shouldTriggerEvent from the event object
+                                delete event.shouldTriggerEvent;
 
-                                // If validation passes, add event to record
-                                if (validationResult.shouldTriggerEvent) {
-                                    const event = {
-                                        event_type: eventType,
-                                        avl_id: ioElement.id,
-                                        trigger_value: ioElement.value,
-                                        label: ioElement.label,
-                                        reason: validationResult.reason,
-                                        timestamp: record.created_on,
-                                        ...validationResult // Include any additional validation data
-                                    };
-
-                                    // Remove shouldTriggerEvent from the event object
-                                    delete event.shouldTriggerEvent;
-
-                                    console.log(`Adding event:`, event);
-                                    record.events.push(event);
-                                }
+                                console.log(`Adding event:`, event);
+                                record.events.push(event);
                             }
                         } catch (error) {
                             console.warn(`Validation error for ${eventType} on AVL ID ${ioElement.id}:`, error.message);
