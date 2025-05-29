@@ -88,14 +88,6 @@ class ValidationEngine {
                 const protocolKey = `data::io::${ioElement.id}`;
                 const protocolElement = protocolElements[protocolKey];
 
-                console.log(`IO ${ioIndex}: ID=${ioElement.id}, Label=${ioElement.label}, Value=${ioElement.value}`);
-                console.log(`Protocol key: ${protocolKey}`);
-                console.log(`Protocol element found:`, !!protocolElement);
-                
-                if (protocolElement) {
-                    console.log(`Protocol element:`, protocolElement);
-                }
-
                 // Check if this IO element has an event processor defined
                 if (protocolElement && protocolElement.event) {
                     const eventType = protocolElement.event;
