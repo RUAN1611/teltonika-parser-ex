@@ -57,5 +57,6 @@
     "35678630*": "advanced-protocol",
     "35681116*": "advanced-protocol",
     "35833470*": "advanced-protocol",
-    "35849675*": "advanced-protocol"
+    "35849675*": "advanced-protocol",
+    "*": "basic-protocol"
 }
