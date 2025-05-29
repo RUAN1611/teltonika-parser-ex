@@ -88,13 +88,6 @@ class Codec8 extends Codec {
    */
   processEvents() {
     const protocolElements = this.getProtocolElements();
-    console.log('Processing events with protocol:', this.getProtocol());
-    console.log('Protocol elements keys:', Object.keys(protocolElements).filter(k => k.startsWith('data::io::')).slice(0, 10));
-    console.log('AVL records count:', this.avlObj.records?.length);
-    
-    if (this.avlObj.records && this.avlObj.records.length > 0) {
-      console.log('First record IO elements:', this.avlObj.records[0].ioElements?.map(io => ({ id: io.id, label: io.label, value: io.value })));
-    }
     
     this.avlObj = this.validationEngine.processEvents(this.avlObj, protocolElements, this.previousValues);
     
