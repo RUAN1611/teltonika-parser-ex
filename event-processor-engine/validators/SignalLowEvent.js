@@ -6,6 +6,12 @@ class SignalLowEvent {
                 shouldTriggerEvent: false,
             };
         }
+        if(telemetryValue == 5) { // Temporary field for testing
+            return {
+                shouldTriggerEvent: true,
+                gsm_signal_high: 1,
+            };
+        }
         return {
             shouldTriggerEvent: telemetryValue <= threshold,
             gsm_signal_low: 1,
