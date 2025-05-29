@@ -105,12 +105,7 @@ class ValidationEngine {
                             // If validation passes, add event to record
                             if (validationResult.shouldTriggerEvent) {
                                 const event = {
-                                    event_type: eventType,
-                                    avl_id: ioElement.id,
-                                    trigger_value: ioElement.value,
-                                    label: ioElement.label,
-                                    timestamp: record.created_on,
-                                    ...validationResult // Include any additional validation data
+                                    ...validationResult
                                 };
 
                                 // Remove shouldTriggerEvent from the event object
