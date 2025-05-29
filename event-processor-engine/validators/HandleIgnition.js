@@ -1,5 +1,11 @@
 class HandleIgnition {
-    validate(telemetryValue) {
+    validate(telemetryValue, previousTelemetryValue) {
+        if(telemetryValue === previousTelemetryValue) {
+            return {
+                shouldTriggerEvent: false,
+                reason: 'Ignition status unchanged',
+            };
+        }
         if(telemetryValue === 0) {
             return {
                 shouldTriggerEvent: true,

@@ -1,9 +1,14 @@
 class SignalLowEvent {
-    validate(telemetryValue) {
+    validate(telemetryValue, previousTelemetryValue) {
         const threshold = 1;
+        if(telemetryValue === previousTelemetryValue) {
+            return {
+                shouldTriggerEvent: false,
+            };
+        }
         return {
             shouldTriggerEvent: telemetryValue <= threshold,
-            reason: `Signal strength ${telemetryValue} is below threshold ${threshold}`,
+            gsm_signal_low: 1,
         };
     }
 }

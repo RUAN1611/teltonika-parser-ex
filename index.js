@@ -9,10 +9,11 @@ const codec16 = require('./codecs/codec16');
 const codec8ex = require('./codecs/codec8ex');
 
 class TeltonikaParser {
-  constructor(buffer, imei = null) {
+  constructor(buffer, imei = null, previousValues = {}) {
     this._reader = new binutils.BinaryReader(buffer);
     this._avlObj = {};
     this.imei = imei;
+    this.previousValues = previousValues;
     this.checkIsImei();
     if (!this.isImei) {
       this.parseHeader();
@@ -52,49 +53,56 @@ class TeltonikaParser {
         this._codec = new codec7(
           this._codecReader,
           this._avlObj.number_of_data,
-          this.imei
+          this.imei,
+          this.previousValues
         );
         break;
       case 8:
         this._codec = new codec8(
           this._codecReader,
           this._avlObj.number_of_data,
-          this.imei
+          this.imei,
+          this.previousValues
         );
         break;
       case 12:
         this._codec = new codec12(
           this._codecReader,
           this._avlObj.number_of_data,
-          this.imei
+          this.imei,
+          this.previousValues
         );
         break;
       case 14:
         this._codec = new codec14(
           this._codecReader,
           this._avlObj.number_of_data,
-          this.imei
+          this.imei,
+          this.previousValues
         );
         break;
       case 16:
         this._codec = new codec16(
           this._codecReader,
           this._avlObj.number_of_data,
-          this.imei
+          this.imei,
+          this.previousValues
         );
         break;
       case 142:
         this._codec = new codec8ex(
           this._codecReader,
           this._avlObj.number_of_data,
-          this.imei
+          this.imei,
+          this.previousValues
         );
         break;
       case 255:
         this._codec = new codec8(
           this._codecReader,
           this._avlObj.number_of_data,
-          this.imei
+          this.imei,
+          this.previousValues
         );
         break;
     }

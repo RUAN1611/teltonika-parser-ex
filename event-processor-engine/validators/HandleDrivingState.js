@@ -1,5 +1,5 @@
 class HandleDrivingState {
-    validate(telemetryValue) {
+    validate(telemetryValue, previousTelemetryValue) {
         if(telemetryValue === 1) {
             return {
                 shouldTriggerEvent: true,
