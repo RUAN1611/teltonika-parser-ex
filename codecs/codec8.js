@@ -285,9 +285,9 @@ class Codec8 extends Codec {
     // Convert the array to an object with id as key for faster lookups
     const elementsById = {};
     if(this.getProtocol() === 'basic-protocol') {
-      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      // Handle new format where basicProtocolIoElements is an object with "telemetry::io::{id}" keys
       Object.entries(basicProtocolIoElements).forEach(([key, element]) => {
-        if (key.startsWith('data::io::')) {
+        if (key.startsWith('telemetry::io::')) {
           const id = parseInt(key.split('::')[2], 10);
           if (!isNaN(id)) {
             elementsById[id] = {
@@ -301,9 +301,9 @@ class Codec8 extends Codec {
     }
 
     if(this.getProtocol() === 'advanced-protocol') {
-      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      // Handle new format where basicProtocolIoElements is an object with "telemetry::io::{id}" keys
       Object.entries(advancedProtocolIoElements).forEach(([key, element]) => {
-        if (key.startsWith('data::io::')) {
+        if (key.startsWith('telemetry::io::')) {
           const id = parseInt(key.split('::')[2], 10);
           if (!isNaN(id)) {
             elementsById[id] = {
@@ -317,9 +317,9 @@ class Codec8 extends Codec {
     }
 
     if(this.getProtocol() === 'professional-protocol') {
-      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      // Handle new format where basicProtocolIoElements is an object with "telemetry::io::{id}" keys
       Object.entries(professionalProtocolIoElements).forEach(([key, element]) => {
-        if (key.startsWith('data::io::')) {
+        if (key.startsWith('telemetry::io::')) {
           const id = parseInt(key.split('::')[2], 10);
           if (!isNaN(id)) {
             elementsById[id] = {
@@ -333,9 +333,9 @@ class Codec8 extends Codec {
     }
 
     if(this.getProtocol() === 'can-trackers-and-adapters-protocol') {
-      // Handle new format where basicProtocolIoElements is an object with "data::io::{id}" keys
+      // Handle new format where basicProtocolIoElements is an object with "telemetry::io::{id}" keys
       Object.entries(canTrackersAndAdaptersProtocolIoElements).forEach(([key, element]) => {
-        if (key.startsWith('data::io::')) {
+        if (key.startsWith('telemetry::io::')) {
           const id = parseInt(key.split('::')[2], 10);
           if (!isNaN(id)) {
             elementsById[id] = {
@@ -350,7 +350,7 @@ class Codec8 extends Codec {
 
     if(this.getProtocol() === 'autonomous-protocol') {
       Object.entries(autonomousProtocolIoElements).forEach(([key, element]) => {
-        if (key.startsWith('data::io::')) {
+        if (key.startsWith('telemetry::io::')) {
           const id = parseInt(key.split('::')[2], 10);
           if (!isNaN(id)) {
             elementsById[id] = {
@@ -365,7 +365,7 @@ class Codec8 extends Codec {
 
     if(this.getProtocol() === 'e-mobility-protocol') {
       Object.entries(eMobilityProtocolIoElements).forEach(([key, element]) => {
-        if (key.startsWith('data::io::')) {
+        if (key.startsWith('telemetry::io::')) {
           const id = parseInt(key.split('::')[2], 10);
           if (!isNaN(id)) {
             elementsById[id] = {
@@ -380,7 +380,7 @@ class Codec8 extends Codec {
 
     if(this.getProtocol() === 'fast-and-easy-protocol') {
       Object.entries(fastAndEasyProtocolIoElements).forEach(([key, element]) => {
-        if (key.startsWith('data::io::')) {
+        if (key.startsWith('telemetry::io::')) {
           const id = parseInt(key.split('::')[2], 10);
           if (!isNaN(id)) {
             elementsById[id] = {

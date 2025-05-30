@@ -85,7 +85,7 @@ class ValidationEngine {
 
             // Check each IO element for event validation
             record.ioElements.forEach((ioElement, ioIndex) => {
-                const protocolKey = `data::io::${ioElement.id}`;
+                const protocolKey = `telemetry::io::${ioElement.id}`;
                 const protocolElement = protocolElements[protocolKey];
 
                 // Check if this IO element has an event processor defined
