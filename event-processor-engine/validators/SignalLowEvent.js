@@ -1,5 +1,5 @@
 class SignalLowEvent {
-    validate(telemetryValue, previousTelemetryValue) {
+    validate(telemetryValue, previousTelemetryValue, label) {
         const threshold = 1;
         if(telemetryValue === previousTelemetryValue) {
             return {
@@ -9,12 +9,18 @@ class SignalLowEvent {
         if(telemetryValue == 5) { // Temporary field for testing
             return {
                 shouldTriggerEvent: true,
-                gsm_signal_high: 1,
+                eventClassText: "Signal High Event",
+                eventType: "gsm_signal_high",
+                eventTelemetry: label,
+                eventValue: 1,
             };
         }
         return {
             shouldTriggerEvent: telemetryValue <= threshold,
-            gsm_signal_low: 1,
+            eventClassText: "Signal Low Event",
+            eventType: "gsm_signal_low",
+            eventTelemetry: label,
+            eventValue: 1,
         };
     }
 }

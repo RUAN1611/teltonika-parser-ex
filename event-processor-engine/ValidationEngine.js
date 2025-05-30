@@ -100,12 +100,13 @@ class ValidationEngine {
                             const previousValue = previousValues[ioElement.id] ? previousValues[ioElement.id] : null;
                             // Standard validation for all event types
                             console.log(`Validating ${eventType} with value: ${ioElement.value}`);
-                            const validationResult = validator.validate(ioElement.value, previousValue);
+                            const validationResult = validator.validate(ioElement.value, previousValue, protocolElement.label);
                             console.log(`Validation result:`, validationResult);
 
                             // If validation passes, add event to record
                             if (validationResult.shouldTriggerEvent) {
                                 const event = {
+                                    eventClass: "triggeredevent",
                                     ...validationResult
                                 };
 

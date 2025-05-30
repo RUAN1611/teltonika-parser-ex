@@ -1,15 +1,21 @@
 class HandleGsmJammingEvent {
-    validate(telemetryValue) {
+    validate(telemetryValue, previousTelemetryValue, label) {
         if(telemetryValue === 0) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Jamming Stop',
+                eventClassText: "Gsm Jammed",
+                eventType: "gsm_jammed_stop",
+                eventTelemetry: label,
+                eventValue: 0,
             };
         }
         else if(telemetryValue === 1) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Jamming Start',
+                eventClassText: "Gsm Jammed",
+                eventType: "gsm_jammed",
+                eventTelemetry: label,
+                eventValue: 1,
             };
         }
         else {

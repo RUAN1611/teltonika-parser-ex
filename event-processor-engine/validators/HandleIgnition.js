@@ -1,5 +1,5 @@
 class HandleIgnition {
-    validate(telemetryValue, previousTelemetryValue) {
+    validate(telemetryValue, previousTelemetryValue, label) {
         if(telemetryValue === previousTelemetryValue) {
             return {
                 shouldTriggerEvent: false,
@@ -9,13 +9,19 @@ class HandleIgnition {
         if(telemetryValue === 0) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Ignition Off',
+                eventClassText: "Ignition Event",
+                eventType: "deactivate",
+                eventTelemetry: label,
+                eventValue: 0,
             };
         }
         else if(telemetryValue === 1) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Ignition On',
+                eventClassText: "Ignition Event",
+                eventType: "activate",
+                eventTelemetry: label,
+                eventValue: 1,
             };
         }
         else {
