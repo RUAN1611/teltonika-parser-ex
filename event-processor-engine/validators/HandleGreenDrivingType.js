@@ -1,21 +1,30 @@
 class HandleGreenDrivingType {
-    validate(telemetryValue) {
+    validate(telemetryValue, previousTelemetryValue, label) {
         if(telemetryValue === 1) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Harsh acceleration',
+                eventClassText: "Harsh Acceleration",
+                eventType: "harsh_accel",
+                eventTelemetry: label,
+                eventValue: 1,
             };
         }
         else if(telemetryValue === 2) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Harsh braking',
+                eventClassText: "Harsh Braking",
+                eventType: "harsh_brake",
+                eventTelemetry: label,
+                eventValue: 2,
             };
         }
         else if(telemetryValue === 3) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Harsh cornering',
+                eventClassText: "Harsh Corner",
+                eventType: "harsh_corner",
+                eventTelemetry: label,
+                eventValue: 3,
             };
         }
         else {
