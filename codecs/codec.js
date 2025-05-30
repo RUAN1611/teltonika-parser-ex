@@ -49,11 +49,17 @@ class Codec {
     const entries = Object.entries(jsonContent);
     const firstEntry = entries.find(([key]) => key.replace('*', '') === tacCode);
     
-    if (!firstEntry) {
-      throw new Error(`No protocol mapping found for TAC code: ${tacCode}`);
+    if (firstEntry) {
+      return firstEntry[1]; // Return the protocol value
     }
     
-    return firstEntry[1]; // Return the protocol value
+    // If no specific match found, check for wildcard entry
+    const wildcardEntry = entries.find(([key]) => key === '*');
+    if (wildcardEntry) {
+      return wildcardEntry[1]; // Return the wildcard protocol value
+    }
+    
+    throw new Error(`No protocol mapping found for TAC code: ${tacCode}`);
   }
 
   /**
