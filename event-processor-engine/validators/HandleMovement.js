@@ -1,15 +1,19 @@
 class HandleMovement {
-    validate(telemetryValue) {
-        if(telemetryValue === 0) {
+    validate(telemetryValue, previousTelemetryValue, label) {
+        if(previousTelemetryValue === 0 && telemetryValue === 1) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Movement Off',
+                eventClassText: "Motion Start",
+                eventType: "motion_start",
+                eventTelemetry: label,
             };
         }
-        else if(telemetryValue === 1) {
+        else if(previousTelemetryValue === 1 && telemetryValue === 0) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'Movement On',
+                eventClassText: "Motion End",
+                eventType: "motion_end",
+                eventTelemetry: label,
             };
         }
         else {
