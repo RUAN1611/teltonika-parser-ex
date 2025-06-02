@@ -100,7 +100,14 @@ class ValidationEngine {
 
                     if (validator) {
                         try {
-                            const previousValue = previousValues[ioElement.id] !== undefined ? previousValues[ioElement.id] : null;
+                            // Get previous value - handle both raw values and objects
+                            let previousValue = previousValues[ioElement.id];
+                            if (previousValue !== undefined && typeof previousValue === 'object' && previousValue.value !== undefined) {
+                                previousValue = previousValue.value; // Extract value from object
+                            }
+                            if (previousValue === undefined) {
+                                previousValue = null;
+                            }
                             console.log(`Previous value for IO ${ioElement.id}: ${previousValue}`);
                             // Standard validation for all event types
                             console.log(`Validating ${eventType} with value: ${ioElement.value}`);
@@ -132,6 +139,7 @@ class ValidationEngine {
                 
                 // Update previous values with current value for next record/call
                 // Only update if this IO element has an event processor defined
+                // Store only the raw value, not the whole object
                 if (protocolElement && protocolElement.event) {
                     previousValues[ioElement.id] = ioElement.value;
                     console.log(`Updated previous value for IO ${ioElement.id} to: ${ioElement.value}`);
