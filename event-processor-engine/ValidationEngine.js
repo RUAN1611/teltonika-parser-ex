@@ -20,6 +20,7 @@ const HandleGsmJammingEvent = require('./validators/HandleGsmJammingEvent');
 const HandleCrashData = require('./validators/HandleCrashData');
 const HandleMilTime = require('./validators/HandleMilTime');
 const HandleEco = require('./validators/HandleEco');
+const HandleOverspeed = require('./validators/HandleOverspeed');
 /**
  * Simple validation engine that processes telemetry data and adds events
  */
@@ -46,7 +47,8 @@ class ValidationEngine {
             'HandleGsmJammingEvent': new HandleGsmJammingEvent(),
             'HandleCrashData': new HandleCrashData(),
             'HandleMilTime': new HandleMilTime(),
-            'HandleEco': new HandleEco()
+            'HandleEco': new HandleEco(),
+            'HandleOverspeed': new HandleOverspeed()
         };
     }
 
