@@ -56,6 +56,7 @@ class ValidationEngine {
      * Process telemetry data and add events where validation passes
      * @param {Object} avlData - The parsed AVL data from codec
      * @param {Object} protocolElements - Protocol elements with event definitions
+     * @param {Object} previousValues - Previous values object to track state changes
      * @returns {Object} - AVL data with events added
      */
     processEvents(avlData, protocolElements, previousValues = {}) {
@@ -99,7 +100,8 @@ class ValidationEngine {
 
                     if (validator) {
                         try {
-                            const previousValue = previousValues[ioElement.id] ? previousValues[ioElement.id] : null;
+                            const previousValue = previousValues[ioElement.id] !== undefined ? previousValues[ioElement.id] : null;
+                            console.log(`Previous value for IO ${ioElement.id}: ${previousValue}`);
                             // Standard validation for all event types
                             console.log(`Validating ${eventType} with value: ${ioElement.value}`);
                             const validationResult = validator.validate(ioElement.value, previousValue, protocolElement.label);
@@ -126,6 +128,13 @@ class ValidationEngine {
                     }
                 } else {
                     console.log(`No event defined for IO element ${ioElement.id}`);
+                }
+                
+                // Update previous values with current value for next record/call
+                // Only update if this IO element has an event processor defined
+                if (protocolElement && protocolElement.event) {
+                    previousValues[ioElement.id] = ioElement.value;
+                    console.log(`Updated previous value for IO ${ioElement.id} to: ${ioElement.value}`);
                 }
             });
         });
