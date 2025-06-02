@@ -1,5 +1,10 @@
 class HandleIgnition {
     validate(telemetryValue, previousTelemetryValue, label) {
+        console.log('HandleIgnition.validate called');
+        console.log('telemetryValue:', telemetryValue);
+        console.log('previousTelemetryValue:', previousTelemetryValue);
+        console.log('label:', label);
+        console.log('Values are equal:', telemetryValue === previousTelemetryValue);
         if(telemetryValue === previousTelemetryValue) {
             return {
                 shouldTriggerEvent: false,
