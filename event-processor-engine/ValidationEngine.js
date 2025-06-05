@@ -118,14 +118,9 @@ class ValidationEngine {
 
                             // If eventAdditionalTelemetryColumn is returned, add it to the original record's telemetry section
                             if (validationResult.eventAdditionalTelemetryColumn) {
-                                // Initialize telemetry section if it doesn't exist
-                                if (!record.telemetry) {
-                                    record.telemetry = {};
-                                }
-                                
-                                // Add the additional telemetry column with the event value
-                                record.telemetry[validationResult.eventAdditionalTelemetryColumn] = validationResult.eventValue;
-                                console.log(`Added to telemetry: ${validationResult.eventAdditionalTelemetryColumn} = ${validationResult.eventValue}`);
+                                // Add the additional telemetry column as a direct property of the record
+                                record[validationResult.eventAdditionalTelemetryColumn] = validationResult.eventValue;
+                                console.log(`Added to record: ${validationResult.eventAdditionalTelemetryColumn} = ${validationResult.eventValue}`);
                             }
 
                             // If validation passes, add event to record
