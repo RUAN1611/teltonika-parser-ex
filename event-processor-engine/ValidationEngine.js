@@ -1,26 +1,27 @@
 'use strict';
 
 const SignalLowEvent = require('./validators/SignalLowEvent');
-const HandleBleTemp = require('./validators/HandleBleTemp');
-const HandleAlarm = require('./validators/HandleAlarm');
-const HandleBitFlagSplit = require('./validators/HandleBitFlagSplit');
-const HandleBleHumidity = require('./validators/HandleBleHumidity');
-const HandleCanFaultCodes = require('./validators/HandleCanFaultCodes');
-const HandleDallasTemperature4B = require('./validators/HandleDallasTemperature4B');
-const HandleDoorStatus = require('./validators/HandleDoorStatus');
-const HandleDrivingState = require('./validators/HandleDrivingState');
+const HandleBleTemp = require('./validators/__HandleBleTemp');
+const HandleAlarm = require('./validators/__HandleAlarm');
+const HandleBitFlagSplit = require('./validators/__HandleBitFlagSplit');
+const HandleBleHumidity = require('./validators/__HandleBleHumidity');
+const HandleCanFaultCodes = require('./validators/__HandleCanFaultCodes');
+const HandleDallasTemperature4B = require('./validators/__HandleDallasTemperature4B');
+const HandleDoorStatus = require('./validators/__HandleDoorStatus');
+const HandleDrivingState = require('./validators/__N_A_HandleDrivingState');
 const HandleGreenDrivingType = require('./validators/HandleGreenDrivingType');
-const HandleIgnition = require('./validators/HandleIgnition');
+const HandleIgnition = require('./validators/__HandleIgnition');
 const HandleMovement = require('./validators/HandleMovement');
 const HandleTripStatus = require('./validators/HandleTripStatus');
 const HandleUnplugStatus = require('./validators/HandleUnplugStatus');
 const HandleManDown = require('./validators/HandleManDown');
 const HandleTowDigital = require('./validators/HandleTowDigital');
 const HandleGsmJammingEvent = require('./validators/HandleGsmJammingEvent');
-const HandleCrashData = require('./validators/HandleCrashData');
+const HandleCrashData = require('./validators/__HandleCrashData');
 const HandleMilTime = require('./validators/HandleMilTime');
 const HandleEco = require('./validators/HandleEco');
 const HandleOverspeed = require('./validators/HandleOverspeed');
+const HandleTimeStamp = require('./validators/X-HandleTimeStamp');
 /**
  * Simple validation engine that processes telemetry data and adds events
  */
@@ -48,7 +49,8 @@ class ValidationEngine {
             'HandleCrashData': new HandleCrashData(),
             'HandleMilTime': new HandleMilTime(),
             'HandleEco': new HandleEco(),
-            'HandleOverspeed': new HandleOverspeed()
+            'HandleOverspeed': new HandleOverspeed(),
+            'HandleTimeStamp': new HandleTimeStamp()
         };
     }
 
