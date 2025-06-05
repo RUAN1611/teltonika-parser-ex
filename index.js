@@ -99,12 +99,10 @@ class TeltonikaParser {
         );
         break;
       case 255:
-        this._codec = new codec(
-          this._codecReader,
-          this._avlObj.number_of_data,
-          this.imei,
-          this.previousValues
-        );
+        console.log(`${this.imei} - Codec 255 detected...`);
+        break;
+      default:
+        console.log(`${this.imei} - Unknown codec detected...`);
         break;
     }
   }
