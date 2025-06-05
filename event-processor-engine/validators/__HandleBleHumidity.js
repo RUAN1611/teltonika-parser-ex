@@ -1,9 +1,12 @@
+// Reviewed with Werner
+// Kyk Na Previous Telemetry Value
+
 class HandleBleHumidity {
     validate(telemetryValue) {
         if(telemetryValue === 65535) {
             return {
                 shouldTriggerEvent: true,
-                reason: 'BLE humidity sensor not found or disconnected',
+                reason: 'BLE humidity sensor not found or disconnected', // Event Text
                 sensorStatus: 'disconnected'
             };
         }

@@ -1,3 +1,5 @@
+// Simplified bit flag parser
+
 class HandleBitFlagSplit {
     constructor() {
         // Define bit flag mappings for different flag types
@@ -278,12 +280,12 @@ class HandleBitFlagSplit {
     }
 
     /**
-     * Validate bit flag data and generate events for active flags
+     * Parse bit flags and return which events occurred
      * @param {number|string} telemetryValue - The bit flag value (hex string or number)
      * @param {string} flagType - The type of flag (e.g., 'controlstateflags_p4')
-     * @returns {Object} - Validation result with individual flag events
+     * @returns {Array} - Array of active flag events
      */
-    validate(telemetryValue, flagType = null) {
+    getActiveEvents(telemetryValue, flagType) {
         try {
             // Convert hex string to number if needed
             let flagValue;
@@ -293,119 +295,57 @@ class HandleBitFlagSplit {
                 flagValue = telemetryValue;
             }
 
-            if (isNaN(flagValue)) {
-                return {
-                    shouldTriggerEvent: false,
-                    reason: 'Invalid bit flag value'
-                };
-            }
-
-            // Determine flag type from context if not provided
-            if (!flagType) {
-                flagType = this.determineFlagType(flagValue);
+            if (isNaN(flagValue) || flagValue === 0) {
+                return [];
             }
 
             const flagMapping = this.flagMappings[flagType];
             if (!flagMapping) {
-                return {
-                    shouldTriggerEvent: false,
-                    reason: `Unknown flag type: ${flagType}`
-                };
+                return [];
             }
 
-            const activeFlags = this.parseFlags(flagValue, flagMapping);
+            const activeEvents = [];
 
-            if (activeFlags.length === 0) {
-                return {
-                    shouldTriggerEvent: false,
-                    reason: 'No active flags detected'
-                };
+            // Convert to byte array (little-endian)
+            const bytes = [];
+            for (let i = 0; i < 8; i++) {
+                bytes[i] = (flagValue >> (i * 8)) & 0xFF;
             }
 
-            return {
-                shouldTriggerEvent: true,
-                reason: `${activeFlags.length} active flag(s) detected`,
-                activeFlags: activeFlags,
-                flagType: flagType,
-                rawValue: flagValue,
-                hexValue: '0x' + flagValue.toString(16).toUpperCase()
-            };
+            // Check each byte for active flags
+            Object.keys(flagMapping).forEach(byteIndex => {
+                const byteNum = parseInt(byteIndex);
+                const byteValue = bytes[byteNum] || 0;
+                const byteMappings = flagMapping[byteIndex];
+
+                Object.keys(byteMappings).forEach(bitIndex => {
+                    const bitMapping = byteMappings[bitIndex];
+                    
+                    // Check if this bit is set
+                    if (byteValue & bitMapping.mask) {
+                        activeEvents.push({
+                            event: bitMapping.label,
+                            bit: parseInt(bitIndex),
+                            byte: byteNum
+                        });
+                    }
+                });
+            });
+
+            return activeEvents;
 
         } catch (error) {
-            return {
-                shouldTriggerEvent: false,
-                reason: `Error parsing bit flags: ${error.message}`
-            };
+            console.error('Error parsing bit flags:', error);
+            return [];
         }
     }
 
     /**
-     * Parse individual flags from the bit flag value
-     * @param {number} flagValue - The numeric flag value
-     * @param {Object} flagMapping - The mapping for this flag type
-     * @returns {Array} - Array of active flag objects
-     */
-    parseFlags(flagValue, flagMapping) {
-        const activeFlags = [];
-
-        // Convert to byte array (little-endian)
-        const bytes = [];
-        for (let i = 0; i < 8; i++) {
-            bytes[i] = (flagValue >> (i * 8)) & 0xFF;
-        }
-
-        // Check each byte and bit
-        Object.keys(flagMapping).forEach(byteIndex => {
-            const byteNum = parseInt(byteIndex);
-            const byteValue = bytes[byteNum] || 0;
-            const byteMappings = flagMapping[byteIndex];
-
-            Object.keys(byteMappings).forEach(bitIndex => {
-                const bitNum = parseInt(bitIndex);
-                const bitMapping = byteMappings[bitIndex];
-                
-                // Check if this bit is set
-                if (byteValue & bitMapping.mask) {
-                    activeFlags.push({
-                        bit: bitNum,
-                        byte: byteNum,
-                        mask: bitMapping.mask,
-                        label: bitMapping.label,
-                        hexMask: '0x' + bitMapping.mask.toString(16).toUpperCase().padStart(2, '0')
-                    });
-                }
-            });
-        });
-
-        return activeFlags;
-    }
-
-    /**
-     * Attempt to determine flag type from value patterns
-     * @param {number} flagValue - The flag value
-     * @returns {string} - Best guess flag type
-     */
-    determineFlagType(flagValue) {
-        // This is a fallback - in practice, the flag type should be determined
-        // from the IO element label or protocol context
-        return 'controlstateflags_p4'; // Default fallback
-    }
-
-    /**
-     * Get available flag types
+     * Get all supported flag types
      * @returns {Array} - Array of supported flag types
      */
     getSupportedFlagTypes() {
         return Object.keys(this.flagMappings);
-    }
-
-    /**
-     * Get flag mapping for a specific type
-     * @param {string} flagType - The flag type
-     * @returns {Object|null} - The flag mapping or null if not found
-     */
-    getFlagMapping(flagType) {
-        return this.flagMappings[flagType] || null;
     }
 }
 

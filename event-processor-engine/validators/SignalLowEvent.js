@@ -1,26 +1,18 @@
+// Reviewed with Werner
 class SignalLowEvent {
     validate(telemetryValue, previousTelemetryValue, label) {
-        const threshold = 1;
+        const threshold = 0;
+        let shouldTriggerEvent = true;
         if(telemetryValue === previousTelemetryValue) {
-            return {
-                shouldTriggerEvent: false,
-            };
-        }
-        if(telemetryValue == 5) { // Temporary field for testing
-            return {
-                shouldTriggerEvent: true,
-                eventClassText: "Signal High Event",
-                eventType: "gsm_signal_high",
-                eventTelemetry: label,
-                eventValue: 1,
-            };
+            shouldTriggerEvent = false;
         }
         return {
             shouldTriggerEvent: telemetryValue <= threshold,
             eventClassText: "Signal Low Event",
             eventType: "gsm_signal_low",
-            eventTelemetry: label,
-            eventValue: 1,
+            eventTelemetry: label, 
+            eventAdditionalTelemetryColumn: "gms_signal_low", // TODO: We need to add a new telemetry column to the data "gsm_signal_low = 1 & null"
+            eventValue:  telemetryValue <= threshold ? 1 : null,
         };
     }
 }

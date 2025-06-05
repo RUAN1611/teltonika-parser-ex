@@ -1,21 +1,29 @@
 class HandleUnplugStatus {
-    validate(telemetryValue) {
-        if(telemetryValue === 0) {
+    validate(telemetryValue, previousTelemetryValue, label) {
+        let shouldTriggerEvent = true;
+        if(previousTelemetryValue === telemetryValue) {
+            shouldTriggerEvent = false;
+        }
+        if(telemetryValue === 0 && previousTelemetryValue === 1) {
             return {
-                shouldTriggerEvent: true,
-                reason: 'Battery Present',
+                shouldTriggerEvent: shouldTriggerEvent,
+                eventClassText: 'Power Disconnect',
+                eventType: 'power_disconnect',
+                eventTelemetry: label,
             };
         }
-        else if(telemetryValue === 1) {
+        else if(telemetryValue === 1 && previousTelemetryValue === 0) {
             return {
-                shouldTriggerEvent: true,
-                reason: 'Battery Unplugged',
+                shouldTriggerEvent: shouldTriggerEvent,
+                eventClassText: 'Power Reconnect',
+                eventType: 'power_reconnect',
+                eventTelemetry: label,
             };
         }
         else {
             return {
                 shouldTriggerEvent: false,
-                reason: 'Battery status unknown',
+                reason: 'Power status unknown',
             };
         }
     }

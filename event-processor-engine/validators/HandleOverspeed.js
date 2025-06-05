@@ -1,11 +1,19 @@
+// Reviewed with Werner
+
 class HandleOverspeed {
     validate(telemetryValue, previousTelemetryValue, label) {
-        if(previousTelemetryValue === 0 && telemetryValue > 0) {
+        let shouldTriggerEvent = true;
+        if(previousTelemetryValue >= 0 && telemetryValue >= 0) {
+            shouldTriggerEvent = false;
+        }
+        if(telemetryValue >= 0) {
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Overspeed Event",
-                eventType: "start",
+                eventType: "over_speeding",
+                eventAdditionalTelemetryColumn: "over_speeding",
                 eventTelemetry: label,
+                eventValue: telemetryValue,
             }
         }
         else {
