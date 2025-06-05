@@ -1,3 +1,6 @@
+// No Need for Looking at Abnormal Temperatures. Look at Error Codes.
+// Reviewed with Werner
+
 class HandleBleTemp {
     validate(telemetryValue) {
         // BLE temperature sensors report in SignedHundredth format

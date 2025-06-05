@@ -114,12 +114,26 @@ class ValidationEngine {
                             const validationResult = validator.validate(ioElement.value, previousValue, protocolElement.label);
                             console.log(`Validation result:`, validationResult);
 
+                            // If eventAdditionalTelemetryColumn is returned, add it to the original record's telemetry section
+                            if (validationResult.eventAdditionalTelemetryColumn) {
+                                // Initialize telemetry section if it doesn't exist
+                                if (!record.telemetry) {
+                                    record.telemetry = {};
+                                }
+                                
+                                // Add the additional telemetry column with the event value
+                                record.telemetry[validationResult.eventAdditionalTelemetryColumn] = validationResult.eventValue;
+                                console.log(`Added to telemetry: ${validationResult.eventAdditionalTelemetryColumn} = ${validationResult.eventValue}`);
+                            }
+
                             // If validation passes, add event to record
                             if (validationResult.shouldTriggerEvent) {
                                 const event = {
                                     eventClass: "triggeredevent",
                                     ...validationResult
                                 };
+
+                                
 
                                 // Remove shouldTriggerEvent from the event object
                                 delete event.shouldTriggerEvent;
@@ -131,10 +145,8 @@ class ValidationEngine {
                             console.warn(`Validation error for ${eventType} on AVL ID ${ioElement.id}:`, error.message);
                         }
                     } else {
-                        console.warn(`Validator not found for event type: ${eventType}`);
                     }
                 } else {
-                    console.log(`No event defined for IO element ${ioElement.id}`);
                 }
                 
                 // Update previous values with current value for next record/call

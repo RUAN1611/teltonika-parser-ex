@@ -1,14 +1,55 @@
+/**
+ * https://wiki.teltonika-gps.com/view/FMB140_Teltonika_Data_Sending_Parameters_ID
+ * EcoMaximum (ID: 258)
+ * ---------------------
+ * Size: 8 bytes
+ * Type: Unsigned
+ * Range: 0 to 0xFFFFFFFFFFFFFFFF
+ * 
+ * Stores maximum accelerometer values in mg on all axes during Eco driving event
+ * 
+ * Byte format:
+ * - 2 bytes: Zeros
+ * - 2 bytes: X axis
+ * - 2 bytes: Y axis  
+ * - 2 bytes: Z axis
+ * 
+ * Format: FMT100
+ * Usage: Eventual I/O elements
+ * 
+ * EcoAverage (ID: 259) 
+ * --------------------
+ * Size: 8 bytes
+ * Type: Unsigned
+ * Range: 0 to 0xFFFFFFFFFFFFFFFF
+ * 
+ * Stores average accelerometer values in mg on all axes during Eco driving event
+ * 
+ * Byte format:
+ * - 2 bytes: Zeros
+ * - 2 bytes: X axis
+ * - 2 bytes: Y axis
+ * - 2 bytes: Z axis
+ * 
+ * Format: FMT100
+ * Usage: Eventual I/O elements
+ */
+
+// Reviewed with Werner
+// Done
+
 class HandleEco {
-    validate(telemetryValue, parameterName = 'Eco') {
+    validate(telemetryValue, previousTelemetryValue, label) {
+        let shouldTriggerEvent = true;
+        if(previousTelemetryValue === telemetryValue) {
+            shouldTriggerEvent = false;
+        }
         // Eco parameters (EcoMaximum/EcoAverage) store accelerometer values in mg
         // 8 Bytes format: 2B Zeros + 2B X axis + 2B Y axis + 2B Z axis
         
         // Handle invalid or null values
         if (telemetryValue === null || telemetryValue === undefined) {
-            return {
-                shouldTriggerEvent: false,
-                reason: `${parameterName} value is null or undefined`
-            };
+            shouldTriggerEvent = false;
         }
 
         // Convert to BigInt if it's a string or number to handle 8-byte values
@@ -22,18 +63,12 @@ class HandleEco {
                 ecoValue = telemetryValue;
             }
         } catch (error) {
-            return {
-                shouldTriggerEvent: false,
-                reason: `Invalid ${parameterName} value format`
-            };
+            shouldTriggerEvent = false;
         }
 
         // Check if value is 0 (no eco driving event data)
         if (ecoValue === 0n) {
-            return {
-                shouldTriggerEvent: false,
-                reason: `No ${parameterName} eco driving event data available`
-            };
+            shouldTriggerEvent = false;
         }
 
         // Parse the 8-byte value: 2B Zeros + 2B X + 2B Y + 2B Z
@@ -51,16 +86,17 @@ class HandleEco {
         // Calculate magnitude of acceleration vector
         const magnitude = Math.sqrt(xAxisSigned * xAxisSigned + yAxisSigned * yAxisSigned + zAxisSigned * zAxisSigned);
 
+        // Determine event type based on parameter name
+        const eventType = label === 'eco_maximum' ? 'eco_maximum_event' : 'eco_average_event';
+        const eventClassText = label === 'eco_maximum' ? 'Eco Maximum Event' : 'Eco Average Event';
+
         return {
-            shouldTriggerEvent: true,
-            reason: `${parameterName} eco driving event recorded with accelerometer data`,
-            accelerometer: {
-                xAxis: xAxisSigned,
-                yAxis: yAxisSigned,
-                zAxis: zAxisSigned,
-                magnitude: Math.round(magnitude)
-            },
-            units: 'mg'
+            shouldTriggerEvent: shouldTriggerEvent,
+            eventClassText: eventClassText,
+            eventType: eventType,
+            eventTelemetry: label,
+            eventAdditionalTelemetryColumn: "eco_value",
+            eventValue: magnitude,
         };
     }
 }

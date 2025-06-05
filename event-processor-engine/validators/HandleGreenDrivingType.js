@@ -1,30 +1,40 @@
+// Reviewed with Werner
+// Done
+
 class HandleGreenDrivingType {
     validate(telemetryValue, previousTelemetryValue, label) {
+        let shouldTriggerEvent = true;
+        if(previousTelemetryValue === telemetryValue) {
+            shouldTriggerEvent = false;
+        }
         if(telemetryValue === 1) {
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Harsh Acceleration",
                 eventType: "harsh_accel",
                 eventTelemetry: label,
+                eventAdditionalTelemetryColumn: "harsh_accel",
                 eventValue: 1,
             };
         }
         else if(telemetryValue === 2) {
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Harsh Braking",
                 eventType: "harsh_brake",
+                eventAdditionalTelemetryColumn: "harsh_brake",
                 eventTelemetry: label,
-                eventValue: 2,
+                eventValue: 1,
             };
         }
         else if(telemetryValue === 3) {
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Harsh Corner",
                 eventType: "harsh_corner",
+                eventAdditionalTelemetryColumn: "harsh_corner",
                 eventTelemetry: label,
-                eventValue: 3,
+                eventValue: 1,
             };
         }
         else {

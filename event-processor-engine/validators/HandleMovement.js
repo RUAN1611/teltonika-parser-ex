@@ -1,19 +1,29 @@
+// Review HandleMovement with Werner
+
 class HandleMovement {
     validate(telemetryValue, previousTelemetryValue, label) {
-        if(previousTelemetryValue === 0 && telemetryValue === 1) {
+        let shouldTriggerEvent = true;
+        if(telemetryValue === previousTelemetryValue) {
+            shouldTriggerEvent = false;
+        }
+        if(telemetryValue === 1) {
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Motion Start",
                 eventType: "motion_start",
                 eventTelemetry: label,
+                eventAdditionalTelemetryColumn: "motion_start",
+                eventValue: telemetryValue,
             };
         }
-        else if(previousTelemetryValue === 1 && telemetryValue === 0) {
+        else if(telemetryValue === 0) {
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Motion End",
                 eventType: "motion_end",
                 eventTelemetry: label,
+                eventAdditionalTelemetryColumn: "motion_end",
+                eventValue: telemetryValue,
             };
         }
         else {

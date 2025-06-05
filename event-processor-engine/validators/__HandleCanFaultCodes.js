@@ -1,3 +1,6 @@
+// Reviewed with Werner
+// Previous Telemetry Value
+
 class HandleCanFaultCodes {
     constructor() {
         // Initialize fault code mappings - comprehensive list from codes.txt
