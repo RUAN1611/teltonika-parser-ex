@@ -62,26 +62,18 @@ class ValidationEngine {
      * @returns {Object} - AVL data with events added
      */
     processEvents(avlData, protocolElements, previousValues = {}) {
-        console.log('ValidationEngine.processEvents called');
-        console.log('Protocol elements available:', Object.keys(protocolElements).length);
         
         if (!avlData.records || !Array.isArray(avlData.records)) {
             console.log('No records found in AVL data');
             return avlData;
         }
-
-        console.log('Processing', avlData.records.length, 'records');
-
         // Process each record
         avlData.records.forEach((record, recordIndex) => {
-            console.log(`Processing record ${recordIndex}`);
             
             if (!record.ioElements || !Array.isArray(record.ioElements)) {
                 console.log(`Record ${recordIndex} has no ioElements`);
                 return;
             }
-
-            console.log(`Record ${recordIndex} has ${record.ioElements.length} IO elements`);
 
             // Initialize events array if not exists
             if (!record.events) {
@@ -98,8 +90,6 @@ class ValidationEngine {
                     const eventType = protocolElement.event;
                     const validator = this.validators[eventType];
 
-                    console.log(`Event type: ${eventType}, Validator found: ${!!validator}`);
-
                     if (validator) {
                         try {
                             // Get previous value - handle both raw values and objects
@@ -110,17 +100,13 @@ class ValidationEngine {
                             if (previousValue === undefined) {
                                 previousValue = null;
                             }
-                            console.log(`Previous value for IO ${ioElement.id}: ${previousValue}`);
                             // Standard validation for all event types
-                            console.log(`Validating ${eventType} with value: ${ioElement.value}`);
                             const validationResult = validator.validate(ioElement.value, previousValue, protocolElement.label);
-                            console.log(`Validation result:`, validationResult);
 
                             // If eventAdditionalTelemetryColumn is returned, add it to the original record's telemetry section
                             if (validationResult.eventAdditionalTelemetryColumn) {
                                 // Add the additional telemetry column as a direct property of the record
                                 record[validationResult.eventAdditionalTelemetryColumn] = validationResult.eventValue;
-                                console.log(`Added to record: ${validationResult.eventAdditionalTelemetryColumn} = ${validationResult.eventValue}`);
                             }
 
                             // If validation passes, add event to record
@@ -130,12 +116,9 @@ class ValidationEngine {
                                     ...validationResult
                                 };
 
-                                
-
                                 // Remove shouldTriggerEvent from the event object
                                 delete event.shouldTriggerEvent;
 
-                                console.log(`Adding event:`, event);
                                 record.events.push(event);
                             }
                         } catch (error) {
