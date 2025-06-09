@@ -119,7 +119,6 @@ class ValidationEngine {
                 // Store only the raw value, not the whole object
                 if (protocolElement && protocolElement.event) {
                     previousValues[ioElement.id] = ioElement.value;
-                    console.log(`Updated previous value for IO ${ioElement.id} to: ${ioElement.value}`);
                 }
             });
 

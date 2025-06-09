@@ -98,12 +98,6 @@ class TeltonikaParser {
           this.previousValues
         );
         break;
-      case 255:
-        console.log(`${this.imei} - Codec 255 detected...`);
-        break;
-      default:
-        console.log(`${this.imei} - Unknown codec detected...`);
-        break;
     }
   }
 
