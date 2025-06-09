@@ -98,6 +98,8 @@ class TeltonikaParser {
           this.previousValues
         );
         break;
+      default:
+        break;
     }
   }
 
