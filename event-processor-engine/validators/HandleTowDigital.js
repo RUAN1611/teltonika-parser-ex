@@ -1,3 +1,5 @@
+// Reviewed with Werner
+
 class HandleTowDigital {
     validate(telemetryValue, previousTelemetryValue, label) {
         let shouldTriggerEvent = true;

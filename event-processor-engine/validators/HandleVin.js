@@ -1,4 +1,5 @@
 // https://wiki.teltonika-gps.com/view/FMB140_Teltonika_Data_Sending_Parameters_ID - AVL ID: 256
+// Reviewed with Werner
 
 class HandleVin {
     validate(telemetryValue, previousTelemetryValue, label) {
