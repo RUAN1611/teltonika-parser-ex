@@ -1,4 +1,24 @@
 // https://wiki.teltonika-gps.com/view/Crash_trace
+// https://wiki.teltonika-gps.com/view/TFT100_AVL_ID_List - AVL ID: 257
+
+/* Telemetry Value Example: 
+001D003F03F3001E003C03F30026004C04020022004603FD0023004603FC0024004
+803FC001F004303FB001F004103F10026004903FC0025004D03FF001E004303F700
+23004503FB001F004103F6001C003B03F40022004703FB001E003B03F50025004A0
+3FB001E003F03F30021004303FB0024004603FF01
+AXIS X 	AXIS Y 	AXIS Z
+001D 	003F 	03F3
+001E 	003C 	03F3
+0026 	004C 	0402
+0022 	0046 	03FD
+0023 	0046 	03FC
+0024 	0048 	03FC
+001F 	0043 	03FB
+001F 	0041 	03F1
+0026 	0049 	03FC 
+....    ....    ....
+....    ....    ....
+*/
 
 class HandleCrashTrace {
     validate(telemetryValue, previousTelemetryValue, label) {
@@ -12,7 +32,7 @@ class HandleCrashTrace {
                 eventClassText: "Crash Trace Event Triggered",
                 eventType: "crash_trace",
                 eventTelemetry: label,
-                eventValue: telemetryValue,
+                eventValue: telemetryValue, // DISCUSS: Should we return the measurements as eventValue? (crash_trace_x: 100,101,103, crash_trax_y: -200, z: 300)(x: 100, y: -200, z: 300)(x: 100, y: -200, z: 300)(x: 100, y: -200, z: 300)
                 reason: 'Crash trace',
             };
         }

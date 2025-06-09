@@ -1,3 +1,4 @@
+// https://embeddedflakes.com/j1939-diagnostics-part-1/
 // https://www.scania.com/content/dam/scanianoe/market/au/products-and-services/engines/electrical-system/Fault-codes-DM1_Issue-6.pdf
 // https://felixequipment.com/Documents/Suspect-Parameter-Numbers-SPN-Codes.pdf
 
@@ -12,6 +13,8 @@
  * Size: 4 bytes (Unsigned), Range: 0 to 4294967295
  * Reference: Scania CV AB 2016 - Fault codes DM1 Industrial & Marine Engines
  */
+
+// Reviewed with Werner
 
 class HandleDtcDm {
     constructor() {
@@ -48,6 +51,10 @@ class HandleDtcDm {
             };
         }
 
+        if(previousTelemetryValue === telemetryValue) {
+            shouldTriggerEvent = false;
+        }
+
         // Convert to number if needed
         const dtcValue = typeof telemetryValue === 'string' ? parseInt(telemetryValue, 10) : telemetryValue;
 
@@ -59,18 +66,16 @@ class HandleDtcDm {
                 eventClassText: `DTC Cleared: ${clearedDesc}`,
                 eventType: label.includes('dm1') ? "dtc_dm1_cleared" : "dtc_dm2_cleared",
                 eventTelemetry: label,
-                eventAdditionalTelemetryColumn: "dtc_cleared"
             };
         }
         // New DTC detected (was 0, now active)
         else if (previousTelemetryValue === 0 && dtcValue > 0) {
-            const activeDesc = this.parseDtcDescription(dtcValue);
+            const activeDesc = this.parseDtcDescription(dtcValue); // Parse Previous Telemetry Value
             return {
                 shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: label.includes('dm1') ? `Active DTC: ${activeDesc}` : `Historic DTC: ${activeDesc}`,
                 eventType: label.includes('dm1') ? "dtc_dm1_active" : "dtc_dm2_historic", 
                 eventTelemetry: label,
-                eventAdditionalTelemetryColumn: "dtc_event"
             };
         }
         // DTC changed (different non-zero value)
@@ -81,7 +86,6 @@ class HandleDtcDm {
                 eventClassText: label.includes('dm1') ? `DTC Changed: ${newDesc}` : `Historic DTC Changed: ${newDesc}`,
                 eventType: label.includes('dm1') ? "dtc_dm1_changed" : "dtc_dm2_changed",
                 eventTelemetry: label,
-                eventAdditionalTelemetryColumn: "dtc_changed"
             };
         }
         else {

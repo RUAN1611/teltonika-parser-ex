@@ -1,14 +1,12 @@
 class HandleEyeProximityFarAway {
     validate(telemetryValue, previousTelemetryValue, label) {
+        let shouldTriggerEvent = true;
         if(telemetryValue === previousTelemetryValue) {
-            return {
-                shouldTriggerEvent: false,
-                reason: 'No change in eye proximity',
-            };
+            shouldTriggerEvent = false;
         }
         if(telemetryValue !== null && telemetryValue !== undefined) {
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Eye Proximity Event",
                 eventType: "far_away",
                 eventTelemetry: label,
