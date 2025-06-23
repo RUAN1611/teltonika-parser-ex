@@ -8,6 +8,8 @@
 
 class HandleBleCustomAlert4B {
     validate(telemetryValue, label) {
+        let shouldTriggerEvent = false;
+        
         // Validate for 4-byte unsigned integer (0 to 4294967295)
         if(telemetryValue !== null && telemetryValue !== undefined) {
             // Convert to number if it's a string
@@ -21,12 +23,16 @@ class HandleBleCustomAlert4B {
                 };
             }
             
+            // Set shouldTriggerEvent to true if we have a valid value
+            shouldTriggerEvent = true;
+            
             return {
-                shouldTriggerEvent: true,
+                shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "BLE Custom Alert Event 4B Triggered for " + label,
                 eventType: "custom_alert",
                 eventTelemetry: label,
-                eventValue: numValue,
+                eventValue: 1,
+                eventAdditionalTelemetryColumn: `${label}_alert`,
                 reason: 'BLE custom alert 4B',
             };
         }

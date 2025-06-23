@@ -8,17 +8,15 @@
 
 class HandleBleCustomAlert {
     validate(telemetryValue, label) {
-        let shouldTriggerEvent = true;
+        let shouldTriggerEvent = false;
         
         if(telemetryValue !== null && telemetryValue !== undefined) {
             // For variable HEX data, basic validation
             const stringValue = String(telemetryValue);
             
-            // Check if it's a valid hex string (optional validation)
-            // This is lenient - allows both with and without 0x prefix
-            const hexPattern = /^(0x)?[0-9A-Fa-f]*$/;
-            if(stringValue.length > 0 && !hexPattern.test(stringValue)) {
-                shouldTriggerEvent = false;
+            // Set alert flag if value has length > 0
+            if (stringValue.length > 0) {
+                shouldTriggerEvent = true;
             }
             
             return {
@@ -26,13 +24,15 @@ class HandleBleCustomAlert {
                 eventClassText: "BLE Custom Alert Event Triggered for IO Element: " + label,
                 eventType: "custom_alert",
                 eventTelemetry: label,
-                eventValue: telemetryValue,
+                eventValue: 1,
+                eventAdditionalTelemetryColumn: `${label}_alert`,
                 reason: 'BLE custom alert - variable HEX',
             };
         }
         else {
             return {
                 shouldTriggerEvent: false,
+                alertFlag: 0,
                 reason: 'BLE custom alert - null or undefined value',
             };
         }

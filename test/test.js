@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const Parser = require('../index');
 const crc = require('crc');
+const ValidationEngine = require('../event-processor-engine/ValidationEngine');
 
 describe('Teltonika parser', function () {
   before(function (done) {
@@ -111,3 +112,72 @@ describe('Teltonika parser', function () {
     });
   });
 });
+
+// Test telemetry removal functionality
+console.log('\n=== Testing Telemetry Removal ===');
+const testValidationEngine = new ValidationEngine();
+
+// Mock AVL data with error codes
+const testAvlData = {
+    records: [{
+        created_on: new Date(),
+        protocol: 'teltonika/basic-protocol',
+        priority: 1,
+        gps: {
+            longitude: -122.4194,
+            latitude: 37.7749,
+            altitude: 100,
+            angle: 0,
+            satellites: 8,
+            speed: 0
+        },
+        event_id: 0,
+        properties_count: 2,
+        ioElements: [
+            {
+                id: 200, // BLE Humidity sensor ID
+                value: 32735, // Error code for disconnected
+                label: 'ble_humidity'
+            },
+            {
+                id: 201, // Normal temperature sensor
+                value: 25.5,
+                label: 'temperature'
+            }
+        ]
+    }]
+};
+
+// Mock protocol elements
+const testProtocolElements = {
+    'telemetry::io::200': {
+        label: 'ble_humidity',
+        event: 'HandleBleHumidity'
+    },
+    'telemetry::io::201': {
+        label: 'temperature',
+        event: 'HandleBleTemp'
+    }
+};
+
+console.log('Before processing:');
+console.log('IO Elements count:', testAvlData.records[0].ioElements.length);
+testAvlData.records[0].ioElements.forEach(element => {
+    console.log(`  ID ${element.id}: ${element.value} (${element.label})`);
+});
+
+// Process events
+const processedData = testValidationEngine.processEvents(testAvlData, testProtocolElements);
+
+console.log('\nAfter processing:');
+console.log('IO Elements count:', processedData.records[0].ioElements.length);
+processedData.records[0].ioElements.forEach(element => {
+    console.log(`  ID ${element.id}: ${element.value} (${element.label})`);
+});
+
+console.log('\nGenerated events:');
+if (processedData.records[0].events) {
+    processedData.records[0].events.forEach(event => {
+        console.log(`  ${event.eventType}: ${event.eventValue}`);
+    });
+}
