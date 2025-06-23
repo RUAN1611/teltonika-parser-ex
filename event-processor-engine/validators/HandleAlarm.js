@@ -10,7 +10,7 @@ class HandleAlarm {
         eventClassText: "Alarm Event",
         eventType: "alarm_event",
         eventTelemetry: label,
-        eventValue: telemetryValue,
+        eventValue: 1,
         eventAdditionalTelemetryColumn: ValidatorConfig.Events.PANIC,
       };
     }

@@ -28,8 +28,8 @@ class HandleMilTime {
         const milTimeMinutes = typeof telemetryValue === 'string' ? 
             parseInt(telemetryValue, 10) : telemetryValue;
 
-        // Validate that it's a valid number and within range (0-65535)
-        if (isNaN(milTimeMinutes) || milTimeMinutes < 0 || milTimeMinutes > 65535) {
+        // Validate that it's a valid number
+        if (isNaN(milTimeMinutes)) {
             shouldTriggerEvent = false;
         }
 
@@ -40,7 +40,8 @@ class HandleMilTime {
                 eventClassText: "MIL Event",
                 eventType: "deactivate",
                 eventTelemetry: label,
-                eventValue: telemetryValue,
+                eventValue: 0,
+                eventAdditionalTelemetryColumn: "mil_status",
                 reason: 'Malfunction Indicator Lamp is off - no active faults'
             };
         }
@@ -53,16 +54,10 @@ class HandleMilTime {
             eventClassText: "MIL Event",
             eventType: "activate",
             eventTelemetry: label,
-            eventValue: telemetryValue,
+            eventValue: 1,
+            eventAdditionalTelemetryColumn: "mil_status",
             reason: `Check Engine Light has been on for ${milTimeMinutes} minutes (${durationHours} hours)`
         };
-
-        /*
-         * Example:
-         * MIL time value: 150 minutes
-         * Converted: 150 ÷ 60 = 2.5 hours
-         * Message: "Check Engine Light has been on for 150 minutes (2.5 hours)"
-         */
     }
 }
 

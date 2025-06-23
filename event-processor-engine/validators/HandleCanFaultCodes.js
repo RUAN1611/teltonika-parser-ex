@@ -22,9 +22,10 @@ class HandleCanFaultCodes {
     /**
      * Validate fault codes and generate events for active codes
      * @param {string} telemetryValue - Comma-separated fault codes (ASCII)
+     * @param {string} label - The telemetry label
      * @returns {Object} - Validation result with fault code events
      */
-    validate(telemetryValue) {
+    validate(telemetryValue, label) {
         try {
             // Handle empty or null values
             if (!telemetryValue || telemetryValue.trim() === '') {
@@ -65,9 +66,15 @@ class HandleCanFaultCodes {
             });
 
             const allFaults = [...activeFaults, ...unknownFaults];
+            const dtcCodes = faultCodes.join(',');
 
             return {
                 shouldTriggerEvent: true,
+                eventClassText: "CAN Fault Codes Event",
+                eventType: "can_fault_codes",
+                eventTelemetry: label,
+                eventValue: dtcCodes,
+                eventAdditionalTelemetryColumn: "dtc",
                 reason: `${allFaults.length} fault code(s) detected`,
                 faultCodes: allFaults,
                 totalCodes: allFaults.length,

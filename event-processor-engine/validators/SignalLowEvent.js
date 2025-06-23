@@ -1,4 +1,5 @@
 // Reviewed with Werner
+const ValidatorConfig = require("../ValidatorConfig");
 class SignalLowEvent {
     validate(telemetryValue, label) {
         const threshold = 0;
@@ -9,8 +10,8 @@ class SignalLowEvent {
                 eventClassText: "Signal Low Event",
                 eventType: "gsm_signal_low",
                 eventTelemetry: label, 
-                eventAdditionalTelemetryColumn: "gms_signal_low", // TODO: We need to add a new telemetry column to the data "gsm_signal_low = 1 & null"
-                eventValue:  telemetryValue,
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.GSM_SIGNAL_LOW,
+                eventValue: 1,
             };
         }
         return {

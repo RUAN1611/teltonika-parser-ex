@@ -16,6 +16,7 @@ class TerribleDtcHandling {
                 eventType: "dtc_fault_codes",
                 eventTelemetry: label,
                 eventValue: telemetryValue,
+                eventAdditionalTelemetryColumn: "dtc",
                 eventDescription: description,
             }
         }

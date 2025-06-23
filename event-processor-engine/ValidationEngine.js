@@ -78,6 +78,7 @@ class ValidationEngine {
 
             // Collect validation results first
             const validationResults = [];
+            const telemetryToRemove = new Set(); // Track which telemetry elements should be removed
             
             record.ioElements.forEach((ioElement, ioIndex) => {
                 const protocolKey = `telemetry::io::${ioElement.id}`;
@@ -93,11 +94,17 @@ class ValidationEngine {
                             // Standard validation for all event types
                             const validationResult = validator.validate(ioElement.value, protocolElement.label);
                             
+                            // Check if this telemetry should be removed
+                            if (validationResult.removeTelemetry) {
+                                telemetryToRemove.add(ioIndex);
+                            }
+                            
                             // Store validation result with context
                             validationResults.push({
                                 ioElement,
                                 validationResult,
-                                protocolElement
+                                protocolElement,
+                                ioIndex
                             });
                         } catch (error) {
                             console.warn(`Validation error for ${eventType} on AVL ID ${ioElement.id}:`, error.message);
@@ -106,11 +113,28 @@ class ValidationEngine {
                 }
             });
 
+            // Remove telemetry elements that should be excluded
+            if (telemetryToRemove.size > 0) {
+                // Convert Set to Array and sort in descending order to avoid index shifting issues
+                const indicesToRemove = Array.from(telemetryToRemove).sort((a, b) => b - a);
+                
+                indicesToRemove.forEach(index => {
+                    const removedElement = record.ioElements.splice(index, 1)[0];
+                    console.log(`Removed telemetry element ID ${removedElement.id} (${removedElement.label}) due to error code: ${removedElement.value}`);
+                });
+            }
+
             // First: Process additional telemetry columns
             validationResults.forEach(({ validationResult }) => {
                 if (validationResult.eventAdditionalTelemetryColumn) {
                     // Add the additional telemetry column as a direct property of the record
                     record[validationResult.eventAdditionalTelemetryColumn] = validationResult.eventValue;
+                }
+                if (validationResult.eventAdditionalTelemetryColumns) {
+                    // Add the additional telemetry columns as a direct property of the record
+                    validationResult.eventAdditionalTelemetryColumns.forEach((column) => {
+                        record[column.columnName] = column.value;
+                    });
                 }
             });
 
@@ -127,8 +151,9 @@ class ValidationEngine {
                         ...validationResult
                     };
 
-                    // Remove shouldTriggerEvent from the event object
+                    // Remove shouldTriggerEvent and removeTelemetry from the event object
                     delete event.shouldTriggerEvent;
+                    delete event.removeTelemetry;
 
                     record.events.push(event);
                 }
@@ -178,6 +203,48 @@ class ValidationEngine {
 
         // Return the mapped flag type or default to controlstateflags_p4
         return labelToFlagType[label] || 'controlstateflags_p4';
+    }
+
+    /**
+     * Create a validation result that indicates telemetry should be removed
+     * @param {string} eventClassText - The event class text
+     * @param {string} eventType - The event type
+     * @param {string} eventTelemetry - The telemetry label
+     * @param {any} eventValue - The telemetry value
+     * @returns {Object} - Validation result with removeTelemetry flag
+     */
+    createRemoveTelemetryResult(eventClassText, eventType, eventTelemetry, eventValue) {
+        return {
+            shouldTriggerEvent: true,
+            eventClassText: eventClassText,
+            eventType: eventType,
+            eventTelemetry: eventTelemetry,
+            eventValue: eventValue,
+            removeTelemetry: true
+        };
+    }
+
+    /**
+     * Create a validation result that indicates telemetry should be removed with additional telemetry column
+     * @param {string} eventClassText - The event class text
+     * @param {string} eventType - The event type
+     * @param {string} eventTelemetry - The telemetry label
+     * @param {any} eventValue - The telemetry value
+     * @param {string} additionalColumnName - The additional telemetry column name
+     * @param {any} additionalColumnValue - The additional telemetry column value
+     * @returns {Object} - Validation result with removeTelemetry flag and additional column
+     */
+    createRemoveTelemetryResultWithAdditionalColumn(eventClassText, eventType, eventTelemetry, eventValue, additionalColumnName, additionalColumnValue) {
+        return {
+            shouldTriggerEvent: true,
+            eventClassText: eventClassText,
+            eventType: eventType,
+            eventTelemetry: eventTelemetry,
+            eventValue: eventValue,
+            removeTelemetry: true,
+            eventAdditionalTelemetryColumn: additionalColumnName,
+            eventValue: additionalColumnValue
+        };
     }
 }
 
