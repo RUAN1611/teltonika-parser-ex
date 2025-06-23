@@ -1,9 +1,6 @@
 class HandleEyeProximityFound {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue !== null && telemetryValue !== undefined) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

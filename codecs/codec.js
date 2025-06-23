@@ -13,14 +13,12 @@ class Codec {
    * @param reader
    * @param number_of_records
    * @param imei - Device IMEI number
-   * @param previousValues - Previous values of the device
    */
-  constructor(reader, number_of_records, imei, previousValues) {
+  constructor(reader, number_of_records, imei) {
     this.reader = reader;
     this.number_of_records = number_of_records;
     this.avlObj = {};
     this.imei = imei;
-    this.previousValues = previousValues;
     this.protocol = this.determineProtocol();
   }
 

@@ -1,9 +1,8 @@
+// Convert hex value into something readable like date.
+
 class HandleTimeStamp {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue !== null && telemetryValue !== undefined) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

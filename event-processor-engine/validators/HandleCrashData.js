@@ -1,13 +1,8 @@
-// Ask David
+// https://wiki.teltonika-gps.com/view/FMB920_Teltonika_Data_Sending_Parameters_ID
+// AVL ID 247
 
 class HandleCrashData {
-    validate(telemetryValue, previousTelemetryValue, label) {
-        if(previousTelemetryValue === telemetryValue) {
-            return {
-                shouldTriggerEvent: false,
-                reason: 'No change in crash data status',
-            };
-        }
+    validate(telemetryValue, label) {
         if(telemetryValue >= 1 && telemetryValue <= 6) {
             return {
                 shouldTriggerEvent: true,

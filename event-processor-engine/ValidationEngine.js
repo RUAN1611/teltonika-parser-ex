@@ -1,28 +1,28 @@
 'use strict';
 
 const SignalLowEvent = require('./validators/SignalLowEvent');
-const HandleBleTemp = require('./validators/__HandleBleTemp');
-const HandleAlarm = require('./validators/__HandleAlarm');
-const HandleBitFlagSplit = require('./validators/__HandleBitFlagSplit');
-const HandleBleHumidity = require('./validators/__HandleBleHumidity');
-const HandleCanFaultCodes = require('./validators/__HandleCanFaultCodes');
-const HandleCrashTrace = require('./validators/__HandleCrashTrace');
-const HandleDallasTemperature4B = require('./validators/__HandleDallasTemperature4B');
-const HandleDoorStatus = require('./validators/__HandleDoorStatus');
-const HandleDrivingState = require('./validators/__N_A_HandleDrivingState');
+const HandleBleTemp = require('./validators/HandleBleTemp');
+const HandleAlarm = require('./validators/HandleAlarm');
+const HandleBitFlagSplit = require('./validators/HandleBitFlagSplit');
+const HandleBleHumidity = require('./validators/HandleBleHumidity');
+const HandleCanFaultCodes = require('./validators/HandleCanFaultCodes');
+const HandleCrashTrace = require('./validators/HandleCrashTrace');
+const HandleDallasTemperature4B = require('./validators/HandleDallasTemperature4B');
+const HandleDoorStatus = require('./validators/HandleDoorStatus');
+const HandleDrivingState = require('./validators/HandleDrivingState');
 const HandleGreenDrivingType = require('./validators/HandleGreenDrivingType');
-const HandleIgnition = require('./validators/__HandleIgnition');
+const HandleIgnition = require('./validators/HandleIgnition');
 const HandleMovement = require('./validators/HandleMovement');
 const HandleTripStatus = require('./validators/HandleTripStatus');
 const HandleUnplugStatus = require('./validators/HandleUnplugStatus');
 const HandleManDown = require('./validators/HandleManDown');
 const HandleTowDigital = require('./validators/HandleTowDigital');
 const HandleGsmJammingEvent = require('./validators/HandleGsmJammingEvent');
-const HandleCrashData = require('./validators/__HandleCrashData');
-const HandleMilTime = require('./validators/__HandleMilTime');
+const HandleCrashData = require('./validators/HandleCrashData');
+const HandleMilTime = require('./validators/HandleMilTime');
 const HandleEco = require('./validators/HandleEco');
 const HandleOverspeed = require('./validators/HandleOverspeed');
-const HandleTimeStamp = require('./validators/__N_A_HandleTimeStamp');
+const HandleTimeStamp = require('./validators/HandleTimeStamp');
 /**
  * Simple validation engine that processes telemetry data and adds events
  */
@@ -60,10 +60,9 @@ class ValidationEngine {
      * Process telemetry data and add events where validation passes
      * @param {Object} avlData - The parsed AVL data from codec
      * @param {Object} protocolElements - Protocol elements with event definitions
-     * @param {Object} previousValues - Previous values object to track state changes
      * @returns {Object} - AVL data with events added
      */
-    processEvents(avlData, protocolElements, previousValues = {}) {
+    processEvents(avlData, protocolElements) {
         
         if (!avlData.records || !Array.isArray(avlData.records)) {
             console.log('No records found in AVL data');
@@ -91,16 +90,8 @@ class ValidationEngine {
 
                     if (validator) {
                         try {
-                            // Get previous value - handle both raw values and objects
-                            let previousValue = previousValues[ioElement.id];
-                            if (previousValue !== undefined && typeof previousValue === 'object' && previousValue.value !== undefined) {
-                                previousValue = previousValue.value; // Extract value from object
-                            }
-                            if (previousValue === undefined) {
-                                previousValue = null;
-                            }
                             // Standard validation for all event types
-                            const validationResult = validator.validate(ioElement.value, previousValue, protocolElement.label);
+                            const validationResult = validator.validate(ioElement.value, protocolElement.label);
                             
                             // Store validation result with context
                             validationResults.push({
@@ -112,13 +103,6 @@ class ValidationEngine {
                             console.warn(`Validation error for ${eventType} on AVL ID ${ioElement.id}:`, error.message);
                         }
                     }
-                }
-                
-                // Update previous values with current value for next record/call
-                // Only update if this IO element has an event processor defined
-                // Store only the raw value, not the whole object
-                if (protocolElement && protocolElement.event) {
-                    previousValues[ioElement.id] = ioElement.value;
                 }
             });
 

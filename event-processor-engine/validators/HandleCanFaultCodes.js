@@ -1,5 +1,7 @@
 // Reviewed with Werner
 // Previous Telemetry Value
+// https://wiki.teltonika-gps.com/view/FMC003_Teltonika_Data_Sending_Parameters_ID
+// AVL ID 281
 
 class HandleCanFaultCodes {
     constructor() {

@@ -40,7 +40,7 @@ class HandleDtcDm {
         return `${spnDesc} - ${fmiDesc}`;
     }
 
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
         
         // Handle null/undefined values
@@ -51,16 +51,12 @@ class HandleDtcDm {
             };
         }
 
-        if(previousTelemetryValue === telemetryValue) {
-            shouldTriggerEvent = false;
-        }
-
         // Convert to number if needed
         const dtcValue = typeof telemetryValue === 'string' ? parseInt(telemetryValue, 10) : telemetryValue;
 
         // DTC cleared (was active, now 0)
-        if (previousTelemetryValue > 0 && dtcValue === 0) {
-            const clearedDesc = this.parseDtcDescription(previousTelemetryValue);
+        if (dtcValue === 0) {
+            const clearedDesc = this.parseDtcDescription(telemetryValue);
             return {
                 shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: `DTC Cleared: ${clearedDesc}`,
@@ -69,22 +65,12 @@ class HandleDtcDm {
             };
         }
         // New DTC detected (was 0, now active)
-        else if (previousTelemetryValue === 0 && dtcValue > 0) {
+        else if (dtcValue > 0) {
             const activeDesc = this.parseDtcDescription(dtcValue); // Parse Previous Telemetry Value
             return {
                 shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: label.includes('dm1') ? `Active DTC: ${activeDesc}` : `Historic DTC: ${activeDesc}`,
                 eventType: label.includes('dm1') ? "dtc_dm1_active" : "dtc_dm2_historic", 
-                eventTelemetry: label,
-            };
-        }
-        // DTC changed (different non-zero value)
-        else if (dtcValue > 0 && dtcValue !== previousTelemetryValue) {
-            const newDesc = this.parseDtcDescription(dtcValue);
-            return {
-                shouldTriggerEvent: shouldTriggerEvent,
-                eventClassText: label.includes('dm1') ? `DTC Changed: ${newDesc}` : `Historic DTC Changed: ${newDesc}`,
-                eventType: label.includes('dm1') ? "dtc_dm1_changed" : "dtc_dm2_changed",
                 eventTelemetry: label,
             };
         }

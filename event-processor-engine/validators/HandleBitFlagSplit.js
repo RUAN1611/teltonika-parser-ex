@@ -1,4 +1,5 @@
 // Simplified bit flag parser
+// https://wiki.teltonika-gps.com/view/FMB110_CAN_adapters
 
 class HandleBitFlagSplit {
     constructor() {

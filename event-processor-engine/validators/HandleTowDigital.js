@@ -1,11 +1,8 @@
 // Reviewed with Werner
 
 class HandleTowDigital {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue === 0) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

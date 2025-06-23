@@ -1,4 +1,5 @@
 // Security State Flags P2 validator - Split version
+// Split the 8 Byte Value into 4B High and 4B Low
 
 class HandleSecurityStateFlagsAndSplit {
     constructor() {
@@ -102,14 +103,7 @@ class HandleSecurityStateFlagsAndSplit {
         };
     }
 
-    validate(telemetryValue, previousTelemetryValue, label) {
-        if (telemetryValue === previousTelemetryValue) {
-            return {
-                shouldTriggerEvent: false,
-                reason: 'Security State Flags P2 unchanged',
-            };
-        }
-
+    validate(telemetryValue, label) {
         if (telemetryValue === 0) {
             return {
                 shouldTriggerEvent: false,
