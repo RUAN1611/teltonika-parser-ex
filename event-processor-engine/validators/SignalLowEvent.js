@@ -1,11 +1,8 @@
 // Reviewed with Werner
 class SignalLowEvent {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         const threshold = 0;
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue <= threshold) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

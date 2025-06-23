@@ -9,8 +9,11 @@
  * The ACTUAL UNIT IS MINUTES, NOT HOURS! Flespi shows it as hours, but it's actually minutes according to the Teltonika documentation.
  */
 
+// Helper Function to Convert Mil Status to Digital
+// mil_status = 0 or 1 as additional column
+
 class HandleMilTime {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         // MIL Time represents the duration (in minutes) that the Malfunction Indicator Lamp 
         // (Check Engine Light) has been illuminated since the fault was detected
 
@@ -18,11 +21,6 @@ class HandleMilTime {
         
         // Handle invalid or null values
         if (telemetryValue === null || telemetryValue === undefined) {
-            shouldTriggerEvent = false;
-        }
-
-        // Check if there's a significant change from previous value
-        if (telemetryValue === previousTelemetryValue) {
             shouldTriggerEvent = false;
         }
 

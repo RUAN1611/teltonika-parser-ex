@@ -20,21 +20,33 @@ AXIS X 	AXIS Y 	AXIS Z
 ....    ....    ....
 */
 
+// Not gonna put in Telemetry. The customer will see there is an IMPACT = 1
+
 class HandleCrashTrace {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue !== null && telemetryValue !== undefined) {
-            return {
-                shouldTriggerEvent: shouldTriggerEvent,
-                eventClassText: "Crash Trace Event Triggered",
-                eventType: "crash_trace",
-                eventTelemetry: label,
-                eventValue: telemetryValue, // DISCUSS: Should we return the measurements as eventValue? (crash_trace_x: 100,101,103, crash_trax_y: -200, z: 300)(x: 100, y: -200, z: 300)(x: 100, y: -200, z: 300)(x: 100, y: -200, z: 300)
-                reason: 'Crash trace',
-            };
+            try {
+                // Parse the crash trace data into x, y, z triplets
+                const crashData = this.parseCrashTraceData(telemetryValue);
+                
+                return {
+                    shouldTriggerEvent: shouldTriggerEvent,
+                    eventClassText: "Crash Trace Event Triggered",
+                    eventType: "crash_trace",
+                    eventTelemetry: label,
+                    telemetry: {},
+                    event: {
+                        crash: crashData // Array of {x, y, z} triplets
+                    },
+                    reason: 'Crash trace',
+                };
+            } catch (error) {
+                return {
+                    shouldTriggerEvent: false,
+                    reason: `Crash trace parsing error: ${error.message}`,
+                };
+            }
         }
         else {
             return {

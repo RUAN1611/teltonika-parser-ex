@@ -6,18 +6,18 @@
  */
 
 class HandleHdop {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
-        if(telemetryValue !== null && telemetryValue !== undefined) {
+
+        let hdop = telemetryValue / 10;
+
+        if(hdop !== null && hdop !== undefined) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "HDOP Event Triggered",
                 eventType: "hdop",
                 eventTelemetry: label,
-                eventValue: telemetryValue,
+                eventValue: hdop,
                 reason: 'HDOP Event Triggered',
             };
         }

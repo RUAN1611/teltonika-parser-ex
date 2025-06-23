@@ -2,13 +2,7 @@
 // NOT APPLICABLE
 
 class HandleDrivingState {
-    validate(telemetryValue, previousTelemetryValue, label) {
-        if(previousTelemetryValue === telemetryValue) {
-            return {
-                shouldTriggerEvent: false,
-                reason: 'No change in driving state',
-            };
-        }
+    validate(telemetryValue, label) {
         if(telemetryValue === 1) {
             return {
                 shouldTriggerEvent: true,

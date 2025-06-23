@@ -1,11 +1,8 @@
 // Reviewed with Werner
 
 class HandleOverspeed {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(previousTelemetryValue >= 0 && telemetryValue >= 0) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue >= 0) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

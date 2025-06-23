@@ -1,17 +1,6 @@
-// https://wiki.teltonika-gps.com/view/FMB930_Teltonika_Data_Sending_Parameters_ID - ID: 25
-// To be Reviewed with Werner  again
-
-
 class HandleDallasTemperature4B {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = false;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = true;
-            // return {
-            //     shouldTriggerEvent: false,
-            //     reason: 'No change in temperature',
-            // };
-        }
         if(telemetryValue === 2000 || telemetryValue === 32766) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,
@@ -19,6 +8,7 @@ class HandleDallasTemperature4B {
                 eventType: "failed_sensor_data_parsing",
                 eventTelemetry: label,
                 eventValue: "failed_sensor_data_parsing",
+                removeTelemetry: true
             };
         }
         else if(telemetryValue === 3000 || telemetryValue === 32767) {
@@ -28,6 +18,7 @@ class HandleDallasTemperature4B {
                 eventType: "sensor_not_found",
                 eventTelemetry: label,
                 eventValue: telemetryValue,
+                removeTelemetry: true
             };
         }
         else if(telemetryValue === 4000 || telemetryValue === 32765) {
@@ -37,6 +28,7 @@ class HandleDallasTemperature4B {
                 eventType: "abnormal_sensor_state",
                 eventTelemetry: label,
                 eventValue: telemetryValue,
+                removeTelemetry: true
             };
         }
         else {

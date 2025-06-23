@@ -1,11 +1,8 @@
 // Reviewed with Werner
 
 class HandleManDown {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue === null || telemetryValue === undefined) {
             return {
                 shouldTriggerEvent: false,

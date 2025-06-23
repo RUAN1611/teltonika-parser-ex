@@ -2,11 +2,8 @@
 // Done
 
 class HandleGreenDrivingType {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(previousTelemetryValue === telemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue === 1) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

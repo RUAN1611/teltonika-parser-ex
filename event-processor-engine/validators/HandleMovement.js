@@ -1,11 +1,8 @@
 // Review HandleMovement with Werner
 
 class HandleMovement {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue === 1) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

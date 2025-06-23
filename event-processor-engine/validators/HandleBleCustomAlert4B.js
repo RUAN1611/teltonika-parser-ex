@@ -7,14 +7,7 @@
  */
 
 class HandleBleCustomAlert4B {
-    validate(telemetryValue, previousTelemetryValue, label) {
-        if(telemetryValue === previousTelemetryValue) {
-            return {
-                shouldTriggerEvent: false,
-                reason: 'No change in BLE custom alert',
-            };
-        }
-        
+    validate(telemetryValue, label) {
         // Validate for 4-byte unsigned integer (0 to 4294967295)
         if(telemetryValue !== null && telemetryValue !== undefined) {
             // Convert to number if it's a string

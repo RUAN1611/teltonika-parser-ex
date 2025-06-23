@@ -39,11 +39,8 @@
 // Done
 
 class HandleEco {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(previousTelemetryValue === telemetryValue) {
-            shouldTriggerEvent = false;
-        }
         // Eco parameters (EcoMaximum/EcoAverage) store accelerometer values in mg
         // 8 Bytes format: 2B Zeros + 2B X axis + 2B Y axis + 2B Z axis
         

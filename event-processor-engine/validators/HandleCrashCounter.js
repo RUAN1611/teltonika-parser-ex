@@ -1,9 +1,9 @@
+// https://wiki.teltonika-gps.com/view/FMB920_Teltonika_Data_Sending_Parameters_ID
+// AVL ID 317
+// Use the Crash Counter to not mix up crash events with other crash events
 class HandleCrashCounter {
-    validate(telemetryValue, previousTelemetryValue, label) {
+    validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
-        if(telemetryValue === previousTelemetryValue) {
-            shouldTriggerEvent = false;
-        }
         if(telemetryValue !== null && telemetryValue !== undefined) {
             return {
                 shouldTriggerEvent: shouldTriggerEvent,

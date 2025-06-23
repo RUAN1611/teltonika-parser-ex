@@ -61,10 +61,9 @@ class Codec8 extends Codec {
    * @param reader
    * @param number_of_records
    * @param imei - Device IMEI number
-   * @param previousValues - Previous values of the device
    */
-  constructor(reader, number_of_records, imei, previousValues = {}) {
-    super(reader, number_of_records, imei, previousValues);
+  constructor(reader, number_of_records, imei) {
+    super(reader, number_of_records, imei);
     this._gpsPrecision = 10000000;
     this.validationEngine = new ValidationEngine();
   }
@@ -89,7 +88,7 @@ class Codec8 extends Codec {
   processEvents() {
     const protocolElements = this.getProtocolElements();
     
-    this.avlObj = this.validationEngine.processEvents(this.avlObj, protocolElements, this.previousValues);
+    this.avlObj = this.validationEngine.processEvents(this.avlObj, protocolElements);
     
     if (this.avlObj.records && this.avlObj.records.length > 0) {
       console.log('Events generated:', this.avlObj.records[0].events?.length || 0);
