@@ -50,3 +50,5 @@ class ValidatorConfig {
         this.Events[name] = type;
     }
 }
+
+module.exports = ValidatorConfig;
