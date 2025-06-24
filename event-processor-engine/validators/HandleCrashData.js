@@ -1,5 +1,6 @@
 // https://wiki.teltonika-gps.com/view/FMB920_Teltonika_Data_Sending_Parameters_ID
 // AVL ID 247
+const ValidatorConfig = require("../ValidatorConfig");
 
 class HandleCrashData {
     validate(telemetryValue, label) {
@@ -9,6 +10,8 @@ class HandleCrashData {
                 eventClassText: 'Impact',
                 eventType: 'impact',
                 eventTelemetry: label,
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.IMPACT,
+                eventValue: telemetryValue,
             };
         }
         else {

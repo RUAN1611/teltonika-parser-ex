@@ -104,24 +104,61 @@ class HandleSecurityStateFlagsAndSplit {
     }
 
     validate(telemetryValue, label) {
-        if (telemetryValue === 0) {
+        try {
+            // Convert hex string to number if needed
+            let value;
+            if (typeof telemetryValue === 'string') {
+                value = parseInt(telemetryValue, 16);
+            } else {
+                value = telemetryValue;
+            }
+
+            if (isNaN(value)) {
+                return {
+                    shouldTriggerEvent: false,
+                    reason: 'Invalid telemetry value'
+                };
+            }
+
+            // Split the 8-byte (64-bit) value into low and high 32-bit parts
+            // JavaScript bitwise operations work on 32-bit signed integers, so we need to handle 64-bit values carefully
+            const valueLow = value & 0xFFFFFFFF;  // Get low 32 bits
+            const valueHigh = Math.floor(value / 0x100000000) & 0xFFFFFFFF;  // Get high 32 bits
+
+            // Convert to signed 32-bit integers to match C# behavior
+            const signedLow = valueLow > 0x7FFFFFFF ? valueLow - 0x100000000 : valueLow;
+            const signedHigh = valueHigh > 0x7FFFFFFF ? valueHigh - 0x100000000 : valueHigh;
+
+            // Check if there are any active security state events
+            const activeEvents = this.getActiveEvents(telemetryValue);
+            const hasActiveEvents = activeEvents.length > 0;
+
+            return {
+                shouldTriggerEvent: hasActiveEvents,
+                eventClassText: hasActiveEvents ? "Security State Flags P2 Event" : undefined,
+                eventType: hasActiveEvents ? (activeEvents[0].event || 'Security State Flags P2') : undefined,
+                eventTelemetry: hasActiveEvents ? label : undefined,
+                eventValue: hasActiveEvents ? telemetryValue : undefined,
+                eventAdditionalTelemetryColumns: [
+                    {
+                        columnName: `${label}_l`,
+                        value: signedLow
+                    },
+                    {
+                        columnName: `${label}_h`, 
+                        value: signedHigh
+                    }
+                ],
+                removeTelemetry: true  // Remove the original 8-byte telemetry
+            };
+
+        } catch (error) {
+            console.error('Error processing Security State Flags P2 and split:', error);
             return {
                 shouldTriggerEvent: false,
-                reason: 'No Security State Flags P2 active',
+                reason: 'Error processing security state flags and split'
             };
         }
-
-        // Get active events to use the first one as event type
-        const activeEvents = this.getActiveEvents(telemetryValue);
-        const eventType = activeEvents.length > 0 ? activeEvents[0].event : 'Security State Flags P2 Event';
-
-        return {
-            shouldTriggerEvent: true,
-            eventClassText: "Security State Flags P2 Event",
-            eventType: eventType,
-            eventTelemetry: label,
-            eventValue: telemetryValue,
-        };
     }
 
     /**
