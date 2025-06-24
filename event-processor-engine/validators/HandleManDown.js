@@ -1,5 +1,5 @@
 // Reviewed with Werner
-
+const ValidatorConfig = require("../ValidatorConfig");
 class HandleManDown {
     validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
@@ -16,7 +16,7 @@ class HandleManDown {
                 eventType: "deactivated",
                 eventTelemetry: label,
                 eventValue: telemetryValue,
-                eventAdditionalTelemetryColumn: "man_down_status",
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.MAN_DOWN_STATUS,
             };
         }
         else if(telemetryValue === 1) {
@@ -26,7 +26,7 @@ class HandleManDown {
                 eventType: "activate",
                 eventTelemetry: label,
                 eventValue: telemetryValue,
-                eventAdditionalTelemetryColumn: "man_down_status"
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.MAN_DOWN_STATUS,
             };
         }
         else {

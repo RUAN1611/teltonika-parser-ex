@@ -9,6 +9,8 @@
  * The ACTUAL UNIT IS MINUTES, NOT HOURS! Flespi shows it as hours, but it's actually minutes according to the Teltonika documentation.
  */
 
+const ValidatorConfig = require("../ValidatorConfig");
+
 // Helper Function to Convert Mil Status to Digital
 // mil_status = 0 or 1 as additional column
 
@@ -41,7 +43,7 @@ class HandleMilTime {
                 eventType: "deactivate",
                 eventTelemetry: label,
                 eventValue: 0,
-                eventAdditionalTelemetryColumn: "mil_status",
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.MIL_STATUS,
                 reason: 'Malfunction Indicator Lamp is off - no active faults'
             };
         }
@@ -55,7 +57,7 @@ class HandleMilTime {
             eventType: "activate",
             eventTelemetry: label,
             eventValue: 1,
-            eventAdditionalTelemetryColumn: "mil_status",
+            eventAdditionalTelemetryColumn: ValidatorConfig.Events.MIL_STATUS,
             reason: `Check Engine Light has been on for ${milTimeMinutes} minutes (${durationHours} hours)`
         };
     }

@@ -40,6 +40,9 @@ class ValidatorConfig {
         ANALOG_JUMP: "analog_jump",
         TILT: "tilt",
         VIN_CHANGED: "vin_changed",
+        MIL_STATUS: "mil_status",
+        MAN_DOWN_STATUS: "man_down_status",
+        IGNITION: "ignition",
     }
 
     static getEventType(eventName) {

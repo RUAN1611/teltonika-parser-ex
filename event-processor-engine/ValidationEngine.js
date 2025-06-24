@@ -23,6 +23,8 @@ const HandleMilTime = require('./validators/HandleMilTime');
 const HandleEco = require('./validators/HandleEco');
 const HandleOverspeed = require('./validators/HandleOverspeed');
 const HandleTimeStamp = require('./validators/HandleTimeStamp');
+const HandleSecurityStateFlagsP4AndSplit = require('./validators/HandleSecurityStateFlagsP4AndSplit');
+const HandleSecurityStateFlagsAndSplit = require('./validators/HandleSecurityStateFlagsAndSplit');
 /**
  * Simple validation engine that processes telemetry data and adds events
  */
@@ -34,6 +36,8 @@ class ValidationEngine {
             'HandleBleTemp': new HandleBleTemp(),
             'HandleAlarm': new HandleAlarm(),
             'HandleBitFlagSplit': new HandleBitFlagSplit(),
+            'HandleSecurityStateFlagsP4AndSplit': new HandleSecurityStateFlagsP4AndSplit(),
+            'HandleSecurityStateFlagsAndSplit': new HandleSecurityStateFlagsAndSplit(),
             'HandleBleHumidity': new HandleBleHumidity(),
             'HandleCanFaultCodes': new HandleCanFaultCodes(),
             'HandleCrashTrace': new HandleCrashTrace(),

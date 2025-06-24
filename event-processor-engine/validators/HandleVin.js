@@ -1,6 +1,8 @@
 // https://wiki.teltonika-gps.com/view/FMB140_Teltonika_Data_Sending_Parameters_ID - AVL ID: 256
 // Reviewed with Werner
 
+const ValidatorConfig = require("../ValidatorConfig");
+
 class HandleVin {
     validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
@@ -11,6 +13,7 @@ class HandleVin {
                 eventType: "vin",
                 eventTelemetry: label,
                 eventValue: this.parseVin(telemetryValue),
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.VIN,
             }
         }
         else {

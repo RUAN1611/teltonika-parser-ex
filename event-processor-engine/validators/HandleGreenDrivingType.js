@@ -1,6 +1,8 @@
 // Reviewed with Werner
 // Done
 
+const ValidatorConfig = require("../ValidatorConfig");
+
 class HandleGreenDrivingType {
     validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
@@ -10,7 +12,7 @@ class HandleGreenDrivingType {
                 eventClassText: "Harsh Acceleration",
                 eventType: "harsh_accel",
                 eventTelemetry: label,
-                eventAdditionalTelemetryColumn: "harsh_accel",
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.HARSH_ACCEL,
                 eventValue: 1,
             };
         }
@@ -19,7 +21,7 @@ class HandleGreenDrivingType {
                 shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Harsh Braking",
                 eventType: "harsh_brake",
-                eventAdditionalTelemetryColumn: "harsh_brake",
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.HARSH_BRAKE,
                 eventTelemetry: label,
                 eventValue: 1,
             };
@@ -29,7 +31,7 @@ class HandleGreenDrivingType {
                 shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: "Harsh Corner",
                 eventType: "harsh_corner",
-                eventAdditionalTelemetryColumn: "harsh_corner",
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.HARSH_CORNER,
                 eventTelemetry: label,
                 eventValue: 1,
             };

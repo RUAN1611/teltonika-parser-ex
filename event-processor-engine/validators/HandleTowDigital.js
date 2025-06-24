@@ -1,5 +1,7 @@
 // Reviewed with Werner
 
+const ValidatorConfig = require("../ValidatorConfig");
+
 class HandleTowDigital {
     validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
@@ -9,7 +11,6 @@ class HandleTowDigital {
                 eventClassText: "Tow Event",
                 eventType: "steady",
                 eventTelemetry: label,
-                eventValue: telemetryValue,
                 reason: 'Vehicle steady - not being towed',
             };
         }
@@ -19,6 +20,7 @@ class HandleTowDigital {
                 eventClassText: "Tow Event",
                 eventType: "towing",
                 eventTelemetry: label,
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.TOWING,
                 eventValue: telemetryValue,
                 reason: 'Vehicle being towed detected',
             };

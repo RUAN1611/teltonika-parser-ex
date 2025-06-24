@@ -1,5 +1,5 @@
 // Review HandleMovement with Werner
-
+const ValidatorConfig = require("../ValidatorConfig");
 class HandleMovement {
     validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
@@ -9,8 +9,8 @@ class HandleMovement {
                 eventClassText: "Motion Start",
                 eventType: "motion_start",
                 eventTelemetry: label,
-                eventAdditionalTelemetryColumn: "motion_start",
-                eventValue: telemetryValue,
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.MOTION_START,
+                eventValue: 1,
             };
         }
         else if(telemetryValue === 0) {
@@ -19,8 +19,8 @@ class HandleMovement {
                 eventClassText: "Motion End",
                 eventType: "motion_end",
                 eventTelemetry: label,
-                eventAdditionalTelemetryColumn: "motion_end",
-                eventValue: telemetryValue,
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.MOTION_END,
+                eventValue: 1,
             };
         }
         else {

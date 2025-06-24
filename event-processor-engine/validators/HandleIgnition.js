@@ -1,3 +1,5 @@
+const ValidatorConfig = require("../ValidatorConfig");
+
 class HandleIgnition {
     validate(telemetryValue, label) {
         if(telemetryValue === 1) {
@@ -7,7 +9,7 @@ class HandleIgnition {
                 eventType: "activate",
                 eventTelemetry: label,
                 eventValue: 1,
-                eventAdditionalTelemetryColumn: "ignition"
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.IGNITION,
             };
         }
         else {

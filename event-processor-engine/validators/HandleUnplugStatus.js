@@ -1,5 +1,7 @@
 // Reviewed with Werner
 
+const ValidatorConfig = require("../ValidatorConfig");
+
 class HandleUnplugStatus {
     validate(telemetryValue, label) {
         let shouldTriggerEvent = true;
@@ -8,7 +10,7 @@ class HandleUnplugStatus {
                 shouldTriggerEvent: shouldTriggerEvent,
                 eventClassText: 'Power Disconnect',
                 eventType: 'power_disconnect',
-                eventAdditionalTelemetryColumn: "power_disconnect",
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.POWER_DISCONNECT,
                 eventValue: telemetryValue,
                 eventTelemetry: label,
             };
@@ -18,7 +20,8 @@ class HandleUnplugStatus {
                 shouldTriggerEvent: false, // No need to trigger event for power reconnect
                 eventClassText: 'Power Reconnect',
                 eventType: 'power_reconnect',
-                eventValue: telemetryValue,
+                eventAdditionalTelemetryColumn: ValidatorConfig.Events.POWER_RECONNECT,
+                eventValue: 1,
                 eventTelemetry: label,
             };
         }
