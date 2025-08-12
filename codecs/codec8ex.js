@@ -574,13 +574,6 @@ class Codec8e extends Codec {
     const protocolElements = this.getProtocolElements();    
     
     this.avlObj = this.validationEngine.processEvents(this.avlObj, protocolElements);
-    
-    if (this.avlObj.records && this.avlObj.records.length > 0) {
-      console.log('Events generated:', this.avlObj.records[0].events?.length || 0);
-      if (this.avlObj.records[0].events?.length > 0) {
-        console.log('Generated events:', this.avlObj.records[0].events);
-      }
-    }
   }
 
   /**
