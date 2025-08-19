@@ -31,9 +31,10 @@ class Codec12 extends Codec {
    * @param reader - Binary reader
    * @param number_of_records - Number of commands/responses
    * @param imei - Device IMEI number
+   * @param deviceType - Device type
    */
-  constructor(reader, number_of_records, imei) {
-    super(reader, number_of_records, imei);
+  constructor(reader, number_of_records, imei, deviceType) {
+    super(reader, number_of_records, imei, deviceType);
   }
 
   /**

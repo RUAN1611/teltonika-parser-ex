@@ -40,9 +40,11 @@ class Codec16 {
    * Codec8 constructor
    * @param buffer
    */
-  constructor(buffer) {
+  constructor(buffer, imei, deviceType) {
     this._reader = new binutils.BinaryReader(buffer);
     this._avlObj = {};
+    this.imei = imei;
+    this.deviceType = deviceType;
     this.parseHeader();
   }
 
