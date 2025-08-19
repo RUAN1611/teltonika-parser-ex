@@ -10,10 +10,11 @@ const codec16 = require('./codecs/codec16');
 const codec8ex = require('./codecs/codec8ex');
 
 class TeltonikaParser {
-  constructor(buffer, imei = null) {
+  constructor(buffer, imei = null, deviceType = null) {
     this._reader = new binutils.BinaryReader(buffer);
     this._avlObj = {};
     this.imei = imei;
+    this.deviceType = deviceType;
     this.checkIsImei();
     if (!this.isImei) {
       this.parseHeader();
@@ -54,6 +55,7 @@ class TeltonikaParser {
           this._codecReader,
           this._avlObj.number_of_data,
           this.imei,
+          this.deviceType,
         );
         break;
       case 8:
@@ -61,6 +63,7 @@ class TeltonikaParser {
           this._codecReader,
           this._avlObj.number_of_data,
           this.imei,
+          this.deviceType,
         );
         break;
       case 12:
@@ -68,6 +71,7 @@ class TeltonikaParser {
           this._codecReader,
           this._avlObj.number_of_data,
           this.imei,
+          this.deviceType,
         );
         break;
       case 14:
@@ -75,6 +79,7 @@ class TeltonikaParser {
           this._codecReader,
           this._avlObj.number_of_data,
           this.imei,
+          this.deviceType,
         );
         break;
       case 16:
@@ -82,6 +87,7 @@ class TeltonikaParser {
           this._codecReader,
           this._avlObj.number_of_data,
           this.imei,
+          this.deviceType,
         );
         break;
       case 142:
@@ -89,6 +95,7 @@ class TeltonikaParser {
           this._codecReader,
           this._avlObj.number_of_data,
           this.imei,
+          this.deviceType,
         );
         break;
       default:
